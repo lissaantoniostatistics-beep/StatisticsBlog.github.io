@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog di Statistiche - Antonio Lissa Lattanzio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+
+        .author {
+            margin-top: 1rem;
+            color: #764ba2;
+            font-weight: bold;
+        }
+
+        .add-article-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .add-article-section h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: bold;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .article-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .article-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .article-category {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-date {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .article-content {
+            padding: 1.5rem;
+        }
+
+        .article-excerpt {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .article-actions {
+            display: flex;
+            gap: 0.5rem;
+            padding: 0 1.5rem 1.5rem 1.5rem;
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            flex: 1;
+        }
+
+        .btn-delete {
+            background: #e74c3c;
+        }
+
+        .btn-delete:hover {
+            background: #c0392b;
+        }
+
+        .no-articles {
+            text-align: center;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            color: #666;
+            font-size: 1.2rem;
+        }
+
+        .stats-badge {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Blog di Statistiche</h1>
+            <p class="subtitle">Analisi, dati e insights statistici</p>
+            <p class="author">di Antonio Lissa Lattanzio</p>
+        </header>
+
+        <div class="add-article-section">
+            <h2>✍️ Aggiungi Nuovo Articolo</h2>
+            <form id="articleForm">
+                <div class="form-group">
+                    <label for="title">Titolo dell'articolo</label>
+                    <input type="text" id="title" required placeholder="Es: Analisi delle distribuzioni normali">
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Categoria</label>
+                    <select id="category" required>
+                        <option value="">Seleziona una categoria</option>
+                        <option value="Statistica Descrittiva">Statistica Descrittiva</option>
+                        <option value="Statistica Inferenziale">Statistica Inferenziale</option>
+                        <option value="Probabilità">Probabilità</option>
+                        <option value="Analisi Dati">Analisi Dati</option>
+                        <option value="Machine Learning">Machine Learning</option>
+                        <option value="Data Visualization">Data Visualization</option>
+                        <option value="Case Study">Case Study</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="content">Contenuto</label>
+                    <textarea id="content" required placeholder="Scrivi qui il contenuto del tuo articolo..."></textarea>
+                </div>
+
+                <button type="submit" class="btn">Pubblica Articolo</button>
+            </form>
+        </div>
+
+        <div id="articlesContainer">
+            <div class="no-articles">
+                📝 Nessun articolo pubblicato. Inizia ad aggiungere il tuo primo articolo!
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let articles = JSON.parse(localStorage.getItem('statisticsBlogArticles')) || [];
+
+        function renderArticles() {
+            const container = document.getElementById('articlesContainer');
+            
+            if (articles.length === 0) {
+                container.innerHTML = '<div class="no-articles">📝 Nessun articolo pubblicato. Inizia ad aggiungere il tuo primo articolo!</div>';
+                return;
+            }
+
+            const articlesHTML = articles.map((article, index) => `
+                <div class="article-card">
+                    <div class="article-header">
+                        <div class="article-category">${article.category}</div>
+                        <h3 class="article-title">${article.title}</h3>
+                        <div class="article-date">📅 ${article.date}</div>
+                        <div class="stats-badge">Articolo #${articles.length - index}</div>
+                    </div>
+                    <div class="article-content">
+                        <p class="article-excerpt">${article.content.substring(0, 200)}${article.content.length > 200 ? '...' : ''}</p>
+                    </div>
+                    <div class="article-actions">
+                        <button class="btn btn-small" onclick="viewArticle(${index})">Leggi tutto</button>
+                        <button class="btn btn-small btn-delete" onclick="deleteArticle(${index})">Elimina</button>
+                    </div>
+                </div>
+            `).join('');
+
+            container.innerHTML = `<div class="articles-grid">${articlesHTML}</div>`;
+        }
+
+        function viewArticle(index) {
+            const article = articles[index];
+            alert(`${article.title}\n\nCategoria: ${article.category}\nData: ${article.date}\n\n${article.content}`);
+        }
+
+        function deleteArticle(index) {
+            if (confirm('Sei sicuro di voler eliminare questo articolo?')) {
+                articles.splice(index, 0);
+                localStorage.setItem('statisticsBlogArticles', JSON.stringify(articles));
+                renderArticles();
+            }
+        }
+
+        document.getElementById('articleForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('title').value;
+            const category = document.getElementById('category').value;
+            const content = document.getElementById('content').value;
+            
+            const newArticle = {
+                title: title,
+                category: category,
+                content: content,
+                date: new Date().toLocaleDateString('it-IT', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                })
+            };
+            
+            articles.unshift(newArticle);
+            localStorage.setItem('statisticsBlogArticles', JSON.stringify(articles));
+            
+            this.reset();
+            renderArticles();
+            
+            alert('✅ Articolo pubblicato con successo!');
+        });
+
+        renderArticles();
+    </script>
+</body>
+</html>
