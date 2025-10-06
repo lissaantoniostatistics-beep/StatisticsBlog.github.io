@@ -68,7 +68,6 @@ function loadHomework() {
     if (sortedHomework.length === 0) {
         homeworkGrid.innerHTML = `
             <div class="no-homework">
-                <div class="no-homework-icon">📚</div>
                 <p class="no-homework-text">Nessun homework ancora pubblicato. Torna presto per vedere i nuovi contenuti!</p>
             </div>
         `;
@@ -154,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inizializza tema
     initializeTheme();
     
-    console.log('📊 Blog di Statistica caricato con successo!');
+    console.log('Blog di Statistica caricato con successo!');
 });
 
 // Utility: Funzione per aggiungere un nuovo homework (per sviluppo)
