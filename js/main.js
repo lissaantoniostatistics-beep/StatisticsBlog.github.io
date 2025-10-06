@@ -2,15 +2,14 @@
 
 // Lista degli homework - aggiungi qui i nuovi homework
 const homeworkList = [
-    // Esempio di homework - rimuovi questo quando aggiungi i tuoi veri homework
     {
-        id: 'homework-1',
+        id: 'homework-statistics-cybersecurity',
         week: 'Settimana 1',
-        title: 'Introduzione alla Statistica Descrittiva',
-        description: 'Analisi di dataset reali utilizzando misure di tendenza centrale e variabilità. Esplorazione di distribuzioni di frequenza e rappresentazioni grafiche.',
-        date: '2024-10-01',
-        tags: ['Statistica Descrittiva', 'Tendenza Centrale', 'Variabilità'],
-        filename: 'homework-1.html'
+        title: 'What is Statistics and Why Can It Be Useful for Cybersecurity',
+        description: 'Understanding the fundamental role of statistics in cybersecurity: from threat detection to risk assessment. Exploring statistical methods that power modern security systems.',
+        date: '2024-10-07',
+        tags: ['Statistical Foundations', 'Cybersecurity', 'Threat Detection'],
+        filename: 'homework-statistics-cybersecurity.html'
     }
     // Aggiungi nuovi homework qui seguendo questo formato:
     /*
@@ -19,7 +18,7 @@ const homeworkList = [
         week: 'Settimana 2',
         title: 'Titolo del tuo homework',
         description: 'Breve descrizione del homework',
-        date: '2024-10-08',
+        date: '2024-10-14',
         tags: ['Tag1', 'Tag2', 'Tag3'],
         filename: 'homework-2.html'
     }
@@ -68,6 +67,7 @@ function loadHomework() {
     if (sortedHomework.length === 0) {
         homeworkGrid.innerHTML = `
             <div class="no-homework">
+                <p class="no-homework-icon">📚</p>
                 <p class="no-homework-text">Nessun homework ancora pubblicato. Torna presto per vedere i nuovi contenuti!</p>
             </div>
         `;
@@ -132,8 +132,30 @@ function addScrollAnimations() {
 
 // Funzione per gestire il tema (opzionale - per future implementazioni)
 function initializeTheme() {
-    // Placeholder per gestione tema chiaro/scuro
-    // Implementabile in futuro se necessario
+    // Controlla se l'utente ha una preferenza salvata
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        document.body.classList.add(savedTheme);
+    }
+    
+    // Rileva la preferenza del sistema
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // Preparato per futuro tema scuro
+        console.log('Sistema in modalità scura rilevato');
+    }
+}
+
+// Funzione per mostrare statistiche del blog
+function showBlogStats() {
+    const totalHomework = homeworkList.length;
+    const latestDate = homeworkList.length > 0 ? 
+        new Date(Math.max(...homeworkList.map(h => new Date(h.date)))) : null;
+    
+    console.log(`📊 Statistiche Blog:`);
+    console.log(`   - Homework pubblicati: ${totalHomework}`);
+    if (latestDate) {
+        console.log(`   - Ultimo aggiornamento: ${formatDate(latestDate)}`);
+    }
 }
 
 // Inizializzazione quando il DOM è caricato
@@ -153,7 +175,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inizializza tema
     initializeTheme();
     
-    console.log('Blog di Statistica caricato con successo!');
+    // Mostra statistiche in console
+    showBlogStats();
+    
+    console.log('✅ Blog di Statistica caricato con successo!');
 });
 
 // Utility: Funzione per aggiungere un nuovo homework (per sviluppo)
@@ -161,11 +186,30 @@ function addNewHomework(homeworkData) {
     homeworkList.push(homeworkData);
     loadHomework();
     setTimeout(addScrollAnimations, 100);
+    console.log(`✨ Nuovo homework aggiunto: ${homeworkData.title}`);
+}
+
+// Funzione per filtrare homework per tag
+function filterByTag(tag) {
+    const filtered = homeworkList.filter(hw => hw.tags.includes(tag));
+    console.log(`Homework con tag "${tag}":`, filtered);
+    return filtered;
+}
+
+// Funzione per ottenere homework recenti
+function getRecentHomework(days = 7) {
+    const cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - days);
+    
+    return homeworkList.filter(hw => new Date(hw.date) >= cutoff);
 }
 
 // Esporta funzioni per uso globale (se necessario)
 window.BlogUtils = {
     addNewHomework,
     loadHomework,
-    formatDate
+    formatDate,
+    filterByTag,
+    getRecentHomework,
+    homeworkList
 };

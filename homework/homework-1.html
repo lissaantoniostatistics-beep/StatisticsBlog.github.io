@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Introduzione alla Statistica Descrittiva - Statistica Applicata</title>
-    <meta name="description" content="Primo homework del corso: analisi di dataset reali utilizzando misure di tendenza centrale e variabilità">
+    <title>What is Statistics and Why Can It Be Useful for Cybersecurity - Statistica Applicata</title>
+    <meta name="description" content="Understanding the fundamental role of statistics in cybersecurity: from threat detection to risk assessment">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -41,242 +41,320 @@
         <header class="article-header">
             <div class="article-meta">
                 <span class="homework-week">Settimana 1</span>
-                <span class="article-date">1 ottobre 2024</span>
+                <span class="article-date">7 ottobre 2024</span>
             </div>
-            <h1 class="article-title">Introduzione alla Statistica Descrittiva</h1>
+            <h1 class="article-title">What is Statistics and Why Can It Be Useful for Cybersecurity</h1>
             <div class="article-tags">
-                <span class="tag">Statistica Descrittiva</span>
-                <span class="tag">Tendenza Centrale</span>
-                <span class="tag">Variabilità</span>
-                <span class="tag">Python</span>
+                <span class="tag">Statistical Foundations</span>
+                <span class="tag">Cybersecurity</span>
+                <span class="tag">Threat Detection</span>
+                <span class="tag">Risk Analysis</span>
             </div>
         </header>
 
         <!-- Article Content -->
         <article class="article-content">
-            <!-- Introduzione -->
+            <!-- Introduction -->
             <section class="content-section">
-                <h2>🎯 Obiettivi dell'Homework</h2>
-                <p>Questo primo homework si concentra sui fondamenti della statistica descrittiva, esplorando come riassumere e descrivere efficacemente un dataset attraverso misure numeriche e rappresentazioni grafiche.</p>
+                <h2>🎯 Objectives of This Analysis</h2>
+                <p>This homework explores the fundamental connection between statistics and cybersecurity, demonstrating how statistical methods form the backbone of modern security systems. We'll examine how statistical thinking transforms raw security data into actionable intelligence.</p>
                 <ul>
-                    <li>Calcolare e interpretare misure di tendenza centrale (media, mediana, moda)</li>
-                    <li>Analizzare la variabilità dei dati attraverso range, varianza e deviazione standard</li>
-                    <li>Creare visualizzazioni efficaci per esplorare la distribuzione dei dati</li>
-                    <li>Identificare outlier e valutare il loro impatto sulle statistiche descrittive</li>
+                    <li>Define statistics and its core principles in the context of security</li>
+                    <li>Explore key statistical methods used in cybersecurity applications</li>
+                    <li>Analyze real-world examples of statistics preventing cyber attacks</li>
+                    <li>Demonstrate practical applications through security log analysis</li>
+                    <li>Understand how statistical models predict and prevent threats</li>
                 </ul>
             </section>
 
-            <!-- Dataset -->
+            <!-- What is Statistics -->
             <section class="content-section">
-                <h2>📊 Dataset Utilizzato</h2>
+                <h2>📊 Understanding Statistics: The Science of Uncertainty</h2>
+                <p>Statistics is the science of collecting, organizing, analyzing, interpreting, and presenting data. In essence, it's a mathematical framework for making sense of uncertainty and variability in the world around us.</p>
+                
+                <h3>Core Components of Statistics</h3>
                 <div class="dataset-info">
-                    <p><strong>Nome Dataset:</strong> Student Performance in Mathematics</p>
-                    <p><strong>Fonte:</strong> UCI Machine Learning Repository</p>
-                    <p><strong>Dimensioni:</strong> 1000 righe × 8 colonne</p>
-                    <p><strong>Variabili principali:</strong> 
-                        math_score (punteggio matematica), 
-                        reading_score (punteggio lettura), 
-                        writing_score (punteggio scrittura), 
-                        parental_education (educazione genitori),
-                        test_preparation (preparazione test)
-                    </p>
+                    <p><strong>Descriptive Statistics:</strong> Summarizing and describing data characteristics</p>
+                    <p><strong>Inferential Statistics:</strong> Drawing conclusions about populations from samples</p>
+                    <p><strong>Predictive Analytics:</strong> Using historical data to forecast future events</p>
+                    <p><strong>Probability Theory:</strong> Quantifying likelihood and risk</p>
                 </div>
-                <p>Il dataset contiene informazioni sui risultati degli studenti in tre materie principali, insieme a variabili demografiche e socio-economiche che potrebbero influenzare le performance.</p>
-            </section>
 
-            <!-- Metodologia -->
-            <section class="content-section">
-                <h2>🔬 Metodologia</h2>
-                <p>L'analisi è stata condotta seguendo un approccio sistematico per esplorare prima le caratteristiche generali del dataset, poi approfondire l'analisi di ciascuna variabile numerica.</p>
-                
-                <h3>Strumenti utilizzati</h3>
+                <p>Statistics transforms raw data into knowledge through systematic methodologies. It provides tools to:</p>
                 <ul>
-                    <li><strong>Python 3.9</strong> - Linguaggio di programmazione principale</li>
-                    <li><strong>Pandas</strong> - Manipolazione e analisi dei dati</li>
-                    <li><strong>NumPy</strong> - Calcoli numerici e statistiche</li>
-                    <li><strong>Matplotlib/Seaborn</strong> - Visualizzazione dei dati</li>
-                    <li><strong>Scipy</strong> - Test statistici avanzati</li>
+                    <li>Identify patterns hidden in complex datasets</li>
+                    <li>Distinguish signal from noise in observations</li>
+                    <li>Quantify uncertainty and assess risk</li>
+                    <li>Make data-driven decisions with confidence intervals</li>
+                    <li>Test hypotheses and validate assumptions</li>
                 </ul>
-
-                <h3>Procedimento</h3>
-                <ol>
-                    <li>Caricamento e ispezione iniziale del dataset</li>
-                    <li>Pulizia dei dati e gestione dei valori mancanti</li>
-                    <li>Calcolo delle statistiche descrittive per ogni variabile numerica</li>
-                    <li>Creazione di visualizzazioni per esplorare le distribuzioni</li>
-                    <li>Identificazione e analisi degli outlier</li>
-                    <li>Confronto delle performance tra diversi gruppi</li>
-                </ol>
             </section>
 
-            <!-- Analisi e Risultati -->
+            <!-- The Cybersecurity Landscape -->
             <section class="content-section">
-                <h2>📈 Analisi e Risultati</h2>
+                <h2>🔒 The Modern Cybersecurity Challenge</h2>
+                <p>Cybersecurity faces an unprecedented data challenge. Modern networks generate terabytes of log data daily, containing millions of events that must be analyzed for potential threats.</p>
                 
                 <div class="analysis-block">
-                    <h3>Analisi delle Performance in Matematica</h3>
-                    <p>La variabile math_score rappresenta il punteggio ottenuto dagli studenti nel test di matematica, su una scala da 0 a 100.</p>
-                    
-                    <div class="chart-container">
-                        <p class="chart-placeholder">📊 [Istogramma della distribuzione dei punteggi in matematica]</p>
-                    </div>
+                    <h3>The Scale of Security Data</h3>
+                    <p>A medium-sized enterprise network typically generates:</p>
+                    <ul>
+                        <li><strong>10-50 GB</strong> of log data per day</li>
+                        <li><strong>1-5 million</strong> security events per hour</li>
+                        <li><strong>Thousands</strong> of unique IP connections</li>
+                        <li><strong>Hundreds</strong> of potential alerts requiring investigation</li>
+                    </ul>
+                    <p>Manual analysis of this volume is impossible. Statistics provides the mathematical foundation for automated threat detection and response.</p>
+                </div>
+            </section>
+
+            <!-- Statistical Methods in Cybersecurity -->
+            <section class="content-section">
+                <h2>🛡️ Key Statistical Methods in Cybersecurity</h2>
+                
+                <div class="analysis-block">
+                    <h3>1. Anomaly Detection</h3>
+                    <p>Statistical anomaly detection identifies deviations from normal behavior patterns, crucial for detecting zero-day attacks and insider threats.</p>
                     
                     <div class="results-box">
-                        <h4>🔍 Risultati chiave:</h4>
+                        <h4>Statistical Techniques Used:</h4>
                         <ul>
-                            <li><strong>Media:</strong> 66.08 (leggermente superiore alla sufficienza)</li>
-                            <li><strong>Mediana:</strong> 66.00 (distribuzione pressoché simmetrica)</li>
-                            <li><strong>Deviazione Standard:</strong> 15.16 (variabilità moderata)</li>
-                            <li><strong>Range:</strong> 0-100 (ampio spettro di performance)</li>
-                            <li><strong>Outlier identificati:</strong> 12 studenti con punteggi < 20</li>
+                            <li><strong>Z-score analysis:</strong> Detecting outliers in network traffic volumes</li>
+                            <li><strong>Gaussian distribution:</strong> Modeling normal user behavior</li>
+                            <li><strong>Standard deviation thresholds:</strong> Setting dynamic alert boundaries</li>
+                            <li><strong>Time series analysis:</strong> Identifying temporal anomalies</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="analysis-block">
-                    <h3>Confronto tra le Tre Materie</h3>
-                    <p>Analisi comparativa delle performance in matematica, lettura e scrittura per identificare pattern e correlazioni.</p>
-                    
-                    <div class="chart-container">
-                        <p class="chart-placeholder">📊 [Box plot comparativo delle tre materie]</p>
-                    </div>
+                    <h3>2. Machine Learning & Classification</h3>
+                    <p>Statistical classification algorithms power modern intrusion detection systems (IDS) and malware detection engines.</p>
                     
                     <div class="results-box">
-                        <h4>🔍 Risultati chiave:</h4>
+                        <h4>Key Algorithms:</h4>
                         <ul>
-                            <li><strong>Performance migliori:</strong> Lettura (media: 69.17)</li>
-                            <li><strong>Maggiore variabilità:</strong> Matematica (σ = 15.16)</li>
-                            <li><strong>Correlazione forte:</strong> r = 0.82 tra lettura e scrittura</li>
-                            <li><strong>Gender gap:</strong> Differenze significative in matematica</li>
+                            <li><strong>Naive Bayes:</strong> Spam and phishing email detection</li>
+                            <li><strong>Random Forests:</strong> Malware classification</li>
+                            <li><strong>Logistic Regression:</strong> Binary threat classification</li>
+                            <li><strong>Support Vector Machines:</strong> Attack pattern recognition</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="analysis-block">
-                    <h3>Impatto della Preparazione al Test</h3>
-                    <p>Analisi dell'effetto della preparazione specifica al test sulle performance degli studenti.</p>
-                    
-                    <div class="chart-container">
-                        <p class="chart-placeholder">📊 [Grafico a barre: Performance per gruppo di preparazione]</p>
-                    </div>
+                    <h3>3. Risk Assessment & Probability</h3>
+                    <p>Probability theory quantifies security risks and helps prioritize defensive resources.</p>
                     
                     <div class="results-box">
-                        <h4>🔍 Risultati chiave:</h4>
+                        <h4>Applications:</h4>
                         <ul>
-                            <li><strong>Studenti preparati:</strong> Media 69.7 vs 64.1 non preparati</li>
-                            <li><strong>Miglioramento:</strong> +5.6 punti in media in matematica</li>
-                            <li><strong>Effetto consistente:</strong> Benefici in tutte e tre le materie</li>
+                            <li><strong>Bayesian inference:</strong> Updating threat probabilities with new evidence</li>
+                            <li><strong>Monte Carlo simulations:</strong> Assessing breach probability</li>
+                            <li><strong>Risk matrices:</strong> Combining likelihood and impact assessments</li>
+                            <li><strong>Vulnerability scoring:</strong> CVSS calculations using statistical models</li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <!-- Codice -->
+            <!-- Real-World Applications -->
             <section class="content-section">
-                <h2>💻 Frammenti di Codice</h2>
-                <p>Codice Python utilizzato per l'analisi statistica descrittiva:</p>
+                <h2>💼 Real-World Applications</h2>
+                
+                <div class="analysis-block">
+                    <h3>Case Study 1: DDoS Attack Detection</h3>
+                    <p>Statistical analysis of network traffic patterns can identify Distributed Denial of Service attacks before they overwhelm systems.</p>
+                    
+                    <div class="chart-container">
+                        <p class="chart-placeholder">📊 [Time series graph showing normal vs DDoS traffic patterns]</p>
+                    </div>
+                    
+                    <p><strong>Statistical Approach:</strong></p>
+                    <ul>
+                        <li>Baseline establishment using moving averages</li>
+                        <li>Real-time traffic comparison using chi-square tests</li>
+                        <li>Entropy analysis to detect traffic randomness</li>
+                        <li>Correlation analysis across multiple metrics</li>
+                    </ul>
+                </div>
+
+                <div class="analysis-block">
+                    <h3>Case Study 2: User Behavior Analytics (UBA)</h3>
+                    <p>Statistics helps identify compromised accounts by detecting anomalous user behaviors.</p>
+                    
+                    <div class="chart-container">
+                        <p class="chart-placeholder">📊 [Histogram of login times showing anomalous after-hours access]</p>
+                    </div>
+                    
+                    <p><strong>Metrics Analyzed:</strong></p>
+                    <ul>
+                        <li>Login time distributions</li>
+                        <li>Geographic access patterns</li>
+                        <li>File access frequency</li>
+                        <li>Data transfer volumes</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Practical Implementation -->
+            <section class="content-section">
+                <h2>💻 Practical Implementation Example</h2>
+                <p>Let's demonstrate how statistics detects security anomalies using Python:</p>
                 
                 <div class="code-block">
-                    <h4>Caricamento e prime esplorazioni</h4>
-                    <pre><code>import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
+                    <h4>Anomaly Detection in Network Traffic</h4>
+                    <pre><code>import numpy as np
+import pandas as pd
 from scipy import stats
+import matplotlib.pyplot as plt
 
-# Caricamento del dataset
-df = pd.read_csv('student_performance.csv')
+# Simulate network traffic data
+np.random.seed(42)
+normal_traffic = np.random.normal(1000, 200, 1000)  # Normal: mean=1000, std=200
 
-# Informazioni generali
-print("Forma del dataset:", df.shape)
-print("\nPrime 5 righe:")
-print(df.head())
+# Inject anomalies (potential DDoS)
+anomalies = np.random.normal(5000, 500, 50)  # Attack traffic
+traffic_data = np.concatenate([normal_traffic, anomalies])
+timestamps = pd.date_range('2024-01-01', periods=1050, freq='1min')
 
-# Verifica valori mancanti
-print("\nValori mancanti per colonna:")
-print(df.isnull().sum())</code></pre>
+# Create DataFrame
+df = pd.DataFrame({
+    'timestamp': timestamps,
+    'packets_per_second': traffic_data
+})
+
+# Statistical Anomaly Detection
+def detect_anomalies(data, threshold=3):
+    """
+    Detect anomalies using z-score method
+    """
+    mean = np.mean(data)
+    std = np.std(data)
+    z_scores = np.abs(stats.zscore(data))
+    
+    return z_scores > threshold
+
+# Apply detection
+df['is_anomaly'] = detect_anomalies(df['packets_per_second'])
+
+# Calculate statistics
+print("Traffic Statistics:")
+print(f"Mean traffic: {df['packets_per_second'].mean():.2f} packets/sec")
+print(f"Std deviation: {df['packets_per_second'].std():.2f}")
+print(f"Anomalies detected: {df['is_anomaly'].sum()}")
+print(f"Detection rate: {(df['is_anomaly'].sum() / 50) * 100:.1f}%")</code></pre>
                 </div>
 
                 <div class="code-block">
-                    <h4>Statistiche descrittive</h4>
-                    <pre><code># Statistiche descrittive per variabili numeriche
-numeric_cols = ['math_score', 'reading_score', 'writing_score']
+                    <h4>Bayesian Threat Probability Update</h4>
+                    <pre><code>def bayesian_threat_update(prior, likelihood_given_threat, 
+                           likelihood_given_normal):
+    """
+    Update threat probability using Bayes' theorem
+    P(threat|evidence) = P(evidence|threat) * P(threat) / P(evidence)
+    """
+    # Calculate total probability of evidence
+    p_evidence = (likelihood_given_threat * prior + 
+                  likelihood_given_normal * (1 - prior))
+    
+    # Apply Bayes' theorem
+    posterior = (likelihood_given_threat * prior) / p_evidence
+    
+    return posterior
 
-# Statistiche base
-print("Statistiche descrittive:")
-print(df[numeric_cols].describe())
+# Example: Suspicious login detected
+prior_threat = 0.01  # 1% baseline threat probability
+likelihood_suspicious_given_threat = 0.90  # 90% chance if compromised
+likelihood_suspicious_given_normal = 0.05  # 5% false positive rate
 
-# Calcolo manuale di alcune statistiche
-for col in numeric_cols:
-    print(f"\n--- {col.upper()} ---")
-    print(f"Media: {df[col].mean():.2f}")
-    print(f"Mediana: {df[col].median():.2f}")
-    print(f"Moda: {df[col].mode().values[0]:.2f}")
-    print(f"Deviazione Standard: {df[col].std():.2f}")
-    print(f"Varianza: {df[col].var():.2f}")
-    print(f"Range: {df[col].max() - df[col].min():.2f}")</code></pre>
+posterior = bayesian_threat_update(
+    prior_threat, 
+    likelihood_suspicious_given_threat,
+    likelihood_suspicious_given_normal
+)
+
+print(f"\nBayesian Threat Assessment:")
+print(f"Prior probability of threat: {prior_threat:.1%}")
+print(f"After suspicious activity: {posterior:.1%}")
+print(f"Risk increased by: {posterior/prior_threat:.1f}x")</code></pre>
                 </div>
 
                 <div class="code-block">
-                    <h4>Identificazione outlier</h4>
-                    <pre><code># Metodo IQR per identificare outlier
-def find_outliers_iqr(data):
-    Q1 = data.quantile(0.25)
-    Q3 = data.quantile(0.75)
-    IQR = Q3 - Q1
-    lower_bound = Q1 - 1.5 * IQR
-    upper_bound = Q3 + 1.5 * IQR
-    return data[(data < lower_bound) | (data > upper_bound)]
+                    <h4>Statistical Feature Extraction for ML</h4>
+                    <pre><code># Extract statistical features for machine learning
+def extract_security_features(log_data):
+    """
+    Extract statistical features from security logs
+    """
+    features = {
+        'mean_packet_size': log_data['packet_size'].mean(),
+        'std_packet_size': log_data['packet_size'].std(),
+        'entropy': stats.entropy(log_data['port'].value_counts()),
+        'unique_ips': log_data['source_ip'].nunique(),
+        'burst_rate': log_data['timestamp'].diff().std(),
+        'percentile_95': log_data['packet_size'].quantile(0.95)
+    }
+    
+    return features
 
-# Identificazione outlier per matematica
-outliers_math = find_outliers_iqr(df['math_score'])
-print(f"Outlier in matematica: {len(outliers_math)} studenti")
-print(f"Valori: {sorted(outliers_math.values)}")
-
-# Visualizzazione outlier
-plt.figure(figsize=(10, 6))
-plt.boxplot(df['math_score'])
-plt.title('Box Plot - Punteggi Matematica con Outlier')
-plt.ylabel('Punteggio')
-plt.show()</code></pre>
+# These features feed into ML models for threat classification</code></pre>
                 </div>
             </section>
 
-            <!-- Conclusioni -->
+            <!-- Future Trends -->
             <section class="content-section">
-                <h2>💡 Conclusioni</h2>
-                <p>L'analisi descrittiva del dataset ha rivelato pattern interessanti nelle performance studentesche e ha fornito insights utili per comprendere i fattori che influenzano il successo accademico.</p>
+                <h2>🚀 Future Trends: Statistics in Next-Gen Security</h2>
+                
+                <div class="analysis-block">
+                    <h3>Emerging Applications</h3>
+                    <ul>
+                        <li><strong>Quantum-resistant cryptography:</strong> Statistical tests for randomness in key generation</li>
+                        <li><strong>AI security:</strong> Statistical methods to detect adversarial attacks on ML models</li>
+                        <li><strong>IoT security:</strong> Lightweight statistical algorithms for resource-constrained devices</li>
+                        <li><strong>Zero Trust Architecture:</strong> Continuous statistical verification of trust scores</li>
+                        <li><strong>Threat hunting:</strong> Hypothesis-driven statistical investigations</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Conclusions -->
+            <section class="content-section">
+                <h2>💡 Conclusions</h2>
+                <p>Statistics is not just useful for cybersecurity—it's essential. As cyber threats grow in sophistication and volume, statistical methods provide the mathematical foundation for detecting, analyzing, and preventing attacks.</p>
                 
                 <div class="conclusions-box">
-                    <h4>Punti salienti:</h4>
+                    <h4>Key Takeaways:</h4>
                     <ul>
-                        <li>Le performance in lettura sono generalmente superiori rispetto a matematica e scrittura</li>
-                        <li>Esiste una forte correlazione positiva tra le performance nelle diverse materie</li>
-                        <li>La preparazione specifica al test ha un impatto positivo significativo su tutti i punteggi</li>
-                        <li>La presenza di outlier (studenti con performance molto basse) richiede attenzione speciale</li>
-                        <li>La distribuzione dei punteggi è generalmente normale con leggera asimmetria</li>
+                        <li>Statistics transforms overwhelming security data into actionable intelligence</li>
+                        <li>Anomaly detection using statistical methods catches zero-day threats</li>
+                        <li>Probability theory quantifies risk and optimizes security investments</li>
+                        <li>Machine learning algorithms rely on statistical foundations</li>
+                        <li>Real-time statistical analysis enables proactive threat prevention</li>
                     </ul>
                 </div>
 
                 <div class="learnings-box">
-                    <h4>🎓 Cosa ho imparato:</h4>
+                    <h4>🎓 What I Learned:</h4>
                     <ul>
-                        <li><strong>Importanza della visualizzazione:</strong> I grafici rivelano pattern non evidenti nelle statistiche numeriche</li>
-                        <li><strong>Gestione degli outlier:</strong> Necessità di investigare le cause prima di rimuoverli</li>
-                        <li><strong>Correlazioni informative:</strong> Le relazioni tra variabili suggeriscono strategie educative integrate</li>
-                        <li><strong>Valore della preparazione:</strong> Evidenza quantitativa dell'efficacia della preparazione mirata</li>
+                        <li><strong>Data is the new perimeter:</strong> Statistical analysis of data flows replaces traditional network boundaries</li>
+                        <li><strong>Normal must be defined:</strong> Understanding baseline behavior is crucial for anomaly detection</li>
+                        <li><strong>False positives matter:</strong> Statistical precision reduces alert fatigue in SOC teams</li>
+                        <li><strong>Context is key:</strong> Statistical models must adapt to organizational patterns</li>
+                        <li><strong>Continuous learning:</strong> Security statistics require constant model updates</li>
                     </ul>
                 </div>
             </section>
 
-            <!-- Riferimenti -->
+            <!-- References -->
             <section class="content-section">
-                <h2>📚 Riferimenti</h2>
+                <h2>📚 References</h2>
                 <ul class="references">
-                    <li>Agresti, A., & Finlay, B. (2017). <em>Statistical Methods for the Social Sciences</em>. Pearson.</li>
-                    <li>McKinney, W. (2017). <em>Python for Data Analysis</em>. O'Reilly Media.</li>
-                    <li>Wickham, H., & Grolemund, G. (2016). <em>R for Data Science</em>. O'Reilly Media.</li>
-                    <li>UCI Machine Learning Repository - Student Performance Dataset</li>
+                    <li>Sommer, R., & Paxson, V. (2010). <em>Outside the Closed World: On Using Machine Learning for Network Intrusion Detection</em>. IEEE Symposium on Security and Privacy.</li>
+                    <li>Chandola, V., Banerjee, A., & Kumar, V. (2009). <em>Anomaly Detection: A Survey</em>. ACM Computing Surveys, 41(3).</li>
+                    <li>Buczak, A. L., & Guven, E. (2016). <em>A Survey of Data Mining and Machine Learning Methods for Cyber Security Intrusion Detection</em>. IEEE Communications Surveys & Tutorials.</li>
+                    <li>Gates, C., & Taylor, C. (2006). <em>Challenging the Anomaly Detection Paradigm: A Provocative Discussion</em>. Workshop on New Security Paradigms.</li>
+                    <li>NIST Special Publication 800-61r2. <em>Computer Security Incident Handling Guide</em>.</li>
                 </ul>
             </section>
         </article>
