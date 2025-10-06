@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistica Applicata - Blog di Antonio Lissa Lattanzio</title>
+    <meta name="description" content="Blog di statistica con homework settimanali, analisi dati e approfondimenti statistici">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                Statistica Blog
+            </a>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="#homework" class="nav-link">Homework</a>
+                <a href="#about" class="nav-link">Info</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1 class="hero-title">Statistica Applicata</h1>
+            <p class="hero-subtitle">Blog di Antonio Lissa Lattanzio</p>
+            <p class="hero-description">
+                Benvenuto nel mio blog dedicato alla statistica! Qui troverai tutti i miei homework settimanali, 
+                analisi di dati reali, approfondimenti teorici e applicazioni pratiche della statistica. 
+                Ogni settimana pubblico nuovi contenuti per esplorare insieme il mondo affascinante dei dati.
+            </p>
+            <div class="author-info">
+                📧 Contatto: antonio.lissa.lattanzio@example.com | 🎓 Università: [Nome Università] | 📅 Anno Accademico: 2024/2025
+            </div>
+        </section>
+
+        <!-- Homework Section -->
+        <section class="homework-section" id="homework">
+            <h2 class="section-title">📚 Homework Settimanali</h2>
+            <div class="homework-grid" id="homework-grid">
+                <!-- Gli homework verranno caricati dinamicamente tramite JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Antonio Lissa Lattanzio - Blog di Statistica Applicata</p>
+        <p>Realizzato con ❤️ per l'apprendimento della statistica</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>
+
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #495057;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #1a1a2e;
+            box-shadow: 0 0 0 3px rgba(26, 26, 46, 0.05);
+        }
+
+        textarea {
+            min-height: 180px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .btn {
+            background: #1a1a2e;
+            color: white;
+            padding: 0.85rem 2rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: #0f0f1a;
+        }
+
+        .articles-section {
+            margin-top: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 2rem;
+        }
+
+        .articles-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .article-item {
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: box-shadow 0.2s;
+        }
+
+        .article-item:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .article-header {
+            padding: 1.8rem 2rem 1.5rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.85rem;
+        }
+
+        .category-tag {
+            background: #f8f9fa;
+            color: #495057;
+            padding: 0.3rem 0.8rem;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+
+        .article-date {
+            color: #8a8a8a;
+        }
+
+        .article-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a1a2e;
+            line-height: 1.4;
+        }
+
+        .article-body {
+            padding: 1.5rem 2rem;
+        }
+
+        .article-excerpt {
+            color: #6c757d;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .article-footer {
+            padding: 1rem 2rem 1.5rem;
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #495057;
+            padding: 0.6rem 1.3rem;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: #e9ecef;
+            border-color: #adb5bd;
+        }
+
+        .btn-danger {
+            background: #fff;
+            color: #dc3545;
+            border: 1px solid #dc3545;
+        }
+
+        .btn-danger:hover {
+            background: #dc3545;
+            color: #fff;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .empty-state-text {
+            color: #8a8a8a;
+            font-size: 1.1rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: #fff;
+            max-width: 800px;
+            width: 100%;
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            padding: 2rem 2.5rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-body {
+            padding: 2rem 2.5rem;
+            line-height: 1.8;
+            font-size: 1rem;
+            color: #495057;
+        }
+
+        .modal-close {
+            padding: 1rem 2.5rem;
+            text-align: right;
+            border-top: 1px solid #e9ecef;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .form-section, .hero-section {
+                padding: 1.5rem;
+            }
+
+            .article-header, .article-body, .article-footer {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-bar">
+        <div class="header-content">
+            <div class="logo">Statistica Applicata</div>
+            <a href="#" class="nav-link">Blog</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="hero-section">
+            <h1 class="hero-title">Blog di Statistica</h1>
+            <p class="hero-subtitle">Analisi, dati e metodologie statistiche</p>
+            <div class="author-info">A cura di Antonio Lissa Lattanzio</div>
+        </div>
+
+        <div class="form-section">
+            <h2 class="form-title">Nuovo Articolo</h2>
+            <form id="articleForm">
+                <div class="form-group">
+                    <label for="title">Titolo</label>
+                    <input type="text" id="title" required placeholder="Inserisci il titolo dell'articolo">
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Categoria</label>
+                    <select id="category" required>
+                        <option value="">Seleziona categoria</option>
+                        <option value="Statistica Descrittiva">Statistica Descrittiva</option>
+                        <option value="Statistica Inferenziale">Statistica Inferenziale</option>
+                        <option value="Probabilità">Probabilità</option>
+                        <option value="Analisi dei Dati">Analisi dei Dati</option>
+                        <option value="Machine Learning">Machine Learning</option>
+                        <option value="Data Visualization">Data Visualization</option>
+                        <option value="Case Study">Case Study</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="content">Contenuto</label>
+                    <textarea id="content" required placeholder="Scrivi qui il contenuto dell'articolo..."></textarea>
+                </div>
+
+                <button type="submit" class="btn">Pubblica Articolo</button>
+            </form>
+        </div>
+
+        <div class="articles-section">
+            <h2 class="section-title">Articoli Pubblicati</h2>
+            <div id="articlesContainer">
+                <div class="empty-state">
+                    <p class="empty-state-text">Nessun articolo pubblicato. Inizia a scrivere il tuo primo articolo.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="articleModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="article-meta">
+                    <span class="category-tag" id="modalCategory"></span>
+                    <span class="article-date" id="modalDate"></span>
+                </div>
+                <h2 class="modal-title" id="modalTitle"></h2>
+            </div>
+            <div class="modal-body" id="modalContent"></div>
+            <div class="modal-close">
+                <button class="btn-secondary" onclick="closeModal()">Chiudi</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let articles = JSON.parse(localStorage.getItem('statisticsBlogArticles')) || [];
+
+        function renderArticles() {
+            const container = document.getElementById('articlesContainer');
+            
+            if (articles.length === 0) {
+                container.innerHTML = '<div class="empty-state"><p class="empty-state-text">Nessun articolo pubblicato. Inizia a scrivere il tuo primo articolo.</p></div>';
+                return;
+            }
+
+            const articlesHTML = articles.map((article, index) => `
+                <div class="article-item">
+                    <div class="article-header">
+                        <div class="article-meta">
+                            <span class="category-tag">${article.category}</span>
+                            <span class="article-date">${article.date}</span>
+                        </div>
+                        <h3 class="article-title">${article.title}</h3>
+                    </div>
+                    <div class="article-body">
+                        <p class="article-excerpt">${article.content.substring(0, 250)}${article.content.length > 250 ? '...' : ''}</p>
+                    </div>
+                    <div class="article-footer">
+                        <button class="btn-secondary" onclick="viewArticle(${index})">Leggi articolo</button>
+                        <button class="btn-secondary btn-danger" onclick="deleteArticle(${index})">Elimina</button>
+                    </div>
+                </div>
+            `).join('');
+
+            container.innerHTML = `<div class="articles-list">${articlesHTML}</div>`;
+        }
+
+        function viewArticle(index) {
+            const article = articles[index];
+            document.getElementById('modalTitle').textContent = article.title;
+            document.getElementById('modalCategory').textContent = article.category;
+            document.getElementById('modalDate').textContent = article.date;
+            document.getElementById('modalContent').textContent = article.content;
+            document.getElementById('articleModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('articleModal').classList.remove('active');
+        }
+
+        function deleteArticle(index) {
+            if (confirm('Confermi di voler eliminare questo articolo?')) {
+                articles.splice(index, 1);
+                localStorage.setItem('statisticsBlogArticles', JSON.stringify(articles));
+                renderArticles();
+            }
+        }
+
+        document.getElementById('articleForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const newArticle = {
+                title: document.getElementById('title').value,
+                category: document.getElementById('category').value,
+                content: document.getElementById('content').value,
+                date: new Date().toLocaleDateString('it-IT', { 
+                    day: 'numeric',
+                    month: 'long', 
+                    year: 'numeric'
+                })
+            };
+            
+            articles.unshift(newArticle);
+            localStorage.setItem('statisticsBlogArticles', JSON.stringify(articles));
+            
+            this.reset();
+            renderArticles();
+            
+            window.scrollTo({ top: document.querySelector('.articles-section').offsetTop - 100, behavior: 'smooth' });
+        });
+
+        document.getElementById('articleModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        renderArticles();
+    </script>
+</body>
+</html>

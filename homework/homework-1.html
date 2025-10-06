@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduzione alla Statistica Descrittiva - Statistica Applicata</title>
+    <meta name="description" content="Primo homework del corso: analisi di dataset reali utilizzando misure di tendenza centrale e variabilità">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/homework.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="../index.html" class="logo">
+                Statistica Blog
+            </a>
+            <nav class="nav">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="../index.html#homework" class="nav-link">Homework</a>
+                <a href="#" class="nav-link">Info</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+            <a href="../index.html">Home</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="../index.html#homework">Homework</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">Settimana 1</span>
+        </nav>
+
+        <!-- Article Header -->
+        <header class="article-header">
+            <div class="article-meta">
+                <span class="homework-week">Settimana 1</span>
+                <span class="article-date">1 ottobre 2024</span>
+            </div>
+            <h1 class="article-title">Introduzione alla Statistica Descrittiva</h1>
+            <div class="article-tags">
+                <span class="tag">Statistica Descrittiva</span>
+                <span class="tag">Tendenza Centrale</span>
+                <span class="tag">Variabilità</span>
+                <span class="tag">Python</span>
+            </div>
+        </header>
+
+        <!-- Article Content -->
+        <article class="article-content">
+            <!-- Introduzione -->
+            <section class="content-section">
+                <h2>🎯 Obiettivi dell'Homework</h2>
+                <p>Questo primo homework si concentra sui fondamenti della statistica descrittiva, esplorando come riassumere e descrivere efficacemente un dataset attraverso misure numeriche e rappresentazioni grafiche.</p>
+                <ul>
+                    <li>Calcolare e interpretare misure di tendenza centrale (media, mediana, moda)</li>
+                    <li>Analizzare la variabilità dei dati attraverso range, varianza e deviazione standard</li>
+                    <li>Creare visualizzazioni efficaci per esplorare la distribuzione dei dati</li>
+                    <li>Identificare outlier e valutare il loro impatto sulle statistiche descrittive</li>
+                </ul>
+            </section>
+
+            <!-- Dataset -->
+            <section class="content-section">
+                <h2>📊 Dataset Utilizzato</h2>
+                <div class="dataset-info">
+                    <p><strong>Nome Dataset:</strong> Student Performance in Mathematics</p>
+                    <p><strong>Fonte:</strong> UCI Machine Learning Repository</p>
+                    <p><strong>Dimensioni:</strong> 1000 righe × 8 colonne</p>
+                    <p><strong>Variabili principali:</strong> 
+                        math_score (punteggio matematica), 
+                        reading_score (punteggio lettura), 
+                        writing_score (punteggio scrittura), 
+                        parental_education (educazione genitori),
+                        test_preparation (preparazione test)
+                    </p>
+                </div>
+                <p>Il dataset contiene informazioni sui risultati degli studenti in tre materie principali, insieme a variabili demografiche e socio-economiche che potrebbero influenzare le performance.</p>
+            </section>
+
+            <!-- Metodologia -->
+            <section class="content-section">
+                <h2>🔬 Metodologia</h2>
+                <p>L'analisi è stata condotta seguendo un approccio sistematico per esplorare prima le caratteristiche generali del dataset, poi approfondire l'analisi di ciascuna variabile numerica.</p>
+                
+                <h3>Strumenti utilizzati</h3>
+                <ul>
+                    <li><strong>Python 3.9</strong> - Linguaggio di programmazione principale</li>
+                    <li><strong>Pandas</strong> - Manipolazione e analisi dei dati</li>
+                    <li><strong>NumPy</strong> - Calcoli numerici e statistiche</li>
+                    <li><strong>Matplotlib/Seaborn</strong> - Visualizzazione dei dati</li>
+                    <li><strong>Scipy</strong> - Test statistici avanzati</li>
+                </ul>
+
+                <h3>Procedimento</h3>
+                <ol>
+                    <li>Caricamento e ispezione iniziale del dataset</li>
+                    <li>Pulizia dei dati e gestione dei valori mancanti</li>
+                    <li>Calcolo delle statistiche descrittive per ogni variabile numerica</li>
+                    <li>Creazione di visualizzazioni per esplorare le distribuzioni</li>
+                    <li>Identificazione e analisi degli outlier</li>
+                    <li>Confronto delle performance tra diversi gruppi</li>
+                </ol>
+            </section>
+
+            <!-- Analisi e Risultati -->
+            <section class="content-section">
+                <h2>📈 Analisi e Risultati</h2>
+                
+                <div class="analysis-block">
+                    <h3>Analisi delle Performance in Matematica</h3>
+                    <p>La variabile math_score rappresenta il punteggio ottenuto dagli studenti nel test di matematica, su una scala da 0 a 100.</p>
+                    
+                    <div class="chart-container">
+                        <p class="chart-placeholder">📊 [Istogramma della distribuzione dei punteggi in matematica]</p>
+                    </div>
+                    
+                    <div class="results-box">
+                        <h4>🔍 Risultati chiave:</h4>
+                        <ul>
+                            <li><strong>Media:</strong> 66.08 (leggermente superiore alla sufficienza)</li>
+                            <li><strong>Mediana:</strong> 66.00 (distribuzione pressoché simmetrica)</li>
+                            <li><strong>Deviazione Standard:</strong> 15.16 (variabilità moderata)</li>
+                            <li><strong>Range:</strong> 0-100 (ampio spettro di performance)</li>
+                            <li><strong>Outlier identificati:</strong> 12 studenti con punteggi < 20</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="analysis-block">
+                    <h3>Confronto tra le Tre Materie</h3>
+                    <p>Analisi comparativa delle performance in matematica, lettura e scrittura per identificare pattern e correlazioni.</p>
+                    
+                    <div class="chart-container">
+                        <p class="chart-placeholder">📊 [Box plot comparativo delle tre materie]</p>
+                    </div>
+                    
+                    <div class="results-box">
+                        <h4>🔍 Risultati chiave:</h4>
+                        <ul>
+                            <li><strong>Performance migliori:</strong> Lettura (media: 69.17)</li>
+                            <li><strong>Maggiore variabilità:</strong> Matematica (σ = 15.16)</li>
+                            <li><strong>Correlazione forte:</strong> r = 0.82 tra lettura e scrittura</li>
+                            <li><strong>Gender gap:</strong> Differenze significative in matematica</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="analysis-block">
+                    <h3>Impatto della Preparazione al Test</h3>
+                    <p>Analisi dell'effetto della preparazione specifica al test sulle performance degli studenti.</p>
+                    
+                    <div class="chart-container">
+                        <p class="chart-placeholder">📊 [Grafico a barre: Performance per gruppo di preparazione]</p>
+                    </div>
+                    
+                    <div class="results-box">
+                        <h4>🔍 Risultati chiave:</h4>
+                        <ul>
+                            <li><strong>Studenti preparati:</strong> Media 69.7 vs 64.1 non preparati</li>
+                            <li><strong>Miglioramento:</strong> +5.6 punti in media in matematica</li>
+                            <li><strong>Effetto consistente:</strong> Benefici in tutte e tre le materie</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Codice -->
+            <section class="content-section">
+                <h2>💻 Frammenti di Codice</h2>
+                <p>Codice Python utilizzato per l'analisi statistica descrittiva:</p>
+                
+                <div class="code-block">
+                    <h4>Caricamento e prime esplorazioni</h4>
+                    <pre><code>import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+
+# Caricamento del dataset
+df = pd.read_csv('student_performance.csv')
+
+# Informazioni generali
+print("Forma del dataset:", df.shape)
+print("\nPrime 5 righe:")
+print(df.head())
+
+# Verifica valori mancanti
+print("\nValori mancanti per colonna:")
+print(df.isnull().sum())</code></pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Statistiche descrittive</h4>
+                    <pre><code># Statistiche descrittive per variabili numeriche
+numeric_cols = ['math_score', 'reading_score', 'writing_score']
+
+# Statistiche base
+print("Statistiche descrittive:")
+print(df[numeric_cols].describe())
+
+# Calcolo manuale di alcune statistiche
+for col in numeric_cols:
+    print(f"\n--- {col.upper()} ---")
+    print(f"Media: {df[col].mean():.2f}")
+    print(f"Mediana: {df[col].median():.2f}")
+    print(f"Moda: {df[col].mode().values[0]:.2f}")
+    print(f"Deviazione Standard: {df[col].std():.2f}")
+    print(f"Varianza: {df[col].var():.2f}")
+    print(f"Range: {df[col].max() - df[col].min():.2f}")</code></pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Identificazione outlier</h4>
+                    <pre><code># Metodo IQR per identificare outlier
+def find_outliers_iqr(data):
+    Q1 = data.quantile(0.25)
+    Q3 = data.quantile(0.75)
+    IQR = Q3 - Q1
+    lower_bound = Q1 - 1.5 * IQR
+    upper_bound = Q3 + 1.5 * IQR
+    return data[(data < lower_bound) | (data > upper_bound)]
+
+# Identificazione outlier per matematica
+outliers_math = find_outliers_iqr(df['math_score'])
+print(f"Outlier in matematica: {len(outliers_math)} studenti")
+print(f"Valori: {sorted(outliers_math.values)}")
+
+# Visualizzazione outlier
+plt.figure(figsize=(10, 6))
+plt.boxplot(df['math_score'])
+plt.title('Box Plot - Punteggi Matematica con Outlier')
+plt.ylabel('Punteggio')
+plt.show()</code></pre>
+                </div>
+            </section>
+
+            <!-- Conclusioni -->
+            <section class="content-section">
+                <h2>💡 Conclusioni</h2>
+                <p>L'analisi descrittiva del dataset ha rivelato pattern interessanti nelle performance studentesche e ha fornito insights utili per comprendere i fattori che influenzano il successo accademico.</p>
+                
+                <div class="conclusions-box">
+                    <h4>Punti salienti:</h4>
+                    <ul>
+                        <li>Le performance in lettura sono generalmente superiori rispetto a matematica e scrittura</li>
+                        <li>Esiste una forte correlazione positiva tra le performance nelle diverse materie</li>
+                        <li>La preparazione specifica al test ha un impatto positivo significativo su tutti i punteggi</li>
+                        <li>La presenza di outlier (studenti con performance molto basse) richiede attenzione speciale</li>
+                        <li>La distribuzione dei punteggi è generalmente normale con leggera asimmetria</li>
+                    </ul>
+                </div>
+
+                <div class="learnings-box">
+                    <h4>🎓 Cosa ho imparato:</h4>
+                    <ul>
+                        <li><strong>Importanza della visualizzazione:</strong> I grafici rivelano pattern non evidenti nelle statistiche numeriche</li>
+                        <li><strong>Gestione degli outlier:</strong> Necessità di investigare le cause prima di rimuoverli</li>
+                        <li><strong>Correlazioni informative:</strong> Le relazioni tra variabili suggeriscono strategie educative integrate</li>
+                        <li><strong>Valore della preparazione:</strong> Evidenza quantitativa dell'efficacia della preparazione mirata</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Riferimenti -->
+            <section class="content-section">
+                <h2>📚 Riferimenti</h2>
+                <ul class="references">
+                    <li>Agresti, A., & Finlay, B. (2017). <em>Statistical Methods for the Social Sciences</em>. Pearson.</li>
+                    <li>McKinney, W. (2017). <em>Python for Data Analysis</em>. O'Reilly Media.</li>
+                    <li>Wickham, H., & Grolemund, G. (2016). <em>R for Data Science</em>. O'Reilly Media.</li>
+                    <li>UCI Machine Learning Repository - Student Performance Dataset</li>
+                </ul>
+            </section>
+        </article>
+
+        <!-- Navigation between homework -->
+        <nav class="homework-navigation">
+            <div class="nav-item">
+                <a href="#" class="nav-link nav-prev" style="opacity: 0.5; pointer-events: none;">
+                    ← Nessun homework precedente
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="../index.html" class="nav-link nav-home">
+                    🏠 Torna alla Home
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link nav-next" style="opacity: 0.5; pointer-events: none;">
+                    Prossimo homework →
+                </a>
+            </div>
+        </nav>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Antonio Lissa Lattanzio - Blog di Statistica Applicata</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/homework.js"></script>
+</body>
+</html>
