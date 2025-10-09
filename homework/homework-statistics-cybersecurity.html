@@ -3,11 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>What is Statistics and Why Can It Be Useful for Cybersecurity - Statistica Applicata</title>
-    <meta name="description" content="Understanding the fundamental role of statistics in cybersecurity: from threat detection to risk assessment">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>What is Statistics and Why Can It Be Useful for Cybersecurity</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/homework.css">
 </head>
@@ -15,29 +11,23 @@
     <!-- Header -->
     <header class="header">
         <div class="header-content">
-            <a href="../index.html" class="logo">
-                Statistica Blog
-            </a>
+            <a href="../index.html" class="logo">Antonio Lissa Lattanzio</a>
             <nav class="nav">
                 <a href="../index.html" class="nav-link">Home</a>
                 <a href="../index.html#homework" class="nav-link">Homework</a>
-                <a href="#" class="nav-link">Info</a>
             </nav>
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="main-content">
-        <!-- Breadcrumb -->
         <nav class="breadcrumb">
             <a href="../index.html">Home</a>
             <span class="breadcrumb-separator">›</span>
             <a href="../index.html#homework">Homework</a>
             <span class="breadcrumb-separator">›</span>
-            <span class="breadcrumb-current">Settimana 1</span>
+            <span>Settimana 1</span>
         </nav>
 
-        <!-- Article Header -->
         <header class="article-header">
             <div class="article-meta">
                 <span class="homework-week">Settimana 1</span>
@@ -48,343 +38,128 @@
                 <span class="tag">Statistical Foundations</span>
                 <span class="tag">Cybersecurity</span>
                 <span class="tag">Threat Detection</span>
-                <span class="tag">Risk Analysis</span>
             </div>
         </header>
 
-        <!-- Article Content -->
         <article class="article-content">
-            <!-- Introduction -->
             <section class="content-section">
-                <h2>🎯 Objectives of This Analysis</h2>
-                <p>This homework explores the fundamental connection between statistics and cybersecurity, demonstrating how statistical methods form the backbone of modern security systems. We'll examine how statistical thinking transforms raw security data into actionable intelligence.</p>
-                <ul>
-                    <li>Define statistics and its core principles in the context of security</li>
-                    <li>Explore key statistical methods used in cybersecurity applications</li>
-                    <li>Analyze real-world examples of statistics preventing cyber attacks</li>
-                    <li>Demonstrate practical applications through security log analysis</li>
-                    <li>Understand how statistical models predict and prevent threats</li>
-                </ul>
+                <h2>🎯 Introduction</h2>
+                <p>Statistics is the mathematical science of collecting, organizing, analyzing, and interpreting data to make informed decisions under uncertainty. In the context of cybersecurity, statistics provides the foundation for detecting threats, assessing risks, and making data-driven security decisions in an environment where perfect information is never available.</p>
             </section>
 
-            <!-- What is Statistics -->
             <section class="content-section">
-                <h2>📊 Understanding Statistics: The Science of Uncertainty</h2>
-                <p>Statistics is the science of collecting, organizing, analyzing, interpreting, and presenting data. In essence, it's a mathematical framework for making sense of uncertainty and variability in the world around us.</p>
+                <h2>📊 The Role of Statistics in Cybersecurity</h2>
+                <p>Modern cybersecurity faces a fundamental challenge: distinguishing malicious activity from normal behavior in vast amounts of data. A typical enterprise network generates millions of events daily, making manual analysis impossible. Statistics provides three critical capabilities:</p>
                 
-                <h3>Core Components of Statistics</h3>
-                <div class="dataset-info">
-                    <p><strong>Descriptive Statistics:</strong> Summarizing and describing data characteristics</p>
-                    <p><strong>Inferential Statistics:</strong> Drawing conclusions about populations from samples</p>
-                    <p><strong>Predictive Analytics:</strong> Using historical data to forecast future events</p>
-                    <p><strong>Probability Theory:</strong> Quantifying likelihood and risk</p>
+                <div class="info-box">
+                    <p><strong>Pattern Recognition:</strong> Statistical methods identify baseline behaviors and detect deviations that may indicate security threats.</p>
+                    <p><strong>Risk Quantification:</strong> Probability theory enables organizations to measure and prioritize security risks objectively.</p>
+                    <p><strong>Predictive Analysis:</strong> Historical data patterns help forecast future threats and optimize defensive strategies.</p>
                 </div>
-
-                <p>Statistics transforms raw data into knowledge through systematic methodologies. It provides tools to:</p>
-                <ul>
-                    <li>Identify patterns hidden in complex datasets</li>
-                    <li>Distinguish signal from noise in observations</li>
-                    <li>Quantify uncertainty and assess risk</li>
-                    <li>Make data-driven decisions with confidence intervals</li>
-                    <li>Test hypotheses and validate assumptions</li>
-                </ul>
             </section>
 
-            <!-- The Cybersecurity Landscape -->
             <section class="content-section">
-                <h2>🔒 The Modern Cybersecurity Challenge</h2>
-                <p>Cybersecurity faces an unprecedented data challenge. Modern networks generate terabytes of log data daily, containing millions of events that must be analyzed for potential threats.</p>
+                <h2>🛡️ Key Statistical Applications</h2>
                 
-                <div class="analysis-block">
-                    <h3>The Scale of Security Data</h3>
-                    <p>A medium-sized enterprise network typically generates:</p>
-                    <ul>
-                        <li><strong>10-50 GB</strong> of log data per day</li>
-                        <li><strong>1-5 million</strong> security events per hour</li>
-                        <li><strong>Thousands</strong> of unique IP connections</li>
-                        <li><strong>Hundreds</strong> of potential alerts requiring investigation</li>
-                    </ul>
-                    <p>Manual analysis of this volume is impossible. Statistics provides the mathematical foundation for automated threat detection and response.</p>
-                </div>
-            </section>
-
-            <!-- Statistical Methods in Cybersecurity -->
-            <section class="content-section">
-                <h2>🛡️ Key Statistical Methods in Cybersecurity</h2>
+                <h3>Anomaly Detection</h3>
+                <p>Anomaly detection uses statistical distributions to identify unusual patterns in network traffic, user behavior, or system logs. For example, if login attempts typically follow a normal distribution with mean μ = 50 per hour and standard deviation σ = 10, any hour with more than μ + 3σ = 80 attempts would trigger an alert for potential brute-force attacks.</p>
                 
-                <div class="analysis-block">
-                    <h3>1. Anomaly Detection</h3>
-                    <p>Statistical anomaly detection identifies deviations from normal behavior patterns, crucial for detecting zero-day attacks and insider threats.</p>
-                    
-                    <div class="results-box">
-                        <h4>Statistical Techniques Used:</h4>
-                        <ul>
-                            <li><strong>Z-score analysis:</strong> Detecting outliers in network traffic volumes</li>
-                            <li><strong>Gaussian distribution:</strong> Modeling normal user behavior</li>
-                            <li><strong>Standard deviation thresholds:</strong> Setting dynamic alert boundaries</li>
-                            <li><strong>Time series analysis:</strong> Identifying temporal anomalies</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="analysis-block">
-                    <h3>2. Machine Learning & Classification</h3>
-                    <p>Statistical classification algorithms power modern intrusion detection systems (IDS) and malware detection engines.</p>
-                    
-                    <div class="results-box">
-                        <h4>Key Algorithms:</h4>
-                        <ul>
-                            <li><strong>Naive Bayes:</strong> Spam and phishing email detection</li>
-                            <li><strong>Random Forests:</strong> Malware classification</li>
-                            <li><strong>Logistic Regression:</strong> Binary threat classification</li>
-                            <li><strong>Support Vector Machines:</strong> Attack pattern recognition</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="analysis-block">
-                    <h3>3. Risk Assessment & Probability</h3>
-                    <p>Probability theory quantifies security risks and helps prioritize defensive resources.</p>
-                    
-                    <div class="results-box">
-                        <h4>Applications:</h4>
-                        <ul>
-                            <li><strong>Bayesian inference:</strong> Updating threat probabilities with new evidence</li>
-                            <li><strong>Monte Carlo simulations:</strong> Assessing breach probability</li>
-                            <li><strong>Risk matrices:</strong> Combining likelihood and impact assessments</li>
-                            <li><strong>Vulnerability scoring:</strong> CVSS calculations using statistical models</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Real-World Applications -->
-            <section class="content-section">
-                <h2>💼 Real-World Applications</h2>
+                <h3>Bayesian Threat Assessment</h3>
+                <p>Bayes' theorem updates threat probabilities as new evidence emerges. When a security system detects suspicious activity, it calculates the posterior probability of an actual threat given the observed evidence, accounting for both true positive rates and false positive rates.</p>
                 
-                <div class="analysis-block">
-                    <h3>Case Study 1: DDoS Attack Detection</h3>
-                    <p>Statistical analysis of network traffic patterns can identify Distributed Denial of Service attacks before they overwhelm systems.</p>
-                    
-                    <div class="chart-container">
-                        <p class="chart-placeholder">📊 [Time series graph showing normal vs DDoS traffic patterns]</p>
-                    </div>
-                    
-                    <p><strong>Statistical Approach:</strong></p>
-                    <ul>
-                        <li>Baseline establishment using moving averages</li>
-                        <li>Real-time traffic comparison using chi-square tests</li>
-                        <li>Entropy analysis to detect traffic randomness</li>
-                        <li>Correlation analysis across multiple metrics</li>
-                    </ul>
+                <div class="info-box">
+                    <p><strong>Example:</strong> If a system has a 1% prior threat probability, and suspicious activity is detected that occurs in 90% of real attacks but only 5% of normal operations, Bayes' theorem calculates the updated threat probability at approximately 15.4% – a significant increase warranting investigation.</p>
                 </div>
-
-                <div class="analysis-block">
-                    <h3>Case Study 2: User Behavior Analytics (UBA)</h3>
-                    <p>Statistics helps identify compromised accounts by detecting anomalous user behaviors.</p>
-                    
-                    <div class="chart-container">
-                        <p class="chart-placeholder">📊 [Histogram of login times showing anomalous after-hours access]</p>
-                    </div>
-                    
-                    <p><strong>Metrics Analyzed:</strong></p>
-                    <ul>
-                        <li>Login time distributions</li>
-                        <li>Geographic access patterns</li>
-                        <li>File access frequency</li>
-                        <li>Data transfer volumes</li>
-                    </ul>
-                </div>
+                
+                <h3>Machine Learning Classification</h3>
+                <p>Statistical classification algorithms power intrusion detection systems (IDS) and malware detection. Methods like logistic regression, naive Bayes, and support vector machines classify network traffic or files as benign or malicious based on statistical features extracted from training data.</p>
             </section>
 
-            <!-- Practical Implementation -->
             <section class="content-section">
-                <h2>💻 Practical Implementation Example</h2>
-                <p>Let's demonstrate how statistics detects security anomalies using Python:</p>
+                <h2>💻 Practical Example: Simple Anomaly Detection</h2>
+                <p>Here's a basic implementation of statistical anomaly detection in network traffic:</p>
                 
                 <div class="code-block">
-                    <h4>Anomaly Detection in Network Traffic</h4>
-                    <pre><code>import numpy as np
-import pandas as pd
+                    <code>import numpy as np
 from scipy import stats
-import matplotlib.pyplot as plt
 
-# Simulate network traffic data
-np.random.seed(42)
-normal_traffic = np.random.normal(1000, 200, 1000)  # Normal: mean=1000, std=200
+# Simulate network traffic (requests per minute)
+normal_traffic = np.random.normal(100, 15, 1000)
 
-# Inject anomalies (potential DDoS)
-anomalies = np.random.normal(5000, 500, 50)  # Attack traffic
-traffic_data = np.concatenate([normal_traffic, anomalies])
-timestamps = pd.date_range('2024-01-01', periods=1050, freq='1min')
+# Calculate statistical thresholds
+mean = np.mean(normal_traffic)
+std = np.std(normal_traffic)
+threshold = mean + 3 * std  # 3-sigma rule
 
-# Create DataFrame
-df = pd.DataFrame({
-    'timestamp': timestamps,
-    'packets_per_second': traffic_data
-})
+# Detect anomalies
+test_traffic = [95, 102, 98, 156, 103]  # One anomaly
+anomalies = [x for x in test_traffic if x > threshold]
 
-# Statistical Anomaly Detection
-def detect_anomalies(data, threshold=3):
-    """
-    Detect anomalies using z-score method
-    """
-    mean = np.mean(data)
-    std = np.std(data)
-    z_scores = np.abs(stats.zscore(data))
-    
-    return z_scores > threshold
-
-# Apply detection
-df['is_anomaly'] = detect_anomalies(df['packets_per_second'])
-
-# Calculate statistics
-print("Traffic Statistics:")
-print(f"Mean traffic: {df['packets_per_second'].mean():.2f} packets/sec")
-print(f"Std deviation: {df['packets_per_second'].std():.2f}")
-print(f"Anomalies detected: {df['is_anomaly'].sum()}")
-print(f"Detection rate: {(df['is_anomaly'].sum() / 50) * 100:.1f}%")</code></pre>
+print(f"Mean traffic: {mean:.2f} req/min")
+print(f"Threshold: {threshold:.2f} req/min")
+print(f"Detected anomalies: {anomalies}")</code>
                 </div>
-
-                <div class="code-block">
-                    <h4>Bayesian Threat Probability Update</h4>
-                    <pre><code>def bayesian_threat_update(prior, likelihood_given_threat, 
-                           likelihood_given_normal):
-    """
-    Update threat probability using Bayes' theorem
-    P(threat|evidence) = P(evidence|threat) * P(threat) / P(evidence)
-    """
-    # Calculate total probability of evidence
-    p_evidence = (likelihood_given_threat * prior + 
-                  likelihood_given_normal * (1 - prior))
-    
-    # Apply Bayes' theorem
-    posterior = (likelihood_given_threat * prior) / p_evidence
-    
-    return posterior
-
-# Example: Suspicious login detected
-prior_threat = 0.01  # 1% baseline threat probability
-likelihood_suspicious_given_threat = 0.90  # 90% chance if compromised
-likelihood_suspicious_given_normal = 0.05  # 5% false positive rate
-
-posterior = bayesian_threat_update(
-    prior_threat, 
-    likelihood_suspicious_given_threat,
-    likelihood_suspicious_given_normal
-)
-
-print(f"\nBayesian Threat Assessment:")
-print(f"Prior probability of threat: {prior_threat:.1%}")
-print(f"After suspicious activity: {posterior:.1%}")
-print(f"Risk increased by: {posterior/prior_threat:.1f}x")</code></pre>
-                </div>
-
-                <div class="code-block">
-                    <h4>Statistical Feature Extraction for ML</h4>
-                    <pre><code># Extract statistical features for machine learning
-def extract_security_features(log_data):
-    """
-    Extract statistical features from security logs
-    """
-    features = {
-        'mean_packet_size': log_data['packet_size'].mean(),
-        'std_packet_size': log_data['packet_size'].std(),
-        'entropy': stats.entropy(log_data['port'].value_counts()),
-        'unique_ips': log_data['source_ip'].nunique(),
-        'burst_rate': log_data['timestamp'].diff().std(),
-        'percentile_95': log_data['packet_size'].quantile(0.95)
-    }
-    
-    return features
-
-# These features feed into ML models for threat classification</code></pre>
-                </div>
-            </section>
-
-            <!-- Future Trends -->
-            <section class="content-section">
-                <h2>🚀 Future Trends: Statistics in Next-Gen Security</h2>
                 
-                <div class="analysis-block">
-                    <h3>Emerging Applications</h3>
-                    <ul>
-                        <li><strong>Quantum-resistant cryptography:</strong> Statistical tests for randomness in key generation</li>
-                        <li><strong>AI security:</strong> Statistical methods to detect adversarial attacks on ML models</li>
-                        <li><strong>IoT security:</strong> Lightweight statistical algorithms for resource-constrained devices</li>
-                        <li><strong>Zero Trust Architecture:</strong> Continuous statistical verification of trust scores</li>
-                        <li><strong>Threat hunting:</strong> Hypothesis-driven statistical investigations</li>
-                    </ul>
-                </div>
+                <p>This approach uses the z-score method, where values beyond 3 standard deviations from the mean are flagged as potential security incidents. The 3-sigma threshold captures 99.7% of normal behavior, making it effective for detecting outliers.</p>
             </section>
 
-            <!-- Conclusions -->
+            <section class="content-section">
+                <h2>📈 Real-World Applications</h2>
+                
+                <h3>DDoS Attack Detection</h3>
+                <p>Statistical time series analysis identifies Distributed Denial of Service attacks by monitoring traffic patterns. Systems establish baseline traffic distributions and use chi-square tests to detect significant deviations indicating an ongoing attack.</p>
+                
+                <h3>User Behavior Analytics</h3>
+                <p>Organizations use statistical profiling to detect compromised accounts. By analyzing login times, access patterns, and data transfer volumes, anomaly detection algorithms identify unusual behavior such as after-hours access or geographic impossibilities (accessing from two distant locations within minutes).</p>
+                
+                <h3>Vulnerability Risk Scoring</h3>
+                <p>The Common Vulnerability Scoring System (CVSS) uses statistical models to quantify vulnerability severity, combining metrics like exploitability, impact, and temporal factors into a standardized risk score that guides patching priorities.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>🚀 Future Directions</h2>
+                <p>The integration of statistics and cybersecurity continues to evolve with emerging technologies:</p>
+                
+                <ul>
+                    <li><strong>Zero Trust Architecture:</strong> Continuous statistical verification of user identity and behavior replaces traditional perimeter-based security</li>
+                    <li><strong>AI Security:</strong> Statistical methods detect adversarial attacks designed to fool machine learning models</li>
+                    <li><strong>Threat Hunting:</strong> Hypothesis-driven statistical investigations proactively search for hidden threats</li>
+                    <li><strong>Privacy-Preserving Analytics:</strong> Differential privacy uses statistical noise to enable data analysis while protecting individual privacy</li>
+                </ul>
+            </section>
+
             <section class="content-section">
                 <h2>💡 Conclusions</h2>
-                <p>Statistics is not just useful for cybersecurity—it's essential. As cyber threats grow in sophistication and volume, statistical methods provide the mathematical foundation for detecting, analyzing, and preventing attacks.</p>
                 
                 <div class="conclusions-box">
-                    <h4>Key Takeaways:</h4>
+                    <h4>Key Takeaways</h4>
                     <ul>
-                        <li>Statistics transforms overwhelming security data into actionable intelligence</li>
-                        <li>Anomaly detection using statistical methods catches zero-day threats</li>
-                        <li>Probability theory quantifies risk and optimizes security investments</li>
-                        <li>Machine learning algorithms rely on statistical foundations</li>
-                        <li>Real-time statistical analysis enables proactive threat prevention</li>
+                        <li>Statistics transforms overwhelming security data into actionable intelligence through mathematical rigor</li>
+                        <li>Anomaly detection using statistical distributions catches threats that signature-based systems miss</li>
+                        <li>Bayesian methods provide a framework for rational decision-making under uncertainty</li>
+                        <li>Statistical foundations underpin modern machine learning security tools</li>
+                        <li>As cyber threats evolve, statistical literacy becomes essential for security professionals</li>
                     </ul>
                 </div>
-
-                <div class="learnings-box">
-                    <h4>🎓 What I Learned:</h4>
-                    <ul>
-                        <li><strong>Data is the new perimeter:</strong> Statistical analysis of data flows replaces traditional network boundaries</li>
-                        <li><strong>Normal must be defined:</strong> Understanding baseline behavior is crucial for anomaly detection</li>
-                        <li><strong>False positives matter:</strong> Statistical precision reduces alert fatigue in SOC teams</li>
-                        <li><strong>Context is key:</strong> Statistical models must adapt to organizational patterns</li>
-                        <li><strong>Continuous learning:</strong> Security statistics require constant model updates</li>
-                    </ul>
-                </div>
+                
+                <p>Statistics is not merely useful for cybersecurity—it is fundamental. As attack volumes and sophistication increase, the ability to apply statistical reasoning to security problems becomes a critical skill. Understanding statistical concepts enables security professionals to build more effective defenses, make better risk decisions, and ultimately protect organizations more successfully.</p>
             </section>
 
-            <!-- References -->
             <section class="content-section">
                 <h2>📚 References</h2>
                 <ul class="references">
-                    <li>Sommer, R., & Paxson, V. (2010). <em>Outside the Closed World: On Using Machine Learning for Network Intrusion Detection</em>. IEEE Symposium on Security and Privacy.</li>
                     <li>Chandola, V., Banerjee, A., & Kumar, V. (2009). <em>Anomaly Detection: A Survey</em>. ACM Computing Surveys, 41(3).</li>
                     <li>Buczak, A. L., & Guven, E. (2016). <em>A Survey of Data Mining and Machine Learning Methods for Cyber Security Intrusion Detection</em>. IEEE Communications Surveys & Tutorials.</li>
-                    <li>Gates, C., & Taylor, C. (2006). <em>Challenging the Anomaly Detection Paradigm: A Provocative Discussion</em>. Workshop on New Security Paradigms.</li>
+                    <li>Sommer, R., & Paxson, V. (2010). <em>Outside the Closed World: On Using Machine Learning for Network Intrusion Detection</em>. IEEE Symposium on Security and Privacy.</li>
                     <li>NIST Special Publication 800-61r2. <em>Computer Security Incident Handling Guide</em>.</li>
                 </ul>
             </section>
         </article>
-
-        <!-- Navigation between homework -->
-        <nav class="homework-navigation">
-            <div class="nav-item">
-                <a href="#" class="nav-link nav-prev" style="opacity: 0.5; pointer-events: none;">
-                    ← Nessun homework precedente
-                </a>
-            </div>
-            <div class="nav-item">
-                <a href="../index.html" class="nav-link nav-home">
-                    🏠 Torna alla Home
-                </a>
-            </div>
-            <div class="nav-item">
-                <a href="#" class="nav-link nav-next" style="opacity: 0.5; pointer-events: none;">
-                    Prossimo homework →
-                </a>
-            </div>
-        </nav>
     </main>
 
     <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2024 Antonio Lissa Lattanzio - Blog di Statistica Applicata</p>
+        <p>Antonio Lissa Lattanzio - Statistica Applicata 2024/2025</p>
     </footer>
-
-    <!-- JavaScript -->
-    <script src="../js/homework.js"></script>
 </body>
 </html>

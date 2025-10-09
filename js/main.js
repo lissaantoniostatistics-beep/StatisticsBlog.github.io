@@ -57,22 +57,22 @@ function createHomeworkCard(homework) {
 
 // Funzione per caricare gli homework
 function loadHomework() {
-    const homeworkGrid = document.getElementById('homework-grid');
+    const homeworkListElement = document.getElementById('homework-list');
     
-    if (!homeworkGrid) return;
+    if (!homeworkListElement) return;
     
     // Ordina gli homework per data (più recenti prima)
     const sortedHomework = homeworkList.sort((a, b) => new Date(b.date) - new Date(a.date));
     
     if (sortedHomework.length === 0) {
-        homeworkGrid.innerHTML = `
+        homeworkListElement.innerHTML = `
             <div class="no-homework">
                 <p class="no-homework-icon">📚</p>
                 <p class="no-homework-text">Nessun homework ancora pubblicato. Torna presto per vedere i nuovi contenuti!</p>
             </div>
         `;
     } else {
-        homeworkGrid.innerHTML = sortedHomework.map(homework => createHomeworkCard(homework)).join('');
+        homeworkListElement.innerHTML = sortedHomework.map(homework => createHomeworkCard(homework)).join('');
     }
 }
 
