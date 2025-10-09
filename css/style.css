@@ -7,44 +7,59 @@
 
 body {
     font-family: Georgia, 'Times New Roman', serif;
-    line-height: 1.7;
-    color: #333;
+    line-height: 1.8;
+    color: #2b2b2b;
     background: #fff;
     min-height: 100vh;
+}
+
+a {
+    color: #0066cc;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #004499;
 }
 
 /* ===== HEADER ===== */
 .header {
     background: #fff;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 2px solid #e0e0e0;
 }
 
 .header-content {
-    max-width: 900px;
+    max-width: 800px;
     margin: 0 auto;
-    padding: 1.5rem 2rem;
+    padding: 2rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .logo {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 400;
     color: #000;
     text-decoration: none;
+    letter-spacing: -0.01em;
+}
+
+.logo:hover {
+    color: #000;
 }
 
 .nav {
     display: flex;
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
 .nav-link {
     color: #666;
     text-decoration: none;
     font-size: 0.95rem;
-    font-size: 0.95rem;
+    transition: color 0.2s ease;
 }
 
 .nav-link:hover {
@@ -53,76 +68,84 @@ body {
 
 /* ===== MAIN CONTENT ===== */
 .main-content {
-    max-width: 900px;
+    max-width: 800px;
     margin: 0 auto;
-    padding: 3rem 2rem;
+    padding: 4rem 2rem;
+    background: #fff;
 }
 
 .intro {
-    margin-bottom: 4rem;
+    margin-bottom: 5rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .intro h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 400;
     color: #000;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
 }
 
 .intro .subtitle {
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #666;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     font-style: italic;
 }
 
 .intro p {
     color: #444;
-    line-height: 1.8;
+    line-height: 1.9;
+    font-size: 1rem;
+    max-width: 70ch;
 }
 
 /* ===== HOMEWORK SECTION ===== */
 .homework-section {
-    margin-top: 3rem;
+    margin-top: 4rem;
 }
 
 .homework-section h2 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-weight: 400;
     color: #000;
-    margin-bottom: 2rem;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 0.5rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #e0e0e0;
 }
 
 .homework-list {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
 .homework-card {
     background: #fff;
-    border: 1px solid #ddd;
-    padding: 1.5rem;
-    transition: border-color 0.2s;
+    border-left: 3px solid #ccc;
+    padding: 2rem;
+    transition: all 0.2s ease;
 }
 
 .homework-card:hover {
-    border-color: #999;
+    border-left-color: #666;
 }
 
 .homework-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
 }
 
 .homework-week {
-    font-size: 0.85rem;
-    color: #666;
-    font-weight: normal;
+    font-size: 0.9rem;
+    color: #000;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .homework-date {
@@ -131,16 +154,17 @@ body {
 }
 
 .homework-title {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     font-weight: 400;
     color: #000;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
 }
 
 .homework-description {
     color: #555;
-    margin-bottom: 1rem;
-    line-height: 1.7;
+    margin-bottom: 1.25rem;
+    line-height: 1.8;
     font-size: 0.95rem;
 }
 
@@ -148,43 +172,48 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
 }
 
 .tag {
-    background: #f5f5f5;
+    background: transparent;
     color: #666;
-    padding: 0.2rem 0.5rem;
+    padding: 0.25rem 0.75rem;
     font-size: 0.8rem;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
 }
 
 .homework-link {
     color: #0066cc;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
 }
 
 .homework-link:hover {
-    text-decoration: underline;
+    border-bottom-color: #0066cc;
+    text-decoration: none;
 }
 
 /* ===== NO HOMEWORK MESSAGE ===== */
 .no-homework {
     text-align: center;
-    padding: 3rem;
+    padding: 4rem 2rem;
     color: #999;
     font-style: italic;
 }
 
 /* ===== FOOTER ===== */
 .footer {
-    margin-top: 5rem;
+    margin-top: 6rem;
     text-align: center;
     color: #999;
-    padding: 2rem;
-    border-top: 1px solid #ddd;
+    padding: 3rem 2rem;
+    border-top: 1px solid #e0e0e0;
     font-size: 0.9rem;
+    background: #fff;
 }
 
 /* ===== RESPONSIVE ===== */
