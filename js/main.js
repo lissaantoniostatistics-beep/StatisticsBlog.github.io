@@ -1,7 +1,16 @@
 // ===== GESTIONE DINAMICA DEL BLOG =====
 
-// Lista degli homework - aggiungi qui i nuovi homework
+// Lista degli homework - aggiorna qui i nuovi compiti
 const homeworkList = [
+    {
+        id: 'homework-Caesar cipher',
+        week: 'Week 2',
+        title: 'Concepts of Dataset, Distribution, and Caesar Cipher',
+        description: 'Explanation of dataset and distribution concepts using a DBMS (Access), analysis of univariate and bivariate distributions, and introduction to cryptanalysis with the Caesar Cipher.',
+        date: '2024-10-14',
+        tags: ['Descriptive Statistics', 'DBMS', 'Cryptography', 'Frequency Analysis'],
+        filename: 'homework-concetti-crittografia.html'
+    },
     {
         id: 'homework-statistics-cybersecurity',
         week: 'Settimana 1',
@@ -11,18 +20,6 @@ const homeworkList = [
         tags: ['Statistical Foundations', 'Cybersecurity', 'Threat Detection'],
         filename: 'homework-statistics-cybersecurity.html'
     }
-    // Aggiungi nuovi homework qui seguendo questo formato:
-    /*
-    {
-        id: 'homework-2',
-        week: 'Settimana 2',
-        title: 'Titolo del tuo homework',
-        description: 'Breve descrizione del homework',
-        date: '2024-10-14',
-        tags: ['Tag1', 'Tag2', 'Tag3'],
-        filename: 'homework-2.html'
-    }
-    */
 ];
 
 // Funzione per formattare la data
@@ -37,8 +34,11 @@ function formatDate(dateString) {
 
 // Funzione per creare una card homework
 function createHomeworkCard(homework) {
+    // Nota: Il link presuppone che il file sia in una sottocartella 'homework/'
+    const url = `homework/${homework.filename}`; 
+
     return `
-        <div class="homework-card">
+        <a href="${url}" class="homework-card">
             <div class="homework-header">
                 <span class="homework-week">${homework.week}</span>
                 <span class="homework-date">${formatDate(homework.date)}</span>
@@ -48,27 +48,27 @@ function createHomeworkCard(homework) {
             <div class="homework-tags">
                 ${homework.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
             </div>
-            <a href="homework/${homework.filename}" class="homework-link">
-                Leggi l'homework
-            </a>
-        </div>
+            <span class="homework-link">
+                Leggi l'homework &rarr;
+            </span>
+        </a>
     `;
 }
 
-// Funzione per caricare gli homework
+// Funzione per caricare gli homework nella pagina
 function loadHomework() {
     const homeworkListElement = document.getElementById('homework-list');
     
     if (!homeworkListElement) return;
     
-    // Ordina gli homework per data (più recenti prima)
+    // Ordina gli homework per data (dal più recente al meno recente)
     const sortedHomework = homeworkList.sort((a, b) => new Date(b.date) - new Date(a.date));
     
     if (sortedHomework.length === 0) {
         homeworkListElement.innerHTML = `
             <div class="no-homework">
                 <p class="no-homework-icon">📚</p>
-                <p class="no-homework-text">Nessun homework ancora pubblicato. Torna presto per vedere i nuovi contenuti!</p>
+                <p class="no-homework-text">Ancora nessun compito caricato. Torna presto!</p>
             </div>
         `;
     } else {
@@ -76,7 +76,7 @@ function loadHomework() {
     }
 }
 
-// Funzione per aggiungere smooth scrolling
+// Funzione per aggiungere smooth scrolling per i link interni
 function addSmoothScrolling() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -92,12 +92,13 @@ function addSmoothScrolling() {
     });
 }
 
-// Funzione per evidenziare la navigazione attiva
+// Funzione per evidenziare il link di navigazione attivo
 function highlightActiveNav() {
     const currentPath = window.location.pathname;
     const navLinks = document.querySelectorAll('.nav-link');
     
     navLinks.forEach(link => {
+        // Verifica se l'href del link corrisponde al percorso corrente o alla home
         if (link.getAttribute('href') === currentPath || 
             (currentPath === '/' && link.getAttribute('href') === 'index.html')) {
             link.classList.add('active');
@@ -105,7 +106,7 @@ function highlightActiveNav() {
     });
 }
 
-// Funzione per aggiungere animazioni al scroll
+// Funzione per animazioni (fade-in e slide-up) degli elementi a scroll
 function addScrollAnimations() {
     const observerOptions = {
         threshold: 0.1,
@@ -117,11 +118,12 @@ function addScrollAnimations() {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target); // Ferma l'osservazione dopo l'animazione
             }
         });
     }, observerOptions);
     
-    // Osserva le card degli homework
+    // Prepara e osserva tutte le card degli homework
     document.querySelectorAll('.homework-card').forEach(card => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
@@ -130,86 +132,36 @@ function addScrollAnimations() {
     });
 }
 
-// Funzione per gestire il tema (opzionale - per future implementazioni)
+// Gestione del tema (es. Light/Dark mode)
 function initializeTheme() {
-    // Controlla se l'utente ha una preferenza salvata
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
         document.body.classList.add(savedTheme);
     }
-    
-    // Rileva la preferenza del sistema
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        // Preparato per futuro tema scuro
-        console.log('Sistema in modalità scura rilevato');
-    }
 }
 
-// Funzione per mostrare statistiche del blog
+// Mostra statistiche essenziali in console per il debug
 function showBlogStats() {
     const totalHomework = homeworkList.length;
-    const latestDate = homeworkList.length > 0 ? 
-        new Date(Math.max(...homeworkList.map(h => new Date(h.date)))) : null;
     
-    console.log(`📊 Statistiche Blog:`);
-    console.log(`   - Homework pubblicati: ${totalHomework}`);
-    if (latestDate) {
-        console.log(`   - Ultimo aggiornamento: ${formatDate(latestDate)}`);
-    }
+    console.log(`📊 Blog Statistico Caricato. Compiti totali: ${totalHomework}.`);
 }
 
-// Inizializzazione quando il DOM è caricato
+// Inizializzazione quando il DOM è pronto
 document.addEventListener('DOMContentLoaded', function() {
-    // Carica gli homework
     loadHomework();
-    
-    // Aggiungi smooth scrolling
     addSmoothScrolling();
-    
-    // Evidenzia navigazione attiva
     highlightActiveNav();
-    
-    // Aggiungi animazioni dopo un breve delay per permettere il rendering
-    setTimeout(addScrollAnimations, 100);
-    
-    // Inizializza tema
+    // Animazioni dopo un breve delay per garantire che il layout sia stabile
+    setTimeout(addScrollAnimations, 100); 
     initializeTheme();
-    
-    // Mostra statistiche in console
     showBlogStats();
-    
-    console.log('✅ Blog di Statistica caricato con successo!');
 });
 
-// Utility: Funzione per aggiungere un nuovo homework (per sviluppo)
-function addNewHomework(homeworkData) {
+// Funzione utility per aggiungere un nuovo homework (utile in fase di sviluppo)
+window.addNewHomework = function(homeworkData) {
     homeworkList.push(homeworkData);
     loadHomework();
     setTimeout(addScrollAnimations, 100);
-    console.log(`✨ Nuovo homework aggiunto: ${homeworkData.title}`);
+    console.log(`✨ Nuovo compito aggiunto: ${homeworkData.title}`);
 }
-
-// Funzione per filtrare homework per tag
-function filterByTag(tag) {
-    const filtered = homeworkList.filter(hw => hw.tags.includes(tag));
-    console.log(`Homework con tag "${tag}":`, filtered);
-    return filtered;
-}
-
-// Funzione per ottenere homework recenti
-function getRecentHomework(days = 7) {
-    const cutoff = new Date();
-    cutoff.setDate(cutoff.getDate() - days);
-    
-    return homeworkList.filter(hw => new Date(hw.date) >= cutoff);
-}
-
-// Esporta funzioni per uso globale (se necessario)
-window.BlogUtils = {
-    addNewHomework,
-    loadHomework,
-    formatDate,
-    filterByTag,
-    getRecentHomework,
-    homeworkList
-};
