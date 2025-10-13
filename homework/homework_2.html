@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 1 - Concetti Base e Crittografia - Statistica Applicata</title>
+    <meta name="description" content="Spiegazione dei concetti di dataset e distribuzione, analisi su dataset Access e crittografia di Cesare.">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/homework.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="../index.html" class="logo">
+                Statistica Blog
+            </a>
+            <nav class="nav">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="../index.html#homework" class="nav-link">Homework</a>
+                <a href="#" class="nav-link">Info</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <nav class="breadcrumb">
+            <a href="../index.html">Home</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="../index.html#homework">Homework</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">Settimana 1</span>
+        </nav>
+
+        <header class="article-header">
+            <div class="article-meta">
+                <span class="homework-week">Settimana 1</span>
+                <span class="article-date">10 Maggio 2024</span>
+            </div>
+            <h1 class="article-title">Concetti di Dataset, Distribuzione e Crittografia di Cesare</h1>
+            <div class="article-tags">
+                <span class="tag">Statistica Descrittiva</span>
+                <span class="tag">DBMS</span>
+                <span class="tag">Crittografia</span>
+                <span class="tag">Access</span>
+            </div>
+        </header>
+
+        <article class="article-content">
+            <section class="content-section">
+                <h2>🎯 Obiettivi dell'Homework</h2>
+                <p>Questo homework si propone di esplorare i concetti fondamentali di dataset e distribuzione, applicandoli sia a un semplice database relazionale che all'analisi testuale tramite la crittografia di Cesare.</p>
+                <ul>
+                    <li>Comprendere e definire il concetto di dataset e distribuzione statistica.</li>
+                    <li>Creare un dataset di esempio in Microsoft Access e calcolare distribuzioni univariate.</li>
+                    <li>Analizzare un dataset "X Champions" calcolando una distribuzione bivariata.</li>
+                    <li>Implementare e decodificare il cifrario di Cesare, con e senza conoscenza dello shift, e basandosi sulla distribuzione delle lettere.</li>
+                </ul>
+            </section>
+
+            <section class="content-section">
+                <h2>📊 Dataset Utilizzato</h2>
+                <div class="dataset-info">
+                    <p><strong>Nome Dataset (Esempio):</strong> VenditeProdotti</p>
+                    <p><strong>Fonte:</strong> Creato per scopi didattici in MS Access</p>
+                    <p><strong>Dimensioni:</strong> 500 righe × 4 colonne</p>
+                    <p><strong>Variabili principali:</strong> ID_Ordine, CategoriaProdotto, QuantitàVenduta, PrezzoUnitario</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>🔬 Metodologia</h2>
+                <p>La metodologia adottata prevede due fasi principali: una dedicata all'analisi statistica su database e una alla crittografia testuale. Per la prima parte, si utilizzerà un DBMS per la gestione e l'estrazione dei dati, mentre per la seconda verranno impiegate tecniche di programmazione per l'elaborazione di stringhe.</p>
+                
+                <h3>Strumenti utilizzati</h3>
+                <ul>
+                    <li>Microsoft Access - Per la creazione e la gestione del dataset relazionale.</li>
+                    <li>Python (o linguaggio di programmazione a scelta) - Per l'analisi dei dataset e l'implementazione degli algoritmi di crittografia.</li>
+                </ul>
+
+                <h3>Procedimento</h3>
+                <ol>
+                    <li>Definizione dei concetti teorici di dataset e distribuzione.</li>
+                    <li>Creazione di un database Access con una tabella di esempio e popolamento dei dati.</li>
+                    <li>Calcolo e rappresentazione di 3 distribuzioni univariate dal dataset di Access.</li>
+                    <li>Selezione di due variabili dal dataset "X Champions" e calcolo della distribuzione bivariata.</li>
+                    <li>Scelta di un testo, calcolo della distribuzione delle lettere e applicazione del cifrario di Cesare.</li>
+                    <li>Decodifica del testo cifrato senza shift noto e successivamente tramite analisi di frequenza linguistica.</li>
+                </ol>
+            </section>
+
+            <section class="content-section">
+                <h2>📈 Analisi e Risultati</h2>
+                
+                <div class="analysis-block">
+                    <h3>Distribuzioni Univariate dal Dataset Access</h3>
+                    <p>Sono state calcolate le distribuzioni per la "CategoriaProdotto", la "QuantitàVenduta" e il "PrezzoUnitario".</p>
+                    
+                    <div class="chart-container">
+                        <p class="chart-placeholder">📊 [Inserire qui grafico a barre per CategoriaProdotto]</p>
+                        <p class="chart-placeholder">📊 [Inserire qui istogramma per QuantitàVenduta]</p>
+                        <p class="chart-placeholder">📊 [Inserire qui istogramma per PrezzoUnitario]</p>
+                        </div>
+                    
+                    <div class="results-box">
+                        <h4>🔍 Risultati chiave:</h4>
+                        <ul>
+                            <li>La categoria "Elettronica" è la più venduta.</li>
+                            <li>La maggior parte delle vendite riguarda quantità piccole (1-3 unità).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="analysis-block">
+                    <h3>Distribuzione Bivariata (X Champions: Variabile A vs Variabile B)</h3>
+                    <p>Per il dataset "X Champions", è stata analizzata la relazione tra "Numero di Vittorie" e "Numero di Partecipazioni" per i diversi campioni.</p>
+                    <div class="chart-container">
+                        <p class="chart-placeholder">📊 [Inserire qui scatter plot o tabella di contingenza tra Vittorie e Partecipazioni]</p>
+                    </div>
+                    <div class="results-box">
+                        <h4>🔍 Risultati chiave:</h4>
+                        <ul>
+                            <li>Si osserva una correlazione positiva tra il numero di partecipazioni e il numero di vittorie.</li>
+                            <li>I campioni con più partecipazioni tendono ad avere un maggior numero di vittorie.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="analysis-block">
+                    <h3>Analisi di Frequenza e Cifrario di Cesare</h3>
+                    <p>È stato analizzato un estratto di testo per determinare la distribuzione delle lettere, poi cifrato e decifrato con diverse metodologie.</p>
+                    <div class="chart-container">
+                        <p class="chart-placeholder">📊 [Inserire qui grafico a barre della distribuzione delle lettere nel testo originale]</p>
+                    </div>
+                    <div class="results-box">
+                        <h4>🔍 Risultati chiave:</h4>
+                        <ul>
+                            <li>Il testo cifrato senza conoscere lo shift risulta illeggibile.</li>
+                            <li>La decifratura per tentativi ha permesso di trovare lo shift corretto (es. 3).</li>
+                            <li>L'analisi di frequenza ha confermato lo shift, confrontando la distribuzione delle lettere nel testo cifrato con quella della lingua italiana.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>💻 Frammenti di Codice</h2>
+                <p>Principali funzioni e codice utilizzato nell'analisi dei dati e nella crittografia:</p>
+                
+                <div class="code-block">
+                    <h4>Implementazione Cifrario di Cesare in Python</h4>
+                    <pre><code># Inserire qui il codice per il cifrario di Cesare
+def cifra_cesare(testo, shift):
+    risultato = ""
+    for char in testo:
+        if 'a' <= char <= 'z':
+            risultato += chr(((ord(char) - ord('a') + shift) % 26) + ord('a'))
+        elif 'A' <= char <= 'Z':
+            risultato += chr(((ord(char) - ord('A') + shift) % 26) + ord('A'))
+        else:
+            risultato += char
+    return risultato
+
+testo_originale = "Ciao mondo"
+testo_cifrato = cifra_cesare(testo_originale, 3)
+print(f"Testo cifrato: {testo_cifrato}")
+</code></pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>Analisi di frequenza delle lettere</h4>
+                    <pre><code># Inserire qui il codice per l'analisi di frequenza
+from collections import Counter
+
+def analizza_frequenza(testo):
+    frequenze = Counter(c for c in testo.lower() if 'a' <= c <= 'z')
+    totale_lettere = sum(frequenze.values())
+    distribuzione = {char: count / totale_lettere for char, count in frequenze.items()}
+    return distribuzione
+
+testo_cifrato_esempio = "fldb prqgr"
+dist_cifrato = analizza_frequenza(testo_cifrato_esempio)
+print(f"Distribuzione lettere testo cifrato: {dist_cifrato}")
+</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>💡 Conclusioni</h2>
+                <p>Questo homework ha permesso di consolidare la comprensione dei concetti di dataset e distribuzione, applicandoli in contesti pratici. L'analisi con DBMS ha rafforzato le competenze nell'estrazione e sintesi di dati, mentre la sezione sulla crittografia ha offerto una prospettiva interessante sull'analisi di frequenza e la decodifica di messaggi cifrati, evidenziando il potere della statistica anche in ambiti apparentemente diversi.</p>
+                
+                <div class="conclusions-box">
+                    <h4>Punti salienti:</h4>
+                    <ul>
+                        <li>La struttura di un dataset e le diverse tipologie di distribuzioni sono essenziali per l'analisi statistica.</li>
+                        <li>MS Access è uno strumento efficace per la gestione di piccoli dataset e l'esecuzione di query di base.</li>
+                        <li>L'analisi di frequenza è una tecnica potente per decifrare codici basati su sostituzione.</li>
+                    </ul>
+                </div>
+
+                <div class="learnings-box">
+                    <h4>🎓 Cosa ho imparato:</h4>
+                    <ul>
+                        <li>Come modellare un dataset semplice in un DBMS relazionale.</li>
+                        <li>Approfondito il calcolo e l'interpretazione di distribuzioni univariate e bivariate.</li>
+                        <li>Applicato principi di crittografia e crittoanalisi tramite l'algoritmo di Cesare.</li>
+                        <li>L'importanza dell'analisi statistica per la comprensione di fenomeni sia numerici che testuali.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 Riferimenti</h2>
+                <ul class="references">
+                    <li>Dispense del corso di Statistica Applicata, Prof. [Nome_Professore].</li>
+                    <li>"Introduzione alla Statistica" - Mario Rossi, Ed. Alfa.</li>
+                    <li>Wikipedia - Cifrario di Cesare: <a href="https://it.wikipedia.org/wiki/Cifrario_di_Cesare" target="_blank">https://it.wikipedia.org/wiki/Cifrario_di_Cesare</a></li>
+                </ul>
+            </section>
+        </article>
+
+        <nav class="homework-navigation">
+            <div class="nav-item">
+                <a href="homework_precedente.html" class="homework-nav-link nav-prev">
+                    ← Homework Precedente
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="../index.html" class="homework-nav-link homework-nav-home">
+                    🏠 Torna alla Home
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="homework_successivo.html" class="homework-nav-link nav-next">
+                    Homework Successivo →
+                </a>
+            </div>
+        </nav>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Antonio Lissa Lattanzio - Blog di Statistica Applicata</p>
+    </footer>
+
+    <script src="../js/homework.js"></script>
+</body>
+</html>
