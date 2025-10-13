@@ -1,5 +1,80 @@
 /* ===== STILI SPECIFICI PER HOMEWORK ===== */
 
+
+/* ===== STILI GENERALI PER FORM ELEMENTS (Input, Label, Button) ===== */
+
+/* Stile per le etichette */
+.article-content label {
+    display: block;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 0.4rem;
+    margin-top: 1rem; /* Aggiunge spazio sopra ogni gruppo input/label */
+}
+
+/* Stile generale per i campi di input testuali e numerici */
+.article-content input[type="text"],
+.article-content input[type="number"] {
+    width: 100%;
+    max-width: 400px; /* Limita la larghezza per input singoli */
+    padding: 0.75rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #2b2b2b;
+    box-sizing: border-box; /* Assicura che padding e border siano inclusi nella larghezza */
+    line-height: normal; /* Normalizza l'altezza della riga per gli input */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Feedback visivo quando l'utente è sul campo */
+.article-content input[type="text"]:focus,
+.article-content input[type="number"]:focus {
+    border-color: #0066cc; /* Colore primario */
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2);
+}
+
+/* Stile per i campi di input di sola lettura (es. l'output del cipher) */
+.article-content input[readonly] {
+    background-color: #f5f5f5;
+    color: #000;
+    font-weight: 500;
+}
+
+/* Stile per i pulsanti */
+.article-content button {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    background-color: #0066cc; /* Colore primario */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Feedback visivo al passaggio del mouse sul pulsante */
+.article-content button:hover {
+    background-color: #004499;
+}
+
+/* Feedback visivo al click del pulsante */
+.article-content button:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+/* Stile per i tag <br> per la spaziatura (se necessario) */
+.article-content br {
+    line-height: 1.5;
+}
+
 /* Main Content */
 .main-content {
     max-width: 800px;
@@ -212,6 +287,64 @@
 
 .conclusions-box li {
     margin-bottom: 0.75rem;
+}
+
+.table-scroll-container {
+    max-height: 300px; 
+    overflow-y: auto;  
+    border: 1px solid #e0e0e0;
+}
+
+.article-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2.5rem 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    border: 1px solid #e0e0e0;
+    color: #444;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.article-content th {
+    background-color: #f5f5f5;
+    color: #000;
+    font-weight: 600;
+    padding: 1rem 1.25rem;
+    text-align: left;
+    border-bottom: 2px solid #ccc;
+}
+
+.article-content td {
+    padding: 1rem 1.25rem;
+    text-align: left;
+    border: none;
+}
+
+.article-content tr {
+    border-bottom: 1px solid #eeeeee;
+}
+
+.article-content tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.article-content tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+.article-content tr:last-child {
+    border-bottom: none; 
+}
+
+.article-content tr:hover {
+    background-color: #f0f0f0;
+    transition: background-color 0.15s ease;
+}
+
+.analysis-block table {
+    margin: 1.5rem 0;
 }
 
 /* Responsive Design */
