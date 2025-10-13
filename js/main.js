@@ -9,7 +9,7 @@ const homeworkList = [
         description: 'Explanation of dataset and distribution concepts using a DBMS (Access), analysis of univariate and bivariate distributions, and introduction to cryptanalysis with the Caesar Cipher.',
         date: '2024-10-14',
         tags: ['Descriptive Statistics', 'DBMS', 'Cryptography', 'Frequency Analysis'],
-        filename: 'homework-concetti-crittografia.html'
+        filename: 'homework_2.html'
     },
     {
         id: 'homework-statistics-cybersecurity',
