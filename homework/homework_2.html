@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homework 1 - Concetti Base e Crittografia - Statistica Applicata</title>
+    <title>Homework 2 - Datasets and Caesar Cipher</title>
     <meta name="description" content="Spiegazione dei concetti di dataset e distribuzione, analisi su dataset Access e crittografia di Cesare.">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/homework.css">
@@ -28,17 +28,16 @@
             <span class="breadcrumb-separator">›</span>
             <a href="../index.html#homework">Homework</a>
             <span class="breadcrumb-separator">›</span>
-            <span class="breadcrumb-current">Settimana 1</span>
+            <span class="breadcrumb-current">Week 2</span>
         </nav>
 
         <header class="article-header">
             <div class="article-meta">
-                <span class="homework-week">Settimana 1</span>
-                <span class="article-date">10 Maggio 2024</span>
+                <span class="homework-week">Week 2</span>
+                <span class="article-date">13 Oct 2025</span>
             </div>
-            <h1 class="article-title">Concetti di Dataset, Distribuzione e Crittografia di Cesare</h1>
+            <h1 class="article-title">Datasets and Caesar Cipher</h1>
             <div class="article-tags">
-                <span class="tag">Statistica Descrittiva</span>
                 <span class="tag">DBMS</span>
                 <span class="tag">Crittografia</span>
                 <span class="tag">Access</span>
@@ -48,21 +47,21 @@
         <article class="article-content">
             
 <section class="content-section">
-    <h2>🎯 Homework Objectives</h2>
-    <p>This practical assignment aims to consolidate the fundamental concepts of **Dataset** and **Distribution** through direct application on a **Database Management System (DBMS)**, and subsequently, by extending the analysis to the field of cryptanalysis using the **Caesar Cipher**.</p>
+    <h2>Homework Objectives</h2>
+    <p>This practical assignment aims to consolidate the fundamental concepts of <b>Dataset</b> and <b>Distribution</b> through direct application on a <b>Database Management System (DBMS)</b>, and subsequently, by extending the analysis to the field of cryptanalysis using the <b>Caesar Cipher</b>.</p>
 </section>
 
 <section class="content-section">
-    <h2>📚 Theoretical Foundations</h2>
+    <h2>Theoretical Foundations</h2>
     
     <div class="theory-block">
         <h3>1. The Dataset: Structure and Components</h3>
-        <p>A **Dataset** is a structured collection of data, typically organized in a table, serving as the basis for any statistical analysis.</p>
+        <p>A <b>Dataset</b> is a structured collection of data, typically organized in a table, serving as the basis for any statistical analysis.</p>
         <ul>
-            <li><strong>Structure:</strong> Each **row** represents an observation or unit of analysis (e.g., a student), while each **column** defines a **variable** or attribute (e.g., age or exam grade).</li>
-            <li><strong>Variable Types:</strong> Variables can be **Quantitative** (numerical, like age or grade) or **Qualitative** (categorical, like gender or course).</li>
-            <li><strong>DBMS Context:</strong> In an environment like Microsoft Access, datasets are implemented as **tables** that allow data to be stored, queried, and manipulated logically using SQL.</li>
-            <li><strong>Example:</strong> A simple dataset structure includes: 
+            <li><b>Structure:</b> Each <b>row</b> represents an observation or unit of analysis (e.g., a student), while each <b>column</b> defines a <b>variable</b> or attribute (e.g., age or exam grade).</li>
+            <li><b>Variable Types:</b> Variables can be <b>Quantitative</b> (numerical, like age or grade) or <b>Qualitative</b> (categorical, like gender or course).</li>
+            <li><b>DBMS Context:</b> In an environment like Microsoft Access, datasets are implemented as <b>tables</b> that allow data to be stored, queried, and manipulated logically using SQL.</li>
+            <li><b>Example:</b> A simple dataset structure includes: 
                 <ul>
                     <li>Observations (records): each row is one case.</li>
                     <li>Variables (attributes): columns that describe characteristics (e.g., gender, age, course, grade).</li>
@@ -73,64 +72,455 @@
 
     <div class="theory-block">
         <h3>2. Statistical Distribution</h3>
-        <p>A **Distribution** describes how the values of a variable are spread across a dataset. It shows the **frequency** with which each value (or range of values) occurs in the data.</p>
+        <p>A <b>Distribution</b> describes how the values of a variable are spread across a dataset. It shows the <b>frequency</b> with which each value (or range of values) occurs in the data.</p>
         <ul>
-            <li><strong>Univariate Distribution:</strong> Analysis focusing on a **single variable** (e.g., the distribution of exam grades). It helps identify central tendencies and data variability.</li>
-            <li><strong>Bivariate Distribution:</strong> Analysis that explores the relationship between **two variables** (e.g., course and gender), allowing for the observation of associations or differences between groups.</li>
-            <li><strong>Representation:</strong> Distributions can be shown as frequency tables or visualized using graphs such as histograms or scatter plots.</li>
+            <li><b>Univariate Distribution:</b> Analysis focusing on a <b>single variable</b> (e.g., the distribution of exam grades). It helps identify central tendencies and data variability.</li>
+            <li><b>Bivariate Distribution:</b> Analysis that explores the relationship between <b>two variables</b> (e.g., course and gender), allowing for the observation of associations or differences between groups.</li>
+            <li><b>Representation:</b> Distributions can be shown as frequency tables or visualized using graphs such as histograms or scatter plots.</li>
         </ul>
     </div>
 </section>
 
 <section class="content-section">
-    <h2>🔬 Project Application</h2>
+    <h2>Project Application</h2>
     <p>This work is divided into two distinct sections:</p>
 
     <h3>Section 1: Statistical Analysis using DBMS (Access)</h3>
-    <p>A dataset of 30 university students was created within a DBMS. Each record includes the following variables: **gender** (M/F), **age** (integer), **course** (Engineering, Economics, etc.), and **grade** (18 to 30).</p>
+    <p>A dataset of 30 university students was created within a DBMS. Each record includes the following variables: <b>gender</b> (M/F), <b>age</b> (integer), <b>course</b> (Engineering, Economics, etc.), and <b>grade</b> (18 to 30).</p>
     <p>SQL queries were used to compute and analyze:</p>
     <ol>
-        <li>**Three Univariate Distributions** (for Gender, Age, and Grade).</li>
-        <li>**One Bivariate Distribution** (between Course and Gender).</li>
+        <li><b>Three Univariate Distributions</b> (for Gender, Age, and Grade).</li>
+        <li><b>One Bivariate Distribution</b> (between Course and Gender).</li>
     </ol>
     <p>These analyses help understand how student characteristics are distributed and whether differences appear between courses or groups.</p>
 
     <h3>Section 2: Cryptanalysis and Textual Application</h3>
-    <p>In this part, distribution concepts are extended to text analysis, specifically through the substitution algorithm of the **Caesar Cipher**.</p>
+    <p>In this part, distribution concepts are extended to text analysis, specifically through the substitution algorithm of the <b>Caesar Cipher</b>.</p>
     <p>The activities include:</p>
     <ul>
-        <li>Computing the **letter frequency distribution** of a given text.</li>
-        <li>Applying and decrypting the cipher, including the **frequency cryptanalysis** technique to decode the message without knowing the shift key, by leveraging known letter distributions in the target language.</li>
+        <li>Computing the <b>letter frequency distribution</b> of a given text.</li>
+        <li>Applying and decrypting the cipher, including the <b>frequency cryptanalysis</b> technique to decode the message without knowing the shift key, by leveraging known letter distributions in the target language.</li>
     </ul>
 </section>
 
+<section class="content-section">
+    <h2>Dataset Used: StudentsPerformance</h2>
+    <p>The dataset contains 30 students with gender, age, course, and exam grade. Each row is one student.</p>
+
+    <h3>Dataset Table</h3>
+    <div class="table-scroll-container">
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>sex</th>
+                <th>age</th>
+                <th>course</th>
+                <th>grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td>F</td><td>20</td><td>Engineering</td><td>28</td></tr>
+            <tr><td>2</td><td>M</td><td>21</td><td>Engineering</td><td>25</td></tr>
+            <tr><td>3</td><td>F</td><td>19</td><td>Economics</td><td>30</td></tr>
+            <tr><td>4</td><td>M</td><td>22</td><td>Computer Science</td><td>27</td></tr>
+            <tr><td>5</td><td>F</td><td>23</td><td>Psychology</td><td>29</td></tr>
+            <tr><td>6</td><td>M</td><td>24</td><td>Economics</td><td>22</td></tr>
+            <tr><td>7</td><td>F</td><td>21</td><td>Engineering</td><td>26</td></tr>
+            <tr><td>8</td><td>M</td><td>20</td><td>Literature</td><td>23</td></tr>
+            <tr><td>9</td><td>F</td><td>22</td><td>Literature</td><td>27</td></tr>
+            <tr><td>10</td><td>M</td><td>23</td><td>Psychology</td><td>24</td></tr>
+            <tr><td>11</td><td>F</td><td>21</td><td>Economics</td><td>30</td></tr>
+            <tr><td>12</td><td>M</td><td>19</td><td>Computer Science</td><td>28</td></tr>
+            <tr><td>13</td><td>F</td><td>20</td><td>Engineering</td><td>25</td></tr>
+            <tr><td>14</td><td>M</td><td>22</td><td>Economics</td><td>26</td></tr>
+            <tr><td>15</td><td>F</td><td>23</td><td>Psychology</td><td>30</td></tr>
+            <tr><td>16</td><td>M</td><td>21</td><td>Engineering</td><td>29</td></tr>
+            <tr><td>17</td><td>F</td><td>22</td><td>Economics</td><td>27</td></tr>
+            <tr><td>18</td><td>M</td><td>24</td><td>Literature</td><td>21</td></tr>
+            <tr><td>19</td><td>F</td><td>20</td><td>Computer Science</td><td>24</td></tr>
+            <tr><td>20</td><td>M</td><td>23</td><td>Engineering</td><td>30</td></tr>
+            <tr><td>21</td><td>F</td><td>19</td><td>Psychology</td><td>28</td></tr>
+            <tr><td>22</td><td>M</td><td>22</td><td>Computer Science</td><td>25</td></tr>
+            <tr><td>23</td><td>F</td><td>21</td><td>Literature</td><td>26</td></tr>
+            <tr><td>24</td><td>M</td><td>23</td><td>Economics</td><td>27</td></tr>
+            <tr><td>25</td><td>F</td><td>20</td><td>Engineering</td><td>29</td></tr>
+            <tr><td>26</td><td>M</td><td>21</td><td>Psychology</td><td>30</td></tr>
+            <tr><td>27</td><td>F</td><td>22</td><td>Economics</td><td>23</td></tr>
+            <tr><td>28</td><td>M</td><td>24</td><td>Computer Science</td><td>28</td></tr>
+            <tr><td>29</td><td>F</td><td>23</td><td>Literature</td><td>25</td></tr>
+            <tr><td>30</td><td>M</td><td>20</td><td>Engineering</td><td>26</td></tr>
+        </tbody>
+    </table>
+    </div
+</section>
+
+<section class="content-section">
+    <h2>Univariate Distributions</h2>
+    <p>The following SQL queries calculate the distributions of <strong>gender</strong>, <strong>age</strong>, and <strong>grade</strong>.</p>
+
+    <h3>1. Gender Distribution</h3>
+    <div class="code-block">
+        <pre><code>SELECT sex, COUNT(*) AS count FROM students GROUP BY sex;</code></pre>
+    </div>
+
+    <table>
+        <thead>
+            <tr><th>sex</th><th>count</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>F</td><td>15</td></tr>
+            <tr><td>M</td><td>15</td></tr>
+        </tbody>
+    </table>
+
+    <h3>2. Age Distribution</h3>
+    <div class="code-block">
+        <pre><code>SELECT age, COUNT(*) AS count FROM students GROUP BY age ORDER BY age;</code></pre>
+    </div>
+
+    <table>
+        <thead>
+            <tr><th>age</th><th>count</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>19</td><td>3</td></tr>
+            <tr><td>20</td><td>5</td></tr>
+            <tr><td>21</td><td>4</td></tr>
+            <tr><td>22</td><td>4</td></tr>
+            <tr><td>23</td><td>4</td></tr>
+            <tr><td>24</td><td>3</td></tr>
+        </tbody>
+    </table>
+
+    <h3>3. Grade Distribution</h3>
+    <div class="code-block">
+        <pre><code>SELECT grade, COUNT(*) AS count FROM students GROUP BY grade ORDER BY grade;</code></pre>
+    </div>
+    <div class="table-scroll-container">
+    <table>
+        <thead>
+            <tr><th>grade</th><th>count</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>21</td><td>1</td></tr>
+            <tr><td>22</td><td>2</td></tr>
+            <tr><td>23</td><td>3</td></tr>
+            <tr><td>24</td><td>2</td></tr>
+            <tr><td>25</td><td>3</td></tr>
+            <tr><td>26</td><td>3</td></tr>
+            <tr><td>27</td><td>3</td></tr>
+            <tr><td>28</td><td>3</td></tr>
+            <tr><td>29</td><td>2</td></tr>
+            <tr><td>30</td><td>4</td></tr>
+        </tbody>
+    </table>
+    </div>
+</section>
+
+<section class="content-section">
+    <h2>Bivariate Distribution: Course vs Grade</h2>
+    <p>We calculate the average grade per course using this SQL query:</p>
+
+    <div class="code-block">
+        <pre><code>SELECT course, AVG(grade) AS average_grade FROM students GROUP BY course ORDER BY average_grade DESC;</code></pre>
+    </div>
+
+    <table>
+        <thead>
+            <tr><th>course</th><th>average_grade</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Psychology</td><td>29.4</td></tr>
+            <tr><td>Engineering</td><td>27.7</td></tr>
+            <tr><td>Computer Science</td><td>26.0</td></tr>
+            <tr><td>Economics</td><td>26.2</td></tr>
+            <tr><td>Literature</td><td>25.5</td></tr>
+        </tbody>
+    </table>
+</section>
 
 
-        </article>
+<section class="content-section">
 
-        <nav class="homework-navigation">
-            <div class="nav-item">
-                <a href="homework_precedente.html" class="homework-nav-link nav-prev">
-                    ← Homework Precedente
-                </a>
+<h2>Caesar Cipher Implementation</h2>
+
+<p>
+The Caesar Cipher is one of the simplest and most well-known classical substitution ciphers. In this method, each letter in the plaintext is shifted by a fixed number of positions down or up the alphabet. For example, with a shift of 3, the letter 'A' becomes 'D', 'B' becomes 'E', and so on, wrapping around from 'Z' back to 'A'. Non-alphabetic characters, such as spaces, punctuation, or numbers, remain unchanged.
+</p>
+
+<h3>How the Encryption Works</h3>
+<p>
+The encryption function iterates through every character in the input text. It first converts all letters to uppercase for consistency. If a character is an uppercase letter (A-Z), its Unicode code point is adjusted by the specified shift using modulo 26 arithmetic to ensure the alphabet wraps around correctly. Negative shifts or shifts larger than 26 are normalized automatically. Any character outside the A-Z range is left unchanged. Finally, the transformed characters are joined together to produce the encrypted text.
+</p>
+
+<h3>Code Implementation</h3>
+<div class="code-block">
+<pre><code>function CaesarEncryption(text, shift) {
+    const result = [];
+    text = text.toUpperCase(); // Ensure consistency
+    shift = (shift % 26 + 26) % 26; // Normalize shift to 0-25
+
+    for (let char of text) {
+        const pos = char.charCodeAt(0);
+        if (pos >= 65 && pos <= 90) { // Only shift A-Z
+            const newPos = ((pos - 65 + shift) % 26) + 65;
+            result.push(String.fromCharCode(newPos));
+        } else {
+            result.push(char); // Non-letters remain unchanged
+        }
+    }
+
+    return result.join('');
+}</code></pre>
+</div>
+
+<h3>Implementation Details</h3>
+<ul>
+    <li><strong>Uppercase normalization:</strong> Converting all letters to uppercase ensures that the shifting logic works consistently for all letters.</li>
+    <li><strong>Modulo arithmetic:</strong> `(pos - 65 + shift) % 26` ensures the letter wraps around from 'Z' to 'A' correctly.</li>
+    <li><strong>Shift normalization:</strong> `(shift % 26 + 26) % 26` allows both negative and overly large shifts to work seamlessly.</li>
+    <li><strong>Preserving non-alphabetic characters:</strong> Spaces, numbers, punctuation, and special characters remain unchanged to maintain readability.</li>
+</ul>
+
+<h3>How Statistical Decryption Works</h3>
+<p>
+The process involves three main steps:
+</p>
+<ol>
+    <li><strong>Frequency Counting:</strong> Calculate the percentage occurrence of each letter (A-Z) in the ciphertext.</li>
+    <li><strong>Chi-Squared Scoring:</strong> For each possible shift (0-25), apply the shift to the ciphertext and compute a score that measures how closely the resulting letter frequencies match typical English frequencies. We use the <em>chi-squared statistic</em> for this purpose:
+        <br><code>χ² = Σ((O<sub>i</sub> - E<sub>i</sub>)² / E<sub>i</sub>)</code>, 
+        where O<sub>i</sub> is the observed frequency of letter i and E<sub>i</sub> is the expected frequency.</li>
+    <li><strong>Choosing the Best Shift:</strong> The shift with the lowest chi-squared score is chosen as the most likely key, and the ciphertext is decrypted accordingly.</li>
+</ol>
+
+<h3>Code Implementation</h3>
+<div class="code-block">
+<pre><code>function decryptWithChiSquared(ciphertext){
+    const englishFreq = {
+        'A': 8.2, 'B': 1.5, 'C': 2.8, 'D': 4.3,
+        'E': 12.7, 'F': 2.2, 'G': 2.0, 'H': 6.1,
+        'I': 7.0, 'J': 0.2, 'K': 0.8, 'L': 4.0,
+        'M': 2.4, 'N': 6.7, 'O': 7.5, 'P': 1.9,
+        'Q': 0.1, 'R': 6.0, 'S': 6.3, 'T': 9.1,
+        'U': 2.8, 'V': 1.0, 'W': 2.4, 'X': 0.2,
+        'Y': 2.0, 'Z': 0.1
+    };
+
+    let bestShift = 0;
+    let lowestScore = Infinity;
+
+    for(let shift = 0; shift < 26; shift++){
+        const decrypted = CaesarEncryption(ciphertext, shift);
+        const freq = TextStats(decrypted);
+        const score = chiSquaredScore(freq, englishFreq);
+        if(score < lowestScore){
+            lowestScore = score;
+            bestShift = shift;
+        }
+    }
+
+    return CaesarEncryption(ciphertext, bestShift);
+}</code></pre>
+</div>
+
+<h3>Implementation Details</h3>
+<ul>
+    <li><strong>Chi-squared scoring:</strong> Compares each candidate decryption with standard English frequencies. Lower scores indicate a closer match to normal text.</li>
+    <li><strong>All shifts tested:</strong> Every possible shift (0–25) is evaluated to ensure the most probable plaintext is chosen.</li>
+    <li><strong>Letter-only analysis:</strong> Non-alphabetic characters are ignored in frequency calculation to prevent distortion.</li>
+</ul>
+
+<h3>Educational Insights</h3>
+<p>
+Statistical decryption demonstrates how even simple ciphers can be broken using data analysis. It introduces users to concepts such as letter frequency, chi-squared statistics, and automated cryptanalysis, bridging classical cryptography with basic computational methods.
+</p>
+
+
+<div style="margin: 3rem 0; background: #fcfcfc; padding: 2.5rem; border: 1px solid #e0e0e0; border-radius: 4px;">
+    <h3>Try it yourself!</h3>
+
+    <h3>Basic Caesar Encryption</h3>
+    <div style="display: flex; gap: 1.5rem; align-items: flex-end; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px dashed #e0e0e0;">
+        <div style="flex-grow: 3;">
+            <label for="plaintext">Plaintext:</label>
+            <input type="text" id="plaintext" value="The fields of mathematics, probability, and statistics use formal definitions of randomness" style="width: 100%;">
+        </div>
+        
+        <div style="flex-grow: 0; max-width: 100px;">
+            <label for="shift">Shift:</label>
+            <input type="number" id="shift" value="3" min="0" style="width: 100%;">
+        </div>
+        
+        <button onclick="document.getElementById('ciphertext').value = CaesarEncryption(document.getElementById('plaintext').value, parseInt(document.getElementById('shift').value))">
+            Encrypt
+        </button>
+    </div>
+
+    <div style="display: flex; gap: 0.5rem; align-items: center;">
+        <input type="text" id="ciphertext" readonly style="flex-grow: 1; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+        <button onclick="copyCiphertext()">
+            Copy
+        </button>
+    </div>
+</div>
+
+<div style="margin: 3rem 0; background: #fcfcfc; padding: 2.5rem; border: 1px solid #e0e0e0; border-radius: 4px;">
+    <h3>Brute Force Caesar Decryption</h3>
+
+    <div style="display: flex; gap: 1.5rem; align-items: flex-end; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px dashed #e0e0e0;">
+        
+        <div style="flex-grow: 3;">
+            <label for="bruteforce-ciphertext">Ciphertext:</label>
+            <input type="text" id="bruteforce-ciphertext" value="KHOOR ZRUOG" style="width: 100%;">
+        </div>
+        
+        <button onclick="{
+            const ciphertext = document.getElementById('bruteforce-ciphertext').value;
+            let results = [];
+            
+            // Cicla da 1 a 25. La decrittazione con shift N è uguale alla cifratura con shift 26-N
+            for(let i = 1; i < 26; i++){
+                // Usiamo (26 - i) come shift per la funzione CaesarEncryption
+                const decryptedText = CaesarEncryption(ciphertext, 26 - i); 
+                results.push('Shift ' + i + ': ' + decryptedText);
+            }
+            
+            document.getElementById('bruteforce-results').innerHTML = results.join('<br>');
+        }">
+            Brute Force Decrypt
+        </button>
+    </div>
+
+    <div>
+        <label style="display: block; font-weight: 600; color: #444; margin-bottom: 0.4rem;">Possible Decryptions (Shifts 1-25):</label>
+        <div id="bruteforce-results" style="padding: 1rem; background-color: #f5f5f5; border: 1px solid #eee; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.95rem; line-height: 1.8; color: #000;">
             </div>
-            <div class="nav-item">
-                <a href="../index.html" class="homework-nav-link homework-nav-home">
-                    🏠 Torna alla Home
-                </a>
-            </div>
-            <div class="nav-item">
-                <a href="homework_successivo.html" class="homework-nav-link nav-next">
-                    Homework Successivo →
-                </a>
-            </div>
-        </nav>
-    </main>
+    </div>
 
-    <footer class="footer">
-        <p>&copy; 2024 Antonio Lissa Lattanzio - Blog di Statistica Applicata</p>
-    </footer>
+</div>
 
-    <script src="../js/homework.js"></script>
-</body>
+<div style="margin: 3rem 0; background: #fcfcfc; padding: 2.5rem; border: 1px solid #e0e0e0; border-radius: 4px;">
+    <h3>Statistical Caesar Decryption</h3>
+    <p>Decrypts a Caesar cipher using frequency analysis and chi-squared scoring.</p>
+    
+    <div style="display: flex; gap: 1.5rem; align-items: flex-end; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px dashed #e0e0e0;">
+        <div style="flex-grow: 3;">
+            <label for="statistical-ciphertext">Ciphertext (Uppercase):</label>
+            <input 
+                type="text" 
+                id="statistical-ciphertext" 
+                value="WKH ILHOGV RI PDWKHPDWLFV, SUREDELOLWB, DQG VWDWLVWLFV XVH IRUPDO GHILQLWLRQV RI UDQGRPQHVV" 
+                style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;"
+                oninput="document.getElementById('char-count').textContent = this.value.length;"
+            >
+            <small style="display: block; margin-top: 0.25rem; color: #555;">
+                Length: <span id="char-count">11</span> characters (100+ recommended)
+            </small>
+        </div>
+        
+        <button onclick="{
+            const ciphertext = document.getElementById('statistical-ciphertext').value.toUpperCase();
+            document.getElementById('statistical-result').innerText = decryptWithChiSquared(ciphertext);
+        }" style="padding: 0.5rem 1rem; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 4px;">
+            Statistical Decrypt
+        </button>
+    </div>
+
+    <div>
+        <label for="statistical-result">Decrypted Plaintext:</label>
+        <div id="statistical-result" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;"></div>
+    </div>
+</div>
+
+<script>
+
+function copyCiphertext() {
+    const input = document.getElementById('ciphertext');
+    input.select();
+    input.setSelectionRange(0, 99999); // mobile support
+    navigator.clipboard.writeText(input.value).then(() => {
+    }).catch(err => {
+        alert('Failed to copy: ' + err);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('statistical-ciphertext');
+    const countSpan = document.getElementById('char-count');
+    if (input && countSpan) countSpan.textContent = input.value.length;
+});
+
+function CaesarEncryption(text, shift) {
+    const result = [];
+    text = text.toUpperCase();
+    shift = (shift % 26 + 26) % 26;
+    for(let char of text){
+        let pos = char.charCodeAt(0);
+        if(pos >= 65 && pos <= 90){
+            result.push(String.fromCharCode(((pos - 65 + shift) % 26) + 65));
+        } else {
+            result.push(char);
+        }
+    }
+    return result.join('');
+}
+
+function TextStats(text){
+    const frequency = {};
+    let totalLetters = 0;
+    text = text.toUpperCase();
+    for(let char of text){
+        let pos = char.charCodeAt(0);
+        if(pos >= 65 && pos <= 90){
+            frequency[char] = (frequency[char] || 0) + 1;
+            totalLetters++;
+        }
+    }
+    for(let char in frequency){
+        frequency[char] = frequency[char] / totalLetters * 100;
+    }
+    return frequency;
+}
+
+function chiSquaredScore(observed, expected) {
+    let score = 0;
+    for(let char in expected){
+        let O = observed[char] || 0;
+        let E = expected[char];
+        score += Math.pow(O - E, 2) / E;
+    }
+    return score;
+}
+
+function decryptWithChiSquared(ciphertext){
+    const englishFreq = {
+        'A': 8.2, 'B': 1.5, 'C': 2.8, 'D': 4.3,
+        'E': 12.7, 'F': 2.2, 'G': 2.0, 'H': 6.1,
+        'I': 7.0, 'J': 0.2, 'K': 0.8, 'L': 4.0,
+        'M': 2.4, 'N': 6.7, 'O': 7.5, 'P': 1.9,
+        'Q': 0.1, 'R': 6.0, 'S': 6.3, 'T': 9.1,
+        'U': 2.8, 'V': 1.0, 'W': 2.4, 'X': 0.2,
+        'Y': 2.0, 'Z': 0.1
+    };
+
+    let bestShift = 0;
+    let lowestScore = Infinity;
+
+    for(let shift = 0; shift < 26; shift++){
+        const decrypted = CaesarEncryption(ciphertext, shift);
+        const freq = TextStats(decrypted);
+        const score = chiSquaredScore(freq, englishFreq);
+        if(score < lowestScore){
+            lowestScore = score;
+            bestShift = shift;
+        }
+    }
+
+    return CaesarEncryption(ciphertext, bestShift);
+}
+</script>
+
+
 </html>
