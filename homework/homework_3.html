@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 3 - RSA Encryption and Decryption</title>
+    <meta name="description" content="Spiegazione dei concetti di dataset e distribuzione con crittografia RSA applicata all'analisi testuale.">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/homework.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="../index.html" class="logo">
+                Statistica Blog
+            </a>
+            <nav class="nav">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="../index.html#homework" class="nav-link">Homework</a>
+                <a href="#" class="nav-link">Info</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <nav class="breadcrumb">
+            <a href="../index.html">Home</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="../index.html#homework">Homework</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">Week 3</span>
+        </nav>
+
+        <header class="article-header">
+            <div class="article-meta">
+                <span class="homework-week">Week 3</span>
+                <span class="article-date">20 Oct 2025</span>
+            </div>
+            <h1 class="article-title">RSA Encryption and Statistical Cryptanalysis</h1>
+            <div class="article-tags">
+                <span class="tag">RSA</span>
+                <span class="tag">Crittografia</span>
+                <span class="tag">Frequency Analysis</span>
+            </div>
+        </header>
+
+        <article class="article-content">
+            
+<section class="content-section">
+    <h2>Homework Objectives</h2>
+    <p>This practical assignment extends the concepts of <b>Dataset</b> and <b>Distribution</b> introduced in Homework 2, now applying them to <b>RSA encryption and decryption</b>. The goal is to understand how public-key cryptography works and how statistical analysis of letter frequency can be used to attempt cryptanalysis on encrypted messages.</p>
+</section>
+
+<section class="content-section">
+    <h2>Theoretical Foundations</h2>
+    
+    <div class="theory-block">
+        <h3>1. RSA Cryptosystem</h3>
+        <p><b>RSA</b> (Rivest–Shamir–Adleman) is a public-key cryptosystem widely used for secure data transmission. Unlike symmetric ciphers like Caesar, RSA uses a pair of keys: a <b>public key</b> for encryption and a <b>private key</b> for decryption.</p>
+        <ul>
+            <li><b>Key Generation:</b> Two distinct prime numbers <b>p</b> and <b>q</b> are chosen. Their product <b>n = p × q</b> forms the modulus. The public exponent <b>e</b> and private exponent <b>d</b> are calculated based on Euler's totient function φ(n) = (p-1)(q-1).</li>
+            <li><b>Encryption:</b> Each character is converted to a numerical value, then encrypted using the formula: <b>C = M<sup>e</sup> mod n</b>, where M is the plaintext message and C is the ciphertext.</li>
+            <li><b>Decryption:</b> The ciphertext is decrypted using the private key: <b>M = C<sup>d</sup> mod n</b>.</li>
+            <li><b>Security:</b> RSA's security relies on the difficulty of factoring large composite numbers. For educational purposes, we use small primes to make computations manageable.</li>
+        </ul>
+    </div>
+
+    <div class="theory-block">
+        <h3>2. Statistical Distribution in Cryptanalysis</h3>
+        <p>Similar to Caesar cipher analysis, we can apply <b>frequency analysis</b> to RSA-encrypted text by analyzing the distribution of encrypted character codes.</p>
+        <ul>
+            <li><b>Letter Frequency Distribution:</b> In natural language, certain letters appear more frequently (e.g., 'E' in English). This pattern can sometimes be observed even in encrypted text.</li>
+            <li><b>Frequency Mapping:</b> By comparing the frequency distribution of encrypted values with known language distributions, we can attempt to identify which encrypted values correspond to common letters.</li>
+            <li><b>Limitations:</b> Unlike simple substitution ciphers, RSA's mathematical properties make pure frequency analysis less effective. However, with small keys and limited character sets, patterns may still emerge.</li>
+        </ul>
+    </div>
+</section>
+
+<section class="content-section">
+    <h2>Project Application</h2>
+    <p>This work focuses on the cryptographic analysis section:</p>
+
+    <h3>RSA Encryption and Statistical Cryptanalysis</h3>
+    <p>In this practical exercise, we implement RSA encryption using <b>very small, manageable prime numbers</b> (e.g., p = 61, q = 53) to keep computations feasible for educational purposes.</p>
+    <p>The activities include:</p>
+    <ul>
+        <li>Computing the <b>letter frequency distribution</b> of a given plaintext.</li>
+        <li>Implementing <b>RSA encryption</b> to convert text into encrypted numerical values.</li>
+        <li>Implementing <b>RSA decryption</b> with the correct private key.</li>
+        <li>Attempting to <b>decode the encrypted message</b> by analyzing the frequency distribution of encrypted values and mapping them to expected language letter frequencies.</li>
+    </ul>
+</section>
+
+<section class="content-section">
+
+<h2>RSA Implementation</h2>
+
+<p>
+RSA is an asymmetric cryptographic algorithm that uses a pair of keys: a public key for encryption and a private key for decryption. The security of RSA is based on the mathematical difficulty of factoring the product of two large prime numbers.
+</p>
+
+<h3>How RSA Key Generation Works</h3>
+<p>
+The key generation process involves several mathematical steps:
+</p>
+<ol>
+    <li><b>Select two prime numbers:</b> Choose two distinct prime numbers <b>p</b> and <b>q</b>. For this educational implementation, we use small primes.</li>
+    <li><b>Calculate the modulus:</b> Compute <b>n = p × q</b>. This value n is used as the modulus for both encryption and decryption.</li>
+    <li><b>Calculate Euler's totient:</b> Compute <b>φ(n) = (p-1)(q-1)</b>. This represents the count of numbers less than n that are coprime to n.</li>
+    <li><b>Choose public exponent:</b> Select an integer <b>e</b> such that 1 < e < φ(n) and gcd(e, φ(n)) = 1.</li>
+    <li><b>Calculate private exponent:</b> Find <b>d</b> such that <b>(d × e) mod φ(n) = 1</b>. This is the modular multiplicative inverse of e.</li>
+</ol>
+
+<h3>Encryption and Decryption Process</h3>
+<p>
+For each character in the message:
+</p>
+<ul>
+    <li><b>Encryption:</b> Convert the character to its ASCII code M, then compute <b>C = M<sup>e</sup> mod n</b></li>
+    <li><b>Decryption:</b> Take the ciphertext value C and compute <b>M = C<sup>d</sup> mod n</b>, then convert back to a character</li>
+</ul>
+
+<h3>Code Implementation</h3>
+<div class="code-block">
+<pre><code>function gcd(a, b) {
+    while (b !== 0) {
+        [a, b] = [b, a % b];
+    }
+    return a;
+}
+
+function modInverse(e, phi) {
+    let [old_r, r] = [e, phi];
+    let [old_s, s] = [1, 0];
+    
+    while (r !== 0) {
+        const quotient = Math.floor(old_r / r);
+        [old_r, r] = [r, old_r - quotient * r];
+        [old_s, s] = [s, old_s - quotient * s];
+    }
+    
+    return old_s < 0 ? old_s + phi : old_s;
+}
+
+function modPow(base, exp, mod) {
+    let result = 1;
+    base = base % mod;
+    while (exp > 0) {
+        if (exp % 2 === 1) result = (result * base) % mod;
+        exp = Math.floor(exp / 2);
+        base = (base * base) % mod;
+    }
+    return result;
+}
+
+function generateRSAKeys(p, q) {
+    const n = p * q;
+    const phi = (p - 1) * (q - 1);
+    let e = 17;
+    
+    while (gcd(e, phi) !== 1) {
+        e++;
+    }
+    
+    const d = modInverse(e, phi);
+    return { publicKey: {e, n}, privateKey: {d, n} };
+}
+
+function rsaEncrypt(text, publicKey) {
+    const {e, n} = publicKey;
+    const encrypted = [];
+    
+    for (let char of text) {
+        const m = char.charCodeAt(0);
+        const c = modPow(m, e, n);
+        encrypted.push(c);
+    }
+    
+    return encrypted;
+}
+
+function rsaDecrypt(encrypted, privateKey) {
+    const {d, n} = privateKey;
+    let decrypted = '';
+    
+    for (let c of encrypted) {
+        const m = modPow(c, d, n);
+        decrypted += String.fromCharCode(m);
+    }
+    
+    return decrypted;
+}</code></pre>
+</div>
+
+<h3>Implementation Details</h3>
+<ul>
+    <li><strong>Modular exponentiation:</strong> The <code>modPow</code> function efficiently computes large powers modulo n using the square-and-multiply algorithm.</li>
+    <li><strong>Extended Euclidean algorithm:</strong> Used in <code>modInverse</code> to find the private exponent d.</li>
+    <li><strong>Small primes:</strong> Using small primes (p=61, q=53, n=3233) makes the math manageable while demonstrating RSA principles.</li>
+    <li><strong>Character encoding:</strong> Each character is converted to its ASCII value before encryption.</li>
+</ul>
+
+<h3>How Statistical Cryptanalysis Works</h3>
+<p>
+The frequency analysis approach for RSA attempts to exploit patterns in the encrypted data:
+</p>
+<ol>
+    <li><strong>Frequency Counting:</strong> Count the occurrence of each encrypted value in the ciphertext.</li>
+    <li><strong>Frequency Mapping:</strong> Map the most frequent encrypted values to the most common letters in the target language (e.g., E, T, A, O in English).</li>
+    <li><strong>Chi-Squared Analysis:</strong> For each possible mapping, calculate a chi-squared score comparing the observed frequency distribution with expected language frequencies.</li>
+    <li><strong>Best Match Selection:</strong> Choose the mapping with the lowest chi-squared score as the most likely decryption.</li>
+</ol>
+
+<h3>Code Implementation</h3>
+<div class="code-block">
+<pre><code>function statisticalRSADecrypt(encrypted) {
+    const englishFreq = {
+        'E': 12.7, 'T': 9.1, 'A': 8.2, 'O': 7.5, 'I': 7.0, 'N': 6.7,
+        'S': 6.3, 'H': 6.1, 'R': 6.0, 'D': 4.3, 'L': 4.0, 'C': 2.8,
+        'U': 2.8, 'M': 2.4, 'W': 2.4, 'F': 2.2, 'G': 2.0, 'Y': 2.0,
+        'P': 1.9, 'B': 1.5, 'V': 1.0, 'K': 0.8, 'J': 0.2, 'X': 0.2,
+        'Q': 0.1, 'Z': 0.1
+    };
+    
+    // Count frequency of encrypted values
+    const freq = {};
+    for (let val of encrypted) {
+        freq[val] = (freq[val] || 0) + 1;
+    }
+    
+    // Sort by frequency
+    const sortedEncrypted = Object.entries(freq)
+        .sort((a, b) => b[1] - a[1])
+        .map(x => parseInt(x[0]));
+    
+    const sortedEnglish = Object.keys(englishFreq)
+        .sort((a, b) => englishFreq[b] - englishFreq[a]);
+    
+    // Create mapping
+    const mapping = {};
+    for (let i = 0; i < Math.min(sortedEncrypted.length, sortedEnglish.length); i++) {
+        mapping[sortedEncrypted[i]] = sortedEnglish[i];
+    }
+    
+    // Decrypt using mapping
+    let result = '';
+    for (let val of encrypted) {
+        result += mapping[val] || '?';
+    }
+    
+    return result;
+}</code></pre>
+</div>
+
+<h3>Implementation Details</h3>
+<ul>
+    <li><strong>Frequency-based mapping:</strong> The most common encrypted values are mapped to the most common English letters.</li>
+    <li><strong>Partial decryption:</strong> This method provides a partial solution that may require manual refinement.</li>
+    <li><strong>Limitations:</strong> RSA with proper key sizes is resistant to frequency analysis. This works only with small keys and limited character sets.</li>
+    <li><strong>Educational value:</strong> Demonstrates the relationship between statistical analysis and cryptography.</li>
+</ul>
+
+<h3>Educational Insights</h3>
+<p>
+This exercise demonstrates that while RSA is mathematically more complex than classical ciphers, patterns in encrypted data can still reveal information about the plaintext when key sizes are small. It bridges concepts from statistics (frequency distribution) with modern cryptography (public-key systems), showing why proper key selection and implementation are crucial for security.
+</p>
+
+
+<div style="margin: 3rem 0; background: #fcfcfc; padding: 2.5rem; border: 1px solid #e0e0e0; border-radius: 4px;">
+    <h3>Try it yourself!</h3>
+
+    <h3>RSA Key Generation</h3>
+    <div style="display: flex; gap: 1.5rem; align-items: flex-end; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px dashed #e0e0e0;">
+        <div style="flex-grow: 1;">
+            <label for="prime-p">Prime p:</label>
+            <select id="prime-p" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+            </select>
+        </div>
+        
+        <div style="flex-grow: 1;">
+            <label for="prime-q">Prime q:</label>
+            <select id="prime-q" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+            </select>
+        </div>
+        
+        <button onclick="generateKeys()">
+            Generate Keys
+        </button>
+    </div>
+
+    <div style="margin-bottom: 1rem;">
+        <label>Public Key (e, n):</label>
+        <div id="public-key" style="padding: 0.5rem; background-color: #f5f5f5; border: 1px solid #eee; border-radius: 4px; font-family: 'Courier New', monospace;">
+        </div>
+    </div>
+
+    <div>
+        <label>Private Key (d, n):</label>
+        <div id="private-key" style="padding: 0.5rem; background-color: #f5f5f5; border: 1px solid #eee; border-radius: 4px; font-family: 'Courier New', monospace;">
+        </div>
+    </div>
+</div>
+
+<div style="margin: 3rem 0; background: #fcfcfc; padding: 2.5rem; border: 1px solid #e0e0e0; border-radius: 4px;">
+    <h3>RSA Encryption</h3>
+
+    <div style="display: flex; gap: 1.5rem; align-items: flex-end; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px dashed #e0e0e0;">
+        <div style="flex-grow: 3;">
+            <label for="rsa-plaintext">Plaintext:</label>
+            <input type="text" id="rsa-plaintext" value="The fields of mathematics, probability, and statistics use formal definitions of randomness" style="width: 100%;">
+        </div>
+        
+        <button onclick="encryptRSA()">
+            Encrypt
+        </button>
+    </div>
+
+    <div>
+        <label>Encrypted Values:</label>
+        <div id="rsa-ciphertext" style="padding: 0.5rem; background-color: #f5f5f5; border: 1px solid #eee; border-radius: 4px; font-family: 'Courier New', monospace; word-break: break-all;">
+        </div>
+    </div>
+</div>
+
+<div style="margin: 3rem 0; background: #fcfcfc; padding: 2.5rem; border: 1px solid #e0e0e0; border-radius: 4px;">
+    <h3>RSA Decryption (with Private Key)</h3>
+    
+    <div style="display: flex; gap: 1.5rem; align-items: flex-end; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px dashed #e0e0e0;">
+        <button onclick="decryptRSA()" style="padding: 0.5rem 1rem; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 4px;">
+            Decrypt with Private Key
+        </button>
+    </div>
+
+    <div>
+        <label>Decrypted Plaintext:</label>
+        <div id="rsa-decrypted" style="padding: 0.5rem; background-color: #f5f5f5; border: 1px solid #eee; border-radius: 4px; font-family: 'Courier New', monospace;">
+        </div>
+    </div>
+</div>
+
+<div style="margin: 3rem 0; background: #fcfcfc; padding: 2.5rem; border: 1px solid #e0e0e0; border-radius: 4px;">
+    <h3>Statistical Cryptanalysis (Frequency Analysis)</h3>
+    <p>Attempts to decrypt RSA by analyzing the frequency distribution of encrypted values.</p>
+    
+    <div style="display: flex; gap: 1.5rem; align-items: flex-end; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px dashed #e0e0e0;">
+        <button onclick="statisticalDecryptRSA()" style="padding: 0.5rem 1rem; cursor: pointer; background-color: #28a745; color: white; border: none; border-radius: 4px;">
+            Statistical Decrypt
+        </button>
+    </div>
+
+    <div style="margin-bottom: 1rem;">
+        <label>Frequency Distribution:</label>
+        <div id="frequency-distribution" style="padding: 0.5rem; background-color: #f5f5f5; border: 1px solid #eee; border-radius: 4px; font-family: 'Courier New', monospace; max-height: 150px; overflow-y: auto;">
+        </div>
+    </div>
+
+    <div>
+        <label>Statistical Decryption Result:</label>
+        <div id="statistical-result" style="padding: 0.5rem; background-color: #f5f5f5; border: 1px solid #eee; border-radius: 4px; font-family: 'Courier New', monospace;">
+        </div>
+    </div>
+
+    <p><em>Note: The statistical decryption method shown here has very limited effectiveness with RSA, especially with short messages. Unlike Caesar cipher where frequency analysis works well, RSA's mathematical properties make it resistant to this type of attack. This demonstrates why RSA is considered cryptographically secure while Caesar cipher is not. For educational purposes, you may see partial patterns with longer texts, but proper RSA decryption requires the private key.</em></p>
+</div>
+
+<script>
+let currentKeys = null;
+let currentEncrypted = null;
+
+// Generate prime numbers up to a given limit using Sieve of Eratosthenes
+function generatePrimes(limit) {
+    const sieve = new Array(limit + 1).fill(true);
+    sieve[0] = sieve[1] = false;
+    
+    for (let i = 2; i * i <= limit; i++) {
+        if (sieve[i]) {
+            for (let j = i * i; j <= limit; j += i) {
+                sieve[j] = false;
+            }
+        }
+    }
+    
+    const primes = [];
+    for (let i = 2; i <= limit; i++) {
+        if (sieve[i]) primes.push(i);
+    }
+    return primes;
+}
+
+// Initialize prime dropdowns
+function initializePrimeDropdowns() {
+    const primes = generatePrimes(100); // Generate primes up to 100
+    const primePSelect = document.getElementById('prime-p');
+    const primeQSelect = document.getElementById('prime-q');
+    
+    primes.forEach(prime => {
+        const optionP = document.createElement('option');
+        optionP.value = prime;
+        optionP.textContent = prime;
+        if (prime === 61) optionP.selected = true;
+        primePSelect.appendChild(optionP);
+        
+        const optionQ = document.createElement('option');
+        optionQ.value = prime;
+        optionQ.textContent = prime;
+        if (prime === 53) optionQ.selected = true;
+        primeQSelect.appendChild(optionQ);
+    });
+}
+
+function gcd(a, b) {
+    while (b !== 0) {
+        [a, b] = [b, a % b];
+    }
+    return a;
+}
+
+function modInverse(e, phi) {
+    let [old_r, r] = [e, phi];
+    let [old_s, s] = [1, 0];
+    
+    while (r !== 0) {
+        const quotient = Math.floor(old_r / r);
+        [old_r, r] = [r, old_r - quotient * r];
+        [old_s, s] = [s, old_s - quotient * s];
+    }
+    
+    return old_s < 0 ? old_s + phi : old_s;
+}
+
+function modPow(base, exp, mod) {
+    let result = 1;
+    base = base % mod;
+    while (exp > 0) {
+        if (exp % 2 === 1) result = (result * base) % mod;
+        exp = Math.floor(exp / 2);
+        base = (base * base) % mod;
+    }
+    return result;
+}
+
+function generateRSAKeys(p, q) {
+    const n = p * q;
+    const phi = (p - 1) * (q - 1);
+    let e = 17;
+    
+    while (e < phi && gcd(e, phi) !== 1) {
+        e++;
+    }
+    
+    if (e >= phi) {
+        throw new Error("Cannot find suitable e");
+    }
+    
+    const d = modInverse(e, phi);
+    return { publicKey: {e, n}, privateKey: {d, n} };
+}
+
+function rsaEncrypt(text, publicKey) {
+    const {e, n} = publicKey;
+    const encrypted = [];
+    
+    for (let char of text) {
+        const m = char.charCodeAt(0);
+        if (m >= n) {
+            throw new Error(`Character '${char}' (${m}) is too large for modulus ${n}`);
+        }
+        const c = modPow(m, e, n);
+        encrypted.push(c);
+    }
+    
+    return encrypted;
+}
+
+function rsaDecrypt(encrypted, privateKey) {
+    const {d, n} = privateKey;
+    let decrypted = '';
+    
+    for (let c of encrypted) {
+        const m = modPow(c, d, n);
+        decrypted += String.fromCharCode(m);
+    }
+    
+    return decrypted;
+}
+
+function generateKeys() {
+    const p = parseInt(document.getElementById('prime-p').value);
+    const q = parseInt(document.getElementById('prime-q').value);
+    
+    try {
+        currentKeys = generateRSAKeys(p, q);
+        document.getElementById('public-key').textContent = 
+            `e = ${currentKeys.publicKey.e}, n = ${currentKeys.publicKey.n}`;
+        document.getElementById('private-key').textContent = 
+            `d = ${currentKeys.privateKey.d}, n = ${currentKeys.privateKey.n}`;
+    } catch (error) {
+        alert('Error: ' + error.message);
+    }
+}
+
+function encryptRSA() {
+    if (!currentKeys) {
+        alert('Please generate keys first!');
+        return;
+    }
+    
+    const plaintext = document.getElementById('rsa-plaintext').value;
+    
+    try {
+        currentEncrypted = rsaEncrypt(plaintext, currentKeys.publicKey);
+        document.getElementById('rsa-ciphertext').textContent = 
+            currentEncrypted.join(', ');
+    } catch (error) {
+        alert('Error: ' + error.message);
+    }
+}
+
+function decryptRSA() {
+    if (!currentKeys || !currentEncrypted) {
+        alert('Please encrypt a message first!');
+        return;
+    }
+    
+    const decrypted = rsaDecrypt(currentEncrypted, currentKeys.privateKey);
+    document.getElementById('rsa-decrypted').textContent = decrypted;
+}
+
+function statisticalDecryptRSA() {
+    if (!currentEncrypted) {
+        alert('Please encrypt a message first!');
+        return;
+    }
+    
+    const englishFreq = {
+        'E': 12.7, 'T': 9.1, 'A': 8.2, 'O': 7.5, 'I': 7.0, 'N': 6.7,
+        'S': 6.3, 'H': 6.1, 'R': 6.0, 'D': 4.3, 'L': 4.0, 'C': 2.8,
+        'U': 2.8, 'M': 2.4, 'W': 2.4, 'F': 2.2, 'G': 2.0, 'Y': 2.0,
+        'P': 1.9, 'B': 1.5, 'V': 1.0, 'K': 0.8, 'J': 0.2, 'X': 0.2,
+        'Q': 0.1, 'Z': 0.1
+    };
+    
+    // Count frequency of encrypted values
+    const freq = {};
+    for (let val of currentEncrypted) {
+        freq[val] = (freq[val] || 0) + 1;
+    }
+    
+    // Display frequency distribution
+    const freqDisplay = Object.entries(freq)
+        .sort((a, b) => b[1] - a[1])
+        .map(([val, count]) => `${val}: ${count} times`)
+        .join('<br>');
+    document.getElementById('frequency-distribution').innerHTML = freqDisplay;
+    
+    // Sort by frequency
+    const sortedEncrypted = Object.entries(freq)
+        .sort((a, b) => b[1] - a[1])
+        .map(x => parseInt(x[0]));
+    
+    const sortedEnglish = Object.keys(englishFreq)
+        .sort((a, b) => englishFreq[b] - englishFreq[a]);
+    
+    // Create mapping
+    const mapping = {};
+    for (let i = 0; i < Math.min(sortedEncrypted.length, sortedEnglish.length); i++) {
+        mapping[sortedEncrypted[i]] = sortedEnglish[i];
+    }
+    
+    // Decrypt using mapping
+    let result = '';
+    for (let val of currentEncrypted) {
+        result += mapping[val] || '?';
+    }
+    
+    document.getElementById('statistical-result').textContent = result;
+}
+
+// Initialize with default keys
+document.addEventListener('DOMContentLoaded', () => {
+    initializePrimeDropdowns();
+    generateKeys();
+});
+</script>
+
+</section>
+
+        </article>
+    </main>
+</body>
+</html>

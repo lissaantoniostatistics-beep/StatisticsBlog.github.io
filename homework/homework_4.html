@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 3 - RSA Encryption and Decryption</title>
+    <meta name="description" content="Spiegazione dei concetti di dataset e distribuzione con crittografia RSA applicata all'analisi testuale.">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/homework.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="../index.html" class="logo">
+                Statistica Blog
+            </a>
+            <nav class="nav">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="../index.html#homework" class="nav-link">Homework</a>
+                <a href="#" class="nav-link">Info</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <nav class="breadcrumb">
+            <a href="../index.html">Home</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="../index.html#homework">Homework</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">Week 3</span>
+        </nav>
+
+        <header class="article-header">
+            <div class="article-meta">
+                <span class="homework-week">Week 3</span>
+                <span class="article-date">22 Oct 2025</span>
+            </div>
+            <h1 class="article-title">Law of Large Numbers and Central Limit Theorem</h1>
+            <div class="article-tags">
+                <span class="tag">LLN</span>
+                <span class="tag">CLT</span>
+            </div>
+        </header>
+
+        <article class="article-content">
+            
+<section class="content-section">
+    <h2>Homework Objectives</h2>
+    <p>This practical assignment extends the concepts of <b>Random Variables</b> and <b>Statistical Distribution</b> introduced in previous exercises, now applying them to <b>simulating the Law of Large Numbers</b>. The goal is to understand how empirical frequencies converge to theoretical probabilities, how trajectories fluctuate, and how histograms can visualize the distribution of outcomes over multiple independent trials.</p>
+</section>
+
+
+<section class="content-section">
+    <h2>Theoretical Foundations</h2>
+    
+    <div class="theory-block">
+        <h3>1. Law of Large Numbers (LLN)</h3>
+        <p>The <b>Law of Large Numbers</b> states that as the number of independent trials increases, the <b>empirical frequency</b> of an event converges to its <b>theoretical probability</b> <b>p</b>. In our simulation, we model a Bernoulli trial with probability <b>p</b> of success.</p>
+        <ul>
+            <li><b>Bernoulli Trials:</b> Each trial can result in success (1) or failure (0) with probability <b>p</b> and <b>1-p</b>, respectively.</li>
+            <li><b>Trajectories:</b> Each trajectory represents the cumulative frequency <b>f(n) = successes / n</b> over n trials. Early in the simulation, f(n) fluctuates due to the randomness of few trials.</li>
+            <li><b>Oscillations:</b> The “sali e scendi” of f(n) occur because each new trial changes the cumulative frequency. Large fluctuations occur when n is small; they decrease as n grows.</li>
+            <li><b>Convergence:</b> As n becomes large, each trajectory stabilizes near the theoretical probability p, visually demonstrating the Law of Large Numbers.</li>
+        </ul>
+    </div>
+
+    <div class="theory-block">
+        <h3>2. Empirical Distribution and Histogram</h3>
+        <p>The histogram shows the <b>distribution of final frequencies</b> across multiple trajectories, providing a visual summary of convergence.</p>
+        <ul>
+            <li><b>Bins:</b> The interval [0,1] is divided into discrete bins. Each bin counts how many trajectories have their final frequency f(N) within that interval.</li>
+            <li><b>Height of Bars:</b> A higher bar indicates more trajectories ending in that bin, showing where the empirical distribution concentrates.</li>
+            <li><b>Relation to p:</b> As trajectories converge, most final frequencies fall into bins near p, so the histogram peaks around the theoretical probability.</li>
+            <li><b>Effect of Number of Trajectories:</b> More trajectories create a smoother histogram, making the convergence to p more evident.</li>
+        </ul>
+    </div>
+</section>
+
+
+
+<section class="content-section">
+
+
+<div class="controls">
+  <label>Number of trajectories: <input type="number" id="trajs" value="30" min="1" max="500"></label>
+  <label>Tests (N): <input type="number" id="trials" value="1000" min="10" max="5000"></label>
+  <label>p (successo): <input type="number" id="p" value="0.5" step="0.01" min="0" max="1"></label>
+  <label>Bin: <input type="number" id="bins" value="20" min="2" max="100"></label>
+  <button id="start">Start</button>
+</div>
+
+<canvas id="simCanvas" width="1000" height="400"></canvas>
+
+
+
+</section>
+
+        </article>
+    </main>
+</body>
+</html>
+
+
+
+<script>
+const canvas = document.getElementById("simCanvas");
+const ctx = canvas.getContext("2d");
+
+let animId = null; // ID dell'animazione corrente
+
+document.getElementById("start").addEventListener("click", startSimulation);
+
+function startSimulation() {
+  // Ferma eventuale simulazione precedente
+  if (animId) cancelAnimationFrame(animId);
+
+  const numTraj = +document.getElementById("trajs").value;
+  const numTrials = +document.getElementById("trials").value;
+  const p = +document.getElementById("p").value;
+  const numBins = +document.getElementById("bins").value;
+
+  const mainWidth = canvas.width * 0.8; // 80% per grafico principale
+  const histWidth = canvas.width * 0.2; // 20% per istogramma
+
+  const trajectories = Array.from({ length: numTraj }, () => ({
+    n: 0,
+    successes: 0,
+    data: []
+  }));
+
+  let step = 0;
+  const maxSteps = numTrials;
+
+  function drawFrame() {
+    ctx.fillStyle = "#222";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Linea teorica p
+    ctx.strokeStyle = "#f00";
+    ctx.lineWidth = 1.5;
+    const yTheory = (1 - p) * canvas.height;
+    ctx.beginPath();
+    ctx.moveTo(0, yTheory);
+    ctx.lineTo(mainWidth, yTheory);
+    ctx.stroke();
+
+    // Aggiorna traiettorie e raccogli ultimi valori
+    const lastValues = [];
+    trajectories.forEach(t => {
+      if (t.n < maxSteps) {
+        const success = Math.random() < p ? 1 : 0;
+        t.successes += success;
+        t.n++;
+        t.data.push(t.successes / t.n);
+      }
+      if (t.data.length > 0) lastValues.push(t.data[t.data.length - 1]);
+    });
+
+    // Disegna traiettorie
+    trajectories.forEach(t => {
+      ctx.beginPath();
+      for (let i = 0; i < t.data.length; i++) {
+        const x = (i / maxSteps) * mainWidth;
+        const y = (1 - t.data[i]) * canvas.height;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = `hsla(${Math.random() * 360}, 100%, 70%, 0.25)`;
+      ctx.stroke();
+    });
+
+    // Disegna istogramma
+    drawHistogram(lastValues, mainWidth, histWidth, p, numBins);
+
+    step++;
+    if (step < maxSteps) {
+      animId = requestAnimationFrame(drawFrame);
+    } else {
+      animId = null; // simulazione finita
+    }
+  }
+
+  drawFrame();
+}
+
+function drawHistogram(values, offsetX, width, p, bins) {
+  const counts = Array(bins).fill(0);
+  values.forEach(v => {
+    const idx = Math.min(bins - 1, Math.floor(v * bins));
+    counts[idx]++;
+  });
+  const maxCount = Math.max(...counts);
+
+  const barWidth = width / bins;
+  ctx.fillStyle = "#0f0";
+  for (let i = 0; i < bins; i++) {
+    const barHeight = (counts[i] / maxCount) * canvas.height;
+    const x = offsetX + i * barWidth;
+    const y = canvas.height - barHeight;
+    ctx.fillRect(x, y, barWidth - 1, barHeight);
+  }
+
+  // Linea teorica p sull'istogramma
+  ctx.strokeStyle = "#f00";
+  const pX = offsetX + p * width;
+  ctx.beginPath();
+  ctx.moveTo(pX, 0);
+  ctx.lineTo(pX, canvas.height);
+  ctx.stroke();
+}
+</script>
+
+</body>
+</html>
