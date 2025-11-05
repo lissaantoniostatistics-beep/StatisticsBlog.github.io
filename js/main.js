@@ -3,20 +3,56 @@
 // Lista degli homework - aggiorna qui i nuovi compiti
 const homeworkList = [
     {
+        id: 'homework-6',
+        week: 'Week 4',
+        title: 'Online Algorithms for Statistical Measures',
+        description: 'Implementation of Online Algorithms for Statistical Measures',
+        date: '2025-11-05',
+        tags: ['Online Algorithms', 'Streaming Data', 'Statistics'],
+        filename: 'homework_6.html'
+    },
+        {
+        id: 'homework-5',
+        week: 'Week 4',
+        title: 'Measures of Location and Dispersion',
+        description: 'Explanation of measures of Location and Dispersion',
+        date: '2025-11-05',
+        tags: ['Central Tendency', 'variability', 'Statistics'],
+        filename: 'homework_5.html'
+    },
+    {
+        id: 'homework-LLN',
+        week: 'Week 3',
+        title: 'Law of Large Numbers and Central Limit Theorem',
+        description: 'Explanation and integration of the LLN.',
+        date: '2025-10-22',
+        tags: ['LLN', 'CLN'],
+        filename: 'homework_4.html'
+    },
+    {
+        id: 'homework-RSA',
+        week: 'Week 3',
+        title: 'RSA implementation and Cryptanalysis',
+        description: 'Explanation and integration of the RSA.',
+        date: '2025-10-22',
+        tags: ['RSA', 'Frequency Analysis'],
+        filename: 'homework_3.html'
+    },
+    {
         id: 'homework-Caesar cipher',
         week: 'Week 2',
         title: 'Concepts of Dataset, Distribution, and Caesar Cipher',
         description: 'Explanation of dataset and distribution concepts using a DBMS (Access), analysis of univariate and bivariate distributions, and introduction to cryptanalysis with the Caesar Cipher.',
-        date: '2024-10-14',
+        date: '2025-10-14',
         tags: ['Descriptive Statistics', 'DBMS', 'Cryptography', 'Frequency Analysis'],
         filename: 'homework_2.html'
     },
     {
         id: 'homework-statistics-cybersecurity',
-        week: 'Settimana 1',
+        week: 'Week 1',
         title: 'What is Statistics and Why Can It Be Useful for Cybersecurity',
         description: 'Understanding the fundamental role of statistics in cybersecurity: from threat detection to risk assessment. Exploring statistical methods that power modern security systems.',
-        date: '2024-10-07',
+        date: '2025-10-07',
         tags: ['Statistical Foundations', 'Cybersecurity', 'Threat Detection'],
         filename: 'homework-statistics-cybersecurity.html'
     }
