@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 5 - Measures of Location and Dispersion</title>
+    <meta name="description" content="Research on location and dispersion measures, their applications and limitations in statistical analysis.">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/homework.css">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="../index.html" class="logo">
+                Statistica Blog
+            </a>
+            <nav class="nav">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="../index.html#homework" class="nav-link">Homework</a>
+                <a href="#" class="nav-link">Info</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <nav class="breadcrumb">
+            <a href="../index.html">Home</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="../index.html#homework">Homework</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">Week 5</span>
+        </nav>
+
+        <header class="article-header">
+            <div class="article-meta">
+                <span class="homework-week">Week 4</span>
+                <span class="article-date">5 Nov 2025</span>
+            </div>
+            <h1 class="article-title">Measures of Location and Dispersion</h1>
+            <div class="article-tags">
+                <span class="tag">Descriptive Statistics</span>
+                <span class="tag">Central Tendency</span>
+                <span class="tag">Variability</span>
+            </div>
+        </header>
+
+        <article class="article-content">
+            
+<section class="content-section">
+    <h2>Introduction</h2>
+    <p>When we work with data, simply looking at raw numbers doesn't tell us much. We need tools to summarize and understand what the data is really showing us. This is where <b>measures of location</b> and <b>measures of dispersion</b> come in. These two types of measures give us a complete picture of our dataset: location measures tell us where the data is centered, while dispersion measures tell us how spread out the values are.</p>
+    <p>Think of it this way: if you're comparing salaries in two companies, knowing that both have an average salary of 50,000 isn't enough. One company might have everyone earning between 45,000 and 55,000, while the other might have huge differences, with some people earning 10,000 and others 90,000. Both situations have the same average, but they're completely different. That's why we need both types of measures to really understand data.</p>
+</section>
+
+<section class="content-section">
+    <h2>Measures of Location (Central Tendency)</h2>
+    <p>Measures of location help us identify a typical or representative value in our dataset. They answer the question: "What's a normal value in this data?" The three main measures are the mean, median, and mode, and each one has its own strengths and weaknesses.</p>
+
+    <div class="theory-block">
+        <h3>1. Arithmetic Mean</h3>
+        <p>The <b>arithmetic mean</b> is what most people just call "the average." You calculate it by adding up all the values and dividing by how many values you have. It's the most common measure of location and it's used almost everywhere in statistics.</p>
+        
+        <p><b>Formula:</b></p>
+        <p style="text-align: center; font-size: 1.1em; margin: 1rem 0;">
+        \[
+            \bar{x} = \frac{\sum_{i=1}^{n} x_i}{n}
+        \]
+        </p>
+        <p style="margin-left: 1.5rem;">
+        where \(\bar{x}\) is the mean, \(\sum_{i=1}^{n} x_i\) is the sum of all values, and \(n\) is the number of observations.
+        </p>
+
+        <p><b>When to use it:</b></p>
+        <ul>
+            <li>When you have quantitative data (numbers, not categories)</li>
+            <li>When your data doesn't have extreme outliers</li>
+            <li>When you need to do further statistical calculations, since the mean works well with other formulas</li>
+        </ul>
+
+        <p><b>Advantages:</b></p>
+        <ul>
+            <li>Uses all the data points, so no information is wasted</li>
+            <li>Easy to calculate and understand</li>
+            <li>Works well with other statistical methods and tests</li>
+            <li>When you have multiple samples, you can combine their means easily</li>
+        </ul>
+
+        <p><b>Limitations:</b></p>
+        <ul>
+            <li>Very sensitive to outliers and extreme values. One really high or low value can pull the mean way off</li>
+            <li>Can give you a value that doesn't actually exist in your data (like "2.3 children per family")</li>
+            <li>Doesn't work with categorical data (you can't average "red, blue, green")</li>
+            <li>Can be misleading with skewed data. For example, if most people earn €30,000 but one person earns €10 million, the mean will be very high even though it doesn't represent most people</li>
+        </ul>
+
+    </div>
+
+    <div class="theory-block">
+        <h3>2. Median</h3>
+        <p>The <b>median</b> is the middle value when you arrange all your data in order. If you have an even number of values, it's the average of the two middle ones. The median literally splits your data in half: 50% of values are below it, and 50% are above it.</p>
+
+        <p><b>How to find it:</b></p>
+        <ul>
+            <li>Sort all values from smallest to largest</li>
+            <li>If you have an odd number of values (like 5, 7, 9), the median is the one right in the middle</li>
+            <li>If you have an even number of values (like 4, 6, 8), take the two middle values and average them</li>
+        </ul>
+
+        <p><b>When to use it:</b></p>
+        <ul>
+            <li>When you have outliers or extreme values that would mess up the mean</li>
+            <li>When working with skewed data (like income, house prices)</li>
+            <li>When you need a measure that's actually in your dataset (or close to it)</li>
+            <li>With ordinal data (ranked data, like "low, medium, high")</li>
+        </ul>
+
+        <p><b>Advantages:</b></p>
+        <ul>
+            <li>Not affected by outliers at all. You could change the highest value to anything, and the median stays the same</li>
+            <li>Easy to understand: "half the values are above this, half below"</li>
+            <li>Works with ordinal data where the mean doesn't make sense</li>
+            <li>Better represents typical values in skewed distributions</li>
+        </ul>
+
+        <p><b>Limitations:</b></p>
+        <ul>
+            <li>Ignores the actual values of most of your data, only caring about their position</li>
+            <li>Harder to use in more advanced statistics compared to the mean</li>
+            <li>Takes more time to calculate for large datasets (you need to sort everything)</li>
+            <li>If you have multiple samples, you can't just combine their medians</li>
+        </ul>
+
+        <p><b>Example:</b> For the values 18, 22, 24, 25, 28, the median is 24 (the middle value). If we add an outlier like 100, the values become 18, 22, 24, 25, 28, 100, and the median is now 24.5 (average of 24 and 25). The mean would jump from 23.4 to 36.2, showing how the median is stable while the mean gets affected.</p>
+    </div>
+
+    <div class="theory-block">
+        <h3>3. Mode</h3>
+        <p>The <b>mode</b> is simply the value that appears most often in your dataset. It's the only measure of location that works with any type of data, including categories. A dataset can have no mode (if all values appear once), one mode (unimodal), or multiple modes (bimodal, multimodal).</p>
+
+        <p><b>When to use it:</b></p>
+        <ul>
+            <li>With categorical data (like colors, brands, or types)</li>
+            <li>When you want to know the most common value</li>
+            <li>In business contexts, like finding the most popular product size</li>
+            <li>When other measures don't make sense for your data type</li>
+        </ul>
+
+        <p><b>Advantages:</b></p>
+        <ul>
+            <li>Works with any type of data: numbers, categories, anything</li>
+            <li>Not affected by outliers</li>
+            <li>Easy to find and understand</li>
+            <li>Shows you the most typical or popular value</li>
+        </ul>
+
+        <p><b>Limitations:</b></p>
+        <ul>
+            <li>Might not exist if no value repeats</li>
+            <li>Can have multiple modes, which makes interpretation harder</li>
+            <li>Doesn't use most of the information in your data</li>
+            <li>Can be unstable, especially with small datasets</li>
+            <li>Not useful for further statistical calculations</li>
+        </ul>
+
+        <p><b>Example:</b> In the grades 18, 22, 24, 24, 25, 28, the mode is 24 because it appears twice. For the data "red, blue, red, green, red," the mode is "red." If all values appear the same number of times, there's no mode.</p>
+    </div>
+
+
+<div class="theory-block">
+    <h3>4. Weighted Mean</h3>
+    <p>The <b>weighted mean</b> is like the regular arithmetic mean, but it gives more importance (or "weight") to certain values. Not all data points are treated equally — values with higher weights influence the mean more strongly.</p>
+
+    <p><b>Formula:</b></p>
+    <p style="text-align: center; font-size: 1.1em; margin: 1rem 0;">
+    \[
+        \bar{x}_w = \frac{\sum_{i=1}^{n} w_i x_i}{\sum_{i=1}^{n} w_i}
+    \]
+    </p>
+    <p style="margin-left: 1.5rem;">
+    where \(\bar{x}_w\) is the weighted mean, \(x_i\) are the values, and \(w_i\) are their respective weights.
+    </p>
+
+    <p><b>When to use it:</b></p>
+    <ul>
+        <li>When some observations are more important or frequent than others</li>
+        <li>When combining averages from groups of different sizes</li>
+        <li>In index numbers (like CPI or stock indexes), or academic grading systems</li>
+    </ul>
+
+    <p><b>Advantages:</b></p>
+    <ul>
+        <li>Gives a fair representation when data points have different significance</li>
+        <li>Can handle grouped or frequency data effectively</li>
+        <li>Flexible and widely used in economics, finance, and education</li>
+    </ul>
+
+    <p><b>Limitations:</b></p>
+    <ul>
+        <li>Requires knowing or assigning appropriate weights, which isn’t always straightforward</li>
+        <li>If weights are inaccurate or arbitrary, the result is misleading</li>
+        <li>Still sensitive to outliers, like the regular mean</li>
+    </ul>
+
+    <p><b>Example:</b> Suppose a student’s grades are: 80 (weight 2), 90 (weight 3), and 70 (weight 1). The weighted mean is (80×2 + 90×3 + 70×1) / (2+3+1) = 85. The higher weight on 90 pulls the mean upward.</p>
+</div>
+
+<div class="theory-block">
+    <h3>5. Geometric Mean</h3>
+    <p>The <b>geometric mean</b> is the nth root of the product of n values. It’s used when values multiply together or grow exponentially — like growth rates, investment returns, or population changes. Instead of adding, it focuses on proportional change.</p>
+
+    <p><b>Formula:</b></p>
+    <p style="text-align: center; font-size: 1.1em; margin: 1rem 0;">
+    \[
+        G = \left( \prod_{i=1}^{n} x_i \right)^{\frac{1}{n}}
+    \]
+    </p>
+    <p style="margin-left: 1.5rem;">
+    where \(G\) is the geometric mean, \(\prod_{i=1}^{n} x_i\) is the product of all values, and \(n\) is the number of observations.
+    </p>
+
+
+    <p><b>When to use it:</b></p>
+    <ul>
+        <li>For ratios, percentages, and growth rates</li>
+        <li>When data are multiplicative rather than additive</li>
+        <li>When comparing changes over time (like “average annual growth rate”)</li>
+    </ul>
+
+    <p><b>Advantages:</b></p>
+    <ul>
+        <li>Less affected by large outliers or skewed distributions than the arithmetic mean</li>
+        <li>More accurate for averaging relative changes or rates</li>
+        <li>Always smaller than or equal to the arithmetic mean (by AM–GM inequality)</li>
+    </ul>
+
+    <p><b>Limitations:</b></p>
+    <ul>
+        <li>Can only be used with positive values — zero or negative numbers make it meaningless</li>
+        <li>Harder to compute by hand, especially for large datasets</li>
+        <li>Less intuitive for people used to simple averages</li>
+    </ul>
+
+    <p><b>Example:</b> If an investment grows by 10%, 20%, and 30% in three years, the geometric mean growth rate is (1.10×1.20×1.30)<sup>1/3</sup> − 1 = 19.1% per year.</p>
+</div>
+
+<div class="theory-block">
+    <h3>6. Harmonic Mean</h3>
+    <p>The <b>harmonic mean</b> is the reciprocal of the average of reciprocals. It’s used for rates, speeds, or ratios — situations where the data describes something like “per unit.”</p>
+    <p><b>Formula:</b></p>
+    <p style="text-align: center; font-size: 1.1em; margin: 1rem 0;">
+    \[
+    H = \frac{n}{\sum_{i=1}^{n} \frac{1}{x_i}}
+    \]
+    </p>
+    <p style="margin-left: 1.5rem;">
+    where \(H\) is the harmonic mean, \(x_i\) are the values, and \(n\) is the number of observations.
+    </p>
+
+    <p><b>When to use it:</b></p>
+    <ul>
+        <li>When dealing with rates or ratios (like speed, efficiency, or density)</li>
+        <li>When you need the “average rate” over equal distances or tasks</li>
+        <li>In finance, for averaging price-to-earnings (P/E) ratios or similar quantities</li>
+    </ul>
+
+    <p><b>Advantages:</b></p>
+    <ul>
+        <li>Gives correct results for averaging rates and ratios</li>
+        <li>Less affected by large values (compared to the arithmetic mean)</li>
+        <li>Ensures proportional fairness when dealing with quantities like speed or density</li>
+    </ul>
+
+    <p><b>Limitations:</b></p>
+    <ul>
+        <li>Cannot be used with zero or negative values (since division by zero breaks everything)</li>
+        <li>Heavily influenced by very small values</li>
+        <li>Not suitable for general data averaging</li>
+    </ul>
+
+    <p><b>Example:</b> If a car travels a certain distance at 60 km/h and returns at 40 km/h, the harmonic mean speed is 2 / (1/60 + 1/40) = 48 km/h — not 50 km/h. It correctly accounts for the different times spent at each speed.</p>
+</div>
+
+</section>
+
+<section class="content-section">
+    <h2>Measures of Dispersion (Variability)</h2>
+    <p>While measures of location tell us where the center of our data is, they don't tell us anything about how the data is spread out. Two datasets can have the same mean but be completely different in terms of variability. Measures of dispersion help us understand this spread and give us a complete picture of our data.</p>
+
+    <div class="theory-block">
+        <h3>1. Variance</h3>
+        <p>The <b>variance</b> measures how far each value in the dataset is from the mean, on average. It's calculated by finding the difference between each value and the mean, squaring these differences (to make them positive), and then averaging them. The squaring step is important but it also changes the units, which is why we often use standard deviation instead.</p>
+
+        <p><b>Formula:</b></p>
+        <p style="text-align: center; font-size: 1.1em; margin: 1rem 0;">
+        \[
+            s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n - 1}
+        \]
+        </p>
+        <p style="margin-left: 1.5rem;">
+        where \(s^2\) is the sample variance, \(x_i\) are the individual values, \(\bar{x}\) is the mean, and \(n\) is the sample size.
+        </p>
+
+        <p><b>When to use it:</b></p>
+        <ul>
+            <li>When you need to do statistical calculations that require variance (like ANOVA)</li>
+            <li>In theoretical statistics and probability</li>
+            <li>When comparing variability mathematically between datasets</li>
+        </ul>
+
+        <p><b>Advantages:</b></p>
+        <ul>
+            <li>Uses all the data points</li>
+            <li>Has nice mathematical properties that make it useful in formulas</li>
+            <li>Forms the basis for many statistical tests</li>
+        </ul>
+
+        <p><b>Limitations:</b></p>
+        <ul>
+            <li>Units are squared (if your data is in euros, variance is in euros squared, which doesn't make intuitive sense)</li>
+            <li>Very sensitive to outliers (even more than the mean, because differences are squared)</li>
+            <li>Hard to interpret directly</li>
+        </ul>
+
+    </div>
+
+    <div class="theory-block">
+        <h3>2. Standard Deviation</h3>
+        <p>The <b>standard deviation</b> is simply the square root of the variance. It measures the average distance of data points from the mean, but unlike variance, it's in the same units as the original data. This makes it much easier to interpret and more commonly used in practice.</p>
+
+        <p><b>Formula:</b></p>
+        <p style="text-align: center; font-size: 1.1em; margin: 1rem 0;">
+        \[
+            s = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n - 1}}
+        \]
+        </p>
+
+
+        <p><b>When to use it:</b></p>
+        <ul>
+            <li>Pretty much always, when you want to measure spread in quantitative data</li>
+            <li>When comparing variability between different datasets</li>
+            <li>In quality control and process monitoring</li>
+            <li>When describing data alongside the mean</li>
+        </ul>
+
+        <p><b>Advantages:</b></p>
+        <ul>
+            <li>Same units as the original data, so it's easy to interpret</li>
+            <li>Takes into account all values in the dataset</li>
+            <li>Works well with the mean for normally distributed data</li>
+            <li>Widely used and understood</li>
+        </ul>
+
+        <p><b>Limitations:</b></p>
+        <ul>
+            <li>Sensitive to outliers (because it's based on the mean)</li>
+            <li>Requires quantitative data</li>
+            <li>Can be zero, which means no variability at all</li>
+            <li>Harder to calculate manually compared to simpler measures</li>
+        </ul>
+
+        <p><b>Example:</b> Using the variance of 10 from before, the standard deviation is √10 ≈ 3.16 grades. This tells us that, on average, grades are about 3.16 points away from the mean of 24.</p>
+    </div>
+
+    <div class="theory-block">
+        <h3>3. Interquartile Range (IQR)</h3>
+        <p>The <b>interquartile range</b> is the difference between the third quartile (75th percentile) and the first quartile (25th percentile). Basically, it tells you the range of the middle 50% of your data. It's like the median's version of standard deviation: it focuses on the middle of the data and ignores the extremes.</p>
+
+        <p><b>How to calculate it:</b></p>
+        <ul>
+            <li>Sort your data from smallest to largest</li>
+            <li>Find Q1 (the value where 25% of data is below it)</li>
+            <li>Find Q3 (the value where 75% of data is below it)</li>
+            <li>IQR = Q3 - Q1</li>
+        </ul>
+
+        <p><b>When to use it:</b></p>
+        <ul>
+            <li>When you have outliers in your data</li>
+            <li>With skewed distributions</li>
+            <li>When you want a robust measure that won't be affected by extreme values</li>
+            <li>Often used together with the median</li>
+        </ul>
+
+        <p><b>Advantages:</b></p>
+        <ul>
+            <li>Not affected by outliers or extreme values at all</li>
+            <li>Easy to understand and interpret</li>
+            <li>Works well with skewed data</li>
+            <li>Useful for identifying outliers (values more than 1.5×IQR above Q3 or below Q1)</li>
+        </ul>
+
+        <p><b>Limitations:</b></p>
+        <ul>
+            <li>Ignores 50% of your data (the bottom 25% and top 25%)</li>
+            <li>Doesn't work well with further statistical calculations</li>
+            <li>Less efficient than standard deviation for normally distributed data</li>
+            <li>Can be tricky to calculate for small datasets</li>
+        </ul>
+
+    </div>
+
+    <div class="theory-block">
+        <h3>4. Range</h3>
+        <p>The <b>range</b> is the simplest measure of dispersion. It's just the difference between the maximum and minimum values in your dataset. While it's easy to calculate, it's also the least informative because it only uses two values and ignores everything else.</p>
+
+        <p><b>Formula:</b></p>
+        <p style="text-align: center; font-size: 1.1em; margin: 1rem 0;">
+            Range = Maximum value - Minimum value
+        </p>
+
+        <p><b>When to use it:</b></p>
+        <ul>
+            <li>For a quick, rough idea of spread</li>
+            <li>In quality control to check if values are within acceptable limits</li>
+            <li>When you need something simple and fast</li>
+        </ul>
+
+        <p><b>Advantages:</b></p>
+        <ul>
+            <li>Extremely easy to calculate</li>
+            <li>Easy to understand</li>
+            <li>Shows the full span of the data</li>
+        </ul>
+
+        <p><b>Limitations:</b></p>
+        <ul>
+            <li>Uses only two values, wasting all other information</li>
+            <li>Extremely sensitive to outliers (one extreme value changes it completely)</li>
+            <li>Gets larger as you collect more data, even if the data is consistent</li>
+            <li>Not useful for statistical analysis</li>
+            <li>Doesn't tell you anything about how data is distributed between the extremes</li>
+        </ul>
+
+        <p><b>Example:</b> For grades 18, 22, 24, 25, 28, the range is 28 - 18 = 10. If we add one student who scored 30, the range becomes 30 - 18 = 12, even though most of the data hasn't changed.</p>
+    </div>
+</section>
+
+<section class="content-section">
+    <h2>Practical Applications and Use Cases</h2>
+    <p>Different situations call for different measures. Here's how to think about choosing the right ones:</p>
+
+    <h3>Finance and Economics</h3>
+    <p>In finance, both location and dispersion matter a lot. The mean tells you expected returns, while standard deviation measures risk. Portfolio managers use variance to understand investment risk. However, when dealing with things like income or wealth distribution, which tend to be very skewed, the median and IQR are better choices because they're not affected by the ultra-wealthy few.</p>
+
+    <h3>Quality Control</h3>
+    <p>Manufacturing often uses mean and standard deviation to monitor processes. If you're making bolts that should be 10mm ± 0.1mm, you track the mean to make sure they're centered at 10mm, and the standard deviation to ensure they're not varying too much. The range is also useful here for a quick check if anything is outside acceptable limits.</p>
+
+    <h3>Healthcare and Medicine</h3>
+    <p>Medical data often has outliers (some patients respond very differently to treatments), so median and IQR are commonly used. When reporting blood pressure or cholesterol levels, doctors often prefer median because a few extreme cases shouldn't affect the typical value. However, for things like drug dosing where you need precise calculations, mean and standard deviation are necessary.</p>
+
+    <h3>Education</h3>
+    <p>In education, we see all these measures used. Teachers might look at the mean grade to understand overall class performance, but also check the standard deviation to see if students are learning consistently or if there's a big gap between strong and weak students. The mode can show the most common grade, which might be different from the average.</p>
+
+    <h3>Social Sciences</h3>
+    <p>Survey data and opinion polls often use the mode because responses are categorical ("agree," "neutral," "disagree"). The median is popular for things like age or income in demographic studies. Standard deviation helps researchers understand if a population is homogeneous or diverse.</p>
+</section>
+
+
+<section class="content-section">
+    <h2>Interactive Calculator</h2>
+    <p>Try calculating these measures with your own data. Enter numbers separated by commas.</p>
+
+    <div style="margin: 2rem 0; background: #fcfcfc; padding: 2rem; border: 1px solid #e0e0e0; border-radius: 4px;">
+        <div style="margin-bottom: 1.5rem;">
+            <label for="data-input" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Enter your data (comma-separated):</label>
+            <input type="text" id="data-input" value="18, 22, 24, 25, 28, 30" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+        
+        <button onclick="calculateStats()" style="padding: 0.6rem 1.5rem; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            Calculate Statistics
+        </button>
+
+        <div id="results" style="margin-top: 1.5rem; padding: 1rem; background-color: #f5f5f5; border-radius: 4px; display: none;">
+            <h4 style="margin-top: 0;">Results:</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div>
+                    <p><strong>Measures of Location:</strong></p>
+                    <p>Mean: <span id="mean-result"></span></p>
+                    <p>Median: <span id="median-result"></span></p>
+                    <p>Mode: <span id="mode-result"></span></p>
+                </div>
+                <div>
+                    <p><strong>Measures of Dispersion:</strong></p>
+                    <p>Range: <span id="range-result"></span></p>
+                    <p>Variance: <span id="variance-result"></span></p>
+                    <p>Standard Deviation: <span id="std-result"></span></p>
+                    <p>IQR: <span id="iqr-result"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content-section">
+    <h2>Conclusion</h2>
+    <p>Understanding measures of location and dispersion is fundamental to working with data. Location measures like mean, median, and mode tell us where our data is centered, while dispersion measures like variance, standard deviation, IQR, and range tell us how spread out it is. Neither type of measure is complete without the other.</p>
+    <p>The key is knowing when to use each measure. There's no single "best" measure for all situations. Normal data works well with mean and standard deviation. Skewed data or data with outliers calls for median and IQR. Categorical data needs the mode. In practice, it's often helpful to calculate several measures and look at them together to get a complete understanding of your data.</p>
+    <p>These concepts might seem abstract at first, but they're the building blocks of all statistical analysis. Whether you're analyzing business data, conducting research, or just trying to make sense of numbers in everyday life, these measures give you the tools to describe and understand variability in the world around you.</p>
+</section>
+
+<script>
+function calculateStats() {
+    const input = document.getElementById('data-input').value;
+    const data = input.split(',').map(x => parseFloat(x.trim())).filter(x => !isNaN(x));
+    
+    if (data.length === 0) {
+        alert('Please enter valid numbers separated by commas');
+        return;
+    }
+    
+    data.sort((a, b) => a - b);
+    
+    // Mean
+    const mean = data.reduce((a, b) => a + b, 0) / data.length;
+    
+    // Median
+    let median;
+    const mid = Math.floor(data.length / 2);
+    if (data.length % 2 === 0) {
+        median = (data[mid - 1] + data[mid]) / 2;
+    } else {
+        median = data[mid];
+    }
+    
+    // Mode
+    const frequency = {};
+    let maxFreq = 0;
+    data.forEach(val => {
+        frequency[val] = (frequency[val] || 0) + 1;
+        maxFreq = Math.max(maxFreq, frequency[val]);
+    });
+    const modes = Object.keys(frequency).filter(key => frequency[key] === maxFreq);
+    const mode = maxFreq > 1 ? modes.join(', ') : 'No mode';
+    
+    // Range
+    const range = data[data.length - 1] - data[0];
+    
+    // Variance and Standard Deviation
+    const variance = data.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / (data.length - 1);
+    const std = Math.sqrt(variance);
+    
+    // IQR
+    const q1Index = Math.floor(data.length * 0.25);
+    const q3Index = Math.floor(data.length * 0.75);
+    const q1 = data[q1Index];
+    const q3 = data[q3Index];
+    const iqr = q3 - q1;
+    
+    // Display results
+    document.getElementById('mean-result').textContent = mean.toFixed(2);
+    document.getElementById('median-result').textContent = median.toFixed(2);
+    document.getElementById('mode-result').textContent = mode;
+    document.getElementById('range-result').textContent = range.toFixed(2);
+    document.getElementById('variance-result').textContent = variance.toFixed(2);
+    document.getElementById('std-result').textContent = std.toFixed(2);
+    document.getElementById('iqr-result').textContent = iqr.toFixed(2);
+    
+    document.getElementById('results').style.display = 'block';
+}
+</script>
+
+</article>
+    </main>
+</body>
+</html>

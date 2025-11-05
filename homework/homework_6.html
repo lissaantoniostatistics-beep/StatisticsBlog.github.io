@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework - Online Algorithms for Statistical Measures</title>
+    <meta name="description" content="Online algorithms for computing arithmetic mean and variance with incremental updates and numerical stability analysis.">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/homework.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="../index.html" class="logo">
+                Statistica Blog
+            </a>
+            <nav class="nav">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="../index.html#homework" class="nav-link">Homework</a>
+                <a href="#" class="nav-link">Info</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <nav class="breadcrumb">
+            <a href="../index.html">Home</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="../index.html#homework">Homework</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">Week 5</span>
+        </nav>
+
+        <header class="article-header">
+            <div class="article-meta">
+                <span class="homework-week">Week 5</span>
+                <span class="article-date">5 Nov 2025</span>
+            </div>
+            <h1 class="article-title">Online Algorithms for Mean and Variance</h1>
+            <div class="article-tags">
+                <span class="tag">Algorithms</span>
+                <span class="tag">Numerical Stability</span>
+                <span class="tag">Statistics</span>
+            </div>
+        </header>
+
+        <article class="article-content">
+            
+<section class="content-section">
+    <h2>Homework Objectives</h2>
+    <p>This assignment focuses on deriving and implementing <b>online algorithms</b> for computing the <b>arithmetic mean</b> and <b>variance</b> of a dataset. Unlike traditional batch algorithms that process all data at once, online algorithms update statistics <b>incrementally</b> as new data points arrive, offering significant advantages in terms of <b>computational efficiency</b>, <b>memory usage</b>, and <b>numerical stability</b>.</p>
+</section>
+
+<section class="content-section">
+    <h2>Theoretical Foundations</h2>
+    
+    <div class="theory-block">
+        <h3>1. The Problem with Batch Algorithms</h3>
+        <p>Traditional <b>batch algorithms</b> compute statistics by processing the entire dataset simultaneously. While conceptually simple, they suffer from several critical drawbacks:</p>
+        <ul>
+            <li><b>Memory Overhead:</b> Batch methods require storing all data points in memory before computation can begin.</li>
+            <li><b>Computational Inefficiency:</b> Adding a new data point requires recomputing statistics from scratch over the entire dataset.</li>
+            <li><b>Numerical Instability:</b> Algorithms like the "textbook" variance formula (Var = E[X²] - E[X]²) involve subtracting two potentially large numbers, leading to catastrophic cancellation and loss of precision.</li>
+            <li><b>Overflow Risk:</b> Computing the sum of squares directly can cause arithmetic overflow for large datasets or values.</li>
+        </ul>
+    </div>
+
+    <div class="theory-block">
+        <h3>2. Online Algorithms: A Better Approach</h3>
+        <p><b>Online algorithms</b> (also called streaming or incremental algorithms) process data sequentially, updating statistics with each new observation without needing to store or revisit previous data points.</p>
+        <p><b>Key Advantages:</b></p>
+        <ul>
+            <li><b>Constant Memory:</b> Only a fixed number of variables need to be maintained, regardless of dataset size.</li>
+            <li><b>Single-Pass Processing:</b> Each data point is processed exactly once.</li>
+            <li><b>Improved Numerical Stability:</b> Careful formulation avoids catastrophic cancellation.</li>
+            <li><b>Real-Time Capability:</b> Statistics are available immediately after each update.</li>
+        </ul>
+    </div>
+</section>
+
+<section class="content-section">
+    <h2>Recurrence Relations and Proofs</h2>
+
+    <h3>1. Online Algorithm for Arithmetic Mean</h3>
+    <p>The arithmetic mean of \(n\) observations is defined as:</p>
+    <p style="text-align: center;">
+        \[
+            \mu_n = \frac{1}{n} \sum_{i=1}^{n} x_i
+        \]
+    </p>
+
+    <p><b>Recurrence Relation:</b></p>
+    <p>We want to express the mean after \(n\) observations (\(\mu_n\)) in terms of the previous mean (\(\mu_{n-1}\)) and the new observation (\(x_n\)).</p>
+
+    <p style="text-align: center;">
+        \[
+            \begin{aligned}
+            \mu_n &= \frac{1}{n} \sum_{i=1}^{n} x_i \\
+                  &= \frac{1}{n} \left[\sum_{i=1}^{n-1} x_i + x_n\right] \\
+                  &= \frac{1}{n}\left[(n-1)\mu_{n-1} + x_n\right] \\
+                  &= \mu_{n-1} + \frac{x_n - \mu_{n-1}}{n}
+            \end{aligned}
+        \]
+    </p>
+
+    <p><b>Interpretation:</b> The new mean equals the old mean plus a correction term proportional to the difference between the new observation and the current mean, scaled by \(1/n\).</p>
+
+    <h3>2. Online Algorithm for Variance (Welford's Method)</h3>
+    <p>The sample variance is defined as:</p>
+    <p style="text-align: center;">
+        \[
+            s_n^2 = \frac{1}{n - 1} \sum_{i=1}^{n} (x_i - \mu_n)^2
+        \]
+    </p>
+
+    <p><b>Recurrence Relation:</b></p>
+    <p>To derive an online algorithm for variance, we introduce an auxiliary quantity \(M_{2,n}\) representing the sum of squared deviations:</p>
+    <p style="text-align: center;">
+        \[
+            M_{2,n} = \sum_{i=1}^{n} (x_i - \mu_n)^2
+        \]
+    </p>
+
+    <p>The variance can then be computed as: \( s_n^2 = \frac{M_{2,n}}{n - 1} \)</p>
+
+    <p><b>Deriving the Update Rule for \(M_{2,n}\):</b></p>
+    <p style="text-align: center;">
+        \[
+        \begin{aligned}
+        M_{2,n} &= \sum_{i=1}^{n} (x_i - \mu_n)^2 \\
+                &= \sum_{i=1}^{n-1} (x_i - \mu_n)^2 + (x_n - \mu_n)^2
+        \end{aligned}
+        \]
+    </p>
+
+    <p>For \(i \le n-1\), we can rewrite:</p>
+    <p style="text-align: center;">
+        \[
+        (x_i - \mu_n)^2 = [(x_i - \mu_{n-1}) - (\mu_n - \mu_{n-1})]^2 = (x_i - \mu_{n-1})^2 - 2(x_i - \mu_{n-1})(\mu_n - \mu_{n-1}) + (\mu_n - \mu_{n-1})^2
+        \]
+    </p>
+
+    <p>Summing from \(i=1\) to \(n-1\):</p>
+    <p style="text-align: center;">
+        \[
+        \sum_{i=1}^{n-1} (x_i - \mu_n)^2 = M_{2,n-1} - 2(\mu_n - \mu_{n-1})\sum_{i=1}^{n-1}(x_i - \mu_{n-1}) + (n-1)(\mu_n - \mu_{n-1})^2
+        \]
+    </p>
+
+    <p>Note: \(\sum_{i=1}^{n-1}(x_i - \mu_{n-1}) = 0\) by definition of the mean.</p>
+
+    <p>Therefore:</p>
+    <p style="text-align: center;">
+        \[
+        M_{2,n} = M_{2,n-1} + (n-1)(\mu_n - \mu_{n-1})^2 + (x_n - \mu_n)^2
+        \]
+    </p>
+
+    <p><b>Simplified Form:</b></p>
+    <p>Using \(\mu_n - \mu_{n-1} = \frac{x_n - \mu_{n-1}}{n}\), we obtain Welford's famous update formula:</p>
+    <p style="text-align: center;">
+        \[
+            M_{2,n} = M_{2,n-1} + (x_n - \mu_{n-1})(x_n - \mu_n)
+        \]
+    </p>
+
+    <p><b>Algorithm Summary:</b></p>
+    <pre>
+Initialize: n = 0, μ = 0, M₂ = 0
+
+For each new observation x:
+    n = n + 1
+    δ = x - μ
+    μ = μ + δ/n
+    δ₂ = x - μ
+    M₂ = M₂ + δ × δ₂
+
+Variance: s² = M₂ / (n - 1) for n > 1
+    </pre>
+</section>
+
+
+<section class="content-section">
+    <h2>Numerical Stability Analysis</h2>
+
+    <div class="theory-block">
+        <h3>1. Catastrophic Cancellation</h3>
+        <p>The naive "two-pass" variance formula suffers from catastrophic cancellation:</p>
+        <p style="text-align: center;">
+            \[
+                s^2 = \frac{\sum x_i^2 - \frac{(\sum x_i)^2}{n}}{n - 1}
+            \]
+        </p>
+        <p>When data values are large or have small variance relative to their magnitude, the two terms being subtracted are nearly equal, causing severe precision loss. For example, computing the variance of [10000.0, 10000.1, 10000.2] yields incorrect results in finite precision arithmetic.</p>
+        <p><b>Welford's algorithm avoids this</b> by working with deviations from the mean, which are typically much smaller numbers, preventing catastrophic cancellation.</p>
+    </div>
+
+    <div class="theory-block">
+        <h3>2. Overflow Prevention</h3>
+        <p>The naive algorithm requires computing \(\sum x_i^2\), which can overflow for large datasets or values. Welford's method maintains \(M_2\) as a sum of products of deviations, which grow much more slowly and are less prone to overflow.</p>
+    </div>
+
+    <div class="theory-block">
+        <h3>3. Single-Pass Efficiency</h3>
+        <p>Traditional algorithms require either storing all data (memory cost \(O(n)\)) or multiple passes through the data. Online algorithms achieve:</p>
+        <ul>
+            <li><b>\(O(1)\) memory:</b> Only \(n\), \(\mu\), and \(M_2\) need to be stored.</li>
+            <li><b>\(O(1)\) time per update:</b> Each new observation requires constant-time arithmetic operations.</li>
+            <li><b>Single pass:</b> Data is processed exactly once, enabling streaming computation.</li>
+        </ul>
+    </div>
+
+    <div class="theory-block">
+        <h3>4. Error Propagation</h3>
+        <p>In online algorithms, rounding errors accumulate differently than in batch methods. While Welford's algorithm is not immune to floating-point errors, its formulation minimizes error growth compared to the naive formula. For extremely large datasets, compensated summation techniques (e.g., Kahan summation) can be applied to further improve accuracy.</p>
+    </div>
+</section>
+
+
+<section class="content-section">
+    <h2>Implementation and Testing</h2>
+
+    <h3>Interactive Demo: Online Statistics Calculator</h3>
+    <p>Add data points incrementally and observe how the mean and variance are updated in real-time using the online algorithms.</p>
+
+    <div style="margin: 3rem 0; background: #fcfcfc; padding: 2.5rem; border: 1px solid #e0e0e0; border-radius: 4px;">
+        
+        <div style="display: flex; gap: 1rem; align-items: flex-end; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px dashed #e0e0e0;">
+            <div style="flex-grow: 1;">
+                <label for="new-value">New Value:</label>
+                <input type="number" id="new-value" value="10" step="0.01" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+            <button onclick="addValue()" style="padding: 0.5rem 1.5rem; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                Add Value
+            </button>
+            <button onclick="resetStats()" style="padding: 0.5rem 1.5rem; background-color: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                Reset
+            </button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+            <div style="padding: 1.5rem; background: white; border: 1px solid #e0e0e0; border-radius: 4px;">
+                <div style="font-size: 0.9rem; color: #666; margin-bottom: 0.5rem;">Count (n)</div>
+                <div id="count-display" style="font-size: 2rem; font-weight: 600; color: #007bff;">0</div>
+            </div>
+            <div style="padding: 1.5rem; background: white; border: 1px solid #e0e0e0; border-radius: 4px;">
+                <div style="font-size: 0.9rem; color: #666; margin-bottom: 0.5rem;">Mean (μ)</div>
+                <div id="mean-display" style="font-size: 2rem; font-weight: 600; color: #28a745;">0.00</div>
+            </div>
+            <div style="padding: 1.5rem; background: white; border: 1px solid #e0e0e0; border-radius: 4px;">
+                <div style="font-size: 0.9rem; color: #666; margin-bottom: 0.5rem;">Variance (s²)</div>
+                <div id="variance-display" style="font-size: 2rem; font-weight: 600; color: #fd7e14;">0.00</div>
+            </div>
+            <div style="padding: 1.5rem; background: white; border: 1px solid #e0e0e0; border-radius: 4px;">
+                <div style="font-size: 0.9rem; color: #666; margin-bottom: 0.5rem;">Std Dev (s)</div>
+                <div id="stddev-display" style="font-size: 2rem; font-weight: 600; color: #6f42c1;">0.00</div>
+            </div>
+        </div>
+
+        <div>
+            <label style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Data Points:</label>
+            <div id="data-display" style="padding: 1rem; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; min-height: 60px; font-family: 'Courier New', monospace; font-size: 0.95rem; color: #495057;">
+                No data yet
+            </div>
+        </div>
+    </div>
+
+    <h3>Comparison: Online vs Batch Algorithms</h3>
+    <p>Test both algorithms with a predefined dataset and compare their performance and numerical accuracy.</p>
+
+    <div style="margin: 3rem 0; background: #fcfcfc; padding: 2.5rem; border: 1px solid #e0e0e0; border-radius: 4px;">
+        
+        <div style="margin-bottom: 2rem;">
+            <label for="test-data">Test Dataset (comma-separated):</label>
+            <input type="text" id="test-data" value="10000.0, 10000.1, 10000.2, 10000.3, 10000.4" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 1rem;">
+            <button onclick="runComparison()" style="padding: 0.5rem 1.5rem; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; width: 100%;">
+                Run Comparison
+            </button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <div style="padding: 1.5rem; background: white; border: 2px solid #28a745; border-radius: 4px;">
+                <h4 style="margin-top: 0; color: #28a745;">Online Algorithm (Welford)</h4>
+                <div style="font-family: 'Courier New', monospace; font-size: 0.9rem;">
+                    <div style="margin-bottom: 0.5rem;"><b>Mean:</b> <span id="online-mean">-</span></div>
+                    <div style="margin-bottom: 0.5rem;"><b>Variance:</b> <span id="online-var">-</span></div>
+                    <div style="margin-bottom: 0.5rem;"><b>Std Dev:</b> <span id="online-std">-</span></div>
+                    <div style="padding-top: 0.5rem; border-top: 1px solid #e0e0e0; color: #28a745;"><b>✓ Numerically Stable</b></div>
+                </div>
+            </div>
+            
+            <div style="padding: 1.5rem; background: white; border: 2px solid #dc3545; border-radius: 4px;">
+                <h4 style="margin-top: 0; color: #dc3545;">Batch Algorithm (Naive)</h4>
+                <div style="font-family: 'Courier New', monospace; font-size: 0.9rem;">
+                    <div style="margin-bottom: 0.5rem;"><b>Mean:</b> <span id="batch-mean">-</span></div>
+                    <div style="margin-bottom: 0.5rem;"><b>Variance:</b> <span id="batch-var">-</span></div>
+                    <div style="margin-bottom: 0.5rem;"><b>Std Dev:</b> <span id="batch-std">-</span></div>
+                    <div style="padding-top: 0.5rem; border-top: 1px solid #e0e0e0; color: #dc3545;"><b>⚠ Cancellation Risk</b></div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 1.5rem; padding: 1rem; background: #fff3cd; border: 1px solid #ffc107; border-radius: 4px;">
+            <div style="font-weight: 600; margin-bottom: 0.5rem;">💡 Notice:</div>
+            <div id="comparison-note" style="font-size: 0.95rem; color: #856404;">
+                Run the comparison to see how the algorithms perform with different datasets.
+            </div>
+        </div>
+    </div>
+
+    <h3>Stability Test: Large Values with Small Variance</h3>
+    <p>This test demonstrates catastrophic cancellation in the naive algorithm when computing variance of large numbers with small relative variation.</p>
+
+    <div style="margin: 3rem 0; background: #fcfcfc; padding: 2.5rem; border: 1px solid #e0e0e0; border-radius: 4px;">
+        <button onclick="runStabilityTest()" style="padding: 0.75rem 2rem; background-color: #6f42c1; color: white; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-size: 1.1rem; font-weight: 600;">
+            Run Stability Test
+        </button>
+
+        <div id="stability-results" style="margin-top: 1.5rem; padding: 1.5rem; background: white; border: 1px solid #e0e0e0; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.9rem; line-height: 1.8; display: none;">
+        </div>
+    </div>
+
+</section>
+
+<section class="content-section">
+    <h2>Conclusions</h2>
+    <p>Online algorithms for computing mean and variance represent a significant improvement over traditional batch methods. The key takeaways are:</p>
+    <ul>
+        <li><b>Memory Efficiency:</b> Constant memory usage O(1) versus O(n) for storing all data points.</li>
+        <li><b>Computational Efficiency:</b> Single-pass processing with O(1) time per update.</li>
+        <li><b>Numerical Stability:</b> Welford's algorithm avoids catastrophic cancellation by working with deviations from the mean.</li>
+        <li><b>Real-Time Processing:</b> Statistics are available immediately after each observation, enabling streaming applications.</li>
+        <li><b>Scalability:</b> Performance remains consistent regardless of dataset size.</li>
+    </ul>
+    <p>These advantages make online algorithms essential for modern applications involving large-scale data processing, real-time analytics, and systems with limited memory resources.</p>
+</section>
+
+<script>
+// Online Statistics Calculator
+let n = 0;
+let mean = 0;
+let M2 = 0;
+let dataPoints = [];
+
+function addValue() {
+    const input = document.getElementById('new-value');
+    const value = parseFloat(input.value);
+    
+    if (isNaN(value)) {
+        alert('Please enter a valid number');
+        return;
+    }
+    
+    // Online algorithm for mean and variance
+    n++;
+    const delta = value - mean;
+    mean = mean + delta / n;
+    const delta2 = value - mean;
+    M2 = M2 + delta * delta2;
+    
+    dataPoints.push(value);
+    
+    updateDisplay();
+}
+
+function updateDisplay() {
+    document.getElementById('count-display').textContent = n;
+    document.getElementById('mean-display').textContent = mean.toFixed(6);
+    
+    if (n > 1) {
+        const variance = M2 / (n - 1);
+        const stddev = Math.sqrt(variance);
+        document.getElementById('variance-display').textContent = variance.toFixed(6);
+        document.getElementById('stddev-display').textContent = stddev.toFixed(6);
+    } else {
+        document.getElementById('variance-display').textContent = 'N/A';
+        document.getElementById('stddev-display').textContent = 'N/A';
+    }
+    
+    document.getElementById('data-display').textContent = 
+        dataPoints.length > 0 ? dataPoints.join(', ') : 'No data yet';
+}
+
+function resetStats() {
+    n = 0;
+    mean = 0;
+    M2 = 0;
+    dataPoints = [];
+    updateDisplay();
+}
+
+// Comparison Functions
+function onlineAlgorithm(data) {
+    let n = 0;
+    let mean = 0;
+    let M2 = 0;
+    
+    for (let x of data) {
+        n++;
+        const delta = x - mean;
+        mean = mean + delta / n;
+        const delta2 = x - mean;
+        M2 = M2 + delta * delta2;
+    }
+    
+    const variance = n > 1 ? M2 / (n - 1) : 0;
+    const stddev = Math.sqrt(variance);
+    
+    return { mean, variance, stddev };
+}
+
+function batchAlgorithm(data) {
+    const n = data.length;
+    if (n === 0) return { mean: 0, variance: 0, stddev: 0 };
+    
+    let sum = 0;
+    let sumSq = 0;
+    
+    for (let x of data) {
+        sum += x;
+        sumSq += x * x;
+    }
+    
+    const mean = sum / n;
+    const variance = n > 1 ? (sumSq - sum * sum / n) / (n - 1) : 0;
+    const stddev = Math.sqrt(variance);
+    
+    return { mean, variance, stddev };
+}
+
+function runComparison() {
+    const input = document.getElementById('test-data').value;
+    const data = input.split(',').map(x => parseFloat(x.trim())).filter(x => !isNaN(x));
+    
+    if (data.length === 0) {
+        alert('Please enter valid numbers');
+        return;
+    }
+    
+    const online = onlineAlgorithm(data);
+    const batch = batchAlgorithm(data);
+    
+    document.getElementById('online-mean').textContent = online.mean.toFixed(10);
+    document.getElementById('online-var').textContent = online.variance.toFixed(10);
+    document.getElementById('online-std').textContent = online.stddev.toFixed(10);
+    
+    document.getElementById('batch-mean').textContent = batch.mean.toFixed(10);
+    document.getElementById('batch-var').textContent = batch.variance.toFixed(10);
+    document.getElementById('batch-std').textContent = batch.stddev.toFixed(10);
+    
+    const meanDiff = Math.abs(online.mean - batch.mean);
+    const varDiff = Math.abs(online.variance - batch.variance);
+    
+    let note = `Dataset size: ${data.length} points. `;
+    
+    if (varDiff < 1e-10) {
+        note += 'Both algorithms produced identical results for this dataset.';
+    } else if (varDiff < 1e-6) {
+        note += 'Minor differences detected. The naive algorithm shows slight precision loss.';
+    } else {
+        note += `⚠️ Significant difference detected! Variance error: ${varDiff.toExponential(3)}. The naive algorithm suffers from catastrophic cancellation.`;
+    }
+    
+    document.getElementById('comparison-note').textContent = note;
+}
+
+function runStabilityTest() {
+    const resultsDiv = document.getElementById('stability-results');
+    resultsDiv.style.display = 'block';
+    
+    let html = '<div style="font-weight: 600; margin-bottom: 1rem; color: #6f42c1;">Running Stability Tests...</div>';
+    
+    const tests = [
+        {
+            name: 'Test 1: Large values, small variance',
+            data: [1e9, 1e9 + 1, 1e9 + 2, 1e9 + 3, 1e9 + 4]
+        },
+        {
+            name: 'Test 2: Very large values, tiny variance',
+            data: [1e12, 1e12 + 0.1, 1e12 + 0.2, 1e12 + 0.3, 1e12 + 0.4]
+        },
+        {
+            name: 'Test 3: Extreme case',
+            data: [1e15, 1e15 + 1, 1e15 + 2, 1e15 + 3, 1e15 + 4]
+        }
+    ];
+    
+    for (let test of tests) {
+        const online = onlineAlgorithm(test.data);
+        const batch = batchAlgorithm(test.data);
+        const varError = Math.abs(online.variance - batch.variance);
+        
+        html += `<div style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #e0e0e0;">`;
+        html += `<div style="font-weight: 600; color: #495057; margin-bottom: 0.5rem;">${test.name}</div>`;
+        html += `<div>Data: [${test.data[0].toExponential(2)}, ..., ${test.data[test.data.length-1].toExponential(2)}]</div>`;
+        html += `<div style="margin-top: 0.5rem;">`;
+        html += `<div>Online variance: ${online.variance.toFixed(10)}</div>`;
+        html += `<div>Batch variance: ${batch.variance.toFixed(10)}</div>`;
+        html += `<div style="color: ${varError > 0.1 ? '#dc3545' : '#28a745'}; font-weight: 600; margin-top: 0.5rem;">`;
+        html += `Absolute error: ${varError.toExponential(3)}`;
+        html += `</div></div></div>`;
+    }
+    
+    html += '<div style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #6f42c1;">';
+    html += '<b>Conclusion:</b> As values increase and variance decreases relatively, the naive batch algorithm';
+    html += ' shows increasing numerical instability, while Welford\'s online algorithm remains stable.';
+    html += '</div>';
+    
+    resultsDiv.innerHTML = html;
+}
+</script>
+
+</article>
+    </main>
+</body>
+</html>
