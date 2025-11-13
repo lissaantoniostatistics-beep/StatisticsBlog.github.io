@@ -1,5 +1,9 @@
 // ===== JAVASCRIPT SPECIFICO PER HOMEWORK =====
 
+
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
     // Inizializza la pagina homework
     initializeHomeworkPage();
@@ -83,16 +87,17 @@ function initializeCodeBlocks() {
     const codeBlocks = document.querySelectorAll('.code-block pre code');
     
     codeBlocks.forEach((block, index) => {
-        // Aggiungi numerazione delle righe
-        addLineNumbers(block);
+        // Non aggiungere numeri di riga
+        // addLineNumbers(block);
         
         // Aggiungi pulsante copia
         addCopyButton(block, index);
         
         // Evidenzia sintassi se disponibile
-        highlightSyntax(block);
+        //highlightSyntax(block);
     });
 }
+
 
 // Aggiungi numerazione delle righe al codice
 function addLineNumbers(codeBlock) {
