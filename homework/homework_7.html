@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 7 - Random Walk and Binomial Distribution</title>
+    <meta name="description" content="Random walk simulations and their convergence to the binomial distribution in a security model context.">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/homework.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="../index.html" class="logo">
+                Statistica Blog
+            </a>
+            <nav class="nav">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="../index.html#homework" class="nav-link">Homework</a>
+                <a href="#" class="nav-link">Info</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <nav class="breadcrumb">
+            <a href="../index.html">Home</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="../index.html#homework">Homework</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">Week 5</span>
+        </nav>
+
+        <header class="article-header">
+            <div class="article-meta">
+                <span class="homework-week">Week 5</span>
+                <span class="article-date">13 Nov 2025</span>
+            </div>
+            <h1 class="article-title">Random Walk and Binomial Distribution</h1>
+            <div class="article-tags">
+                <span class="tag">Random Walk</span>
+                <span class="tag">Binomial</span>
+                <span class="tag">Security Model</span>
+            </div>
+        </header>
+
+        <article class="article-content">
+            
+<section class="content-section">
+    <h2>Homework Objectives</h2>
+    <p>This practical assignment explores the connection between <b>Random Walks</b> and the <b>Binomial Distribution</b> through a practical security model. We simulate a server receiving weekly security updates over <b>n weeks</b>, facing <b>m attackers</b> who can breach the system with probability <b>p</b>. Each week, the server gains +1 point if it remains secure or loses -1 point if breached. By generating multiple trajectories and analyzing their final scores, we demonstrate how these cumulative scores converge to the binomial distribution as n and m increase.</p>
+</section>
+
+<section class="content-section">
+    <h2>Theoretical Foundations</h2>
+    
+    <div class="theory-block">
+        <h3>1. Random Walk Model</h3>
+        <p>A <b>Random Walk</b> is a mathematical model describing a path consisting of successive random steps. In our security context, each week represents one step in the walk.</p>
+        <ul>
+            <li><b>Step Definition:</b> At each week, the server takes a step of +1 (secure) with probability <b>(1-p)</b> or -1 (breached) with probability <b>p</b>.</li>
+            <li><b>Cumulative Score:</b> Starting from 0, the score after n weeks is <b>S(n) = (+1)×successes + (-1)×breaches</b>.</li>
+            <li><b>Score Range:</b> The final score ranges from <b>-n</b> (all breaches) to <b>+n</b> (all secure), with only values of the same parity as n being reachable.</li>
+            <li><b>Trajectory:</b> Each path from week 0 to week n represents one possible security history for the server.</li>
+        </ul>
+    </div>
+
+    <div class="theory-block">
+        <h3>2. Connection to Binomial Distribution</h3>
+        <p>The final scores of multiple random walk trajectories follow a <b>Binomial Distribution</b> when appropriately transformed.</p>
+        <ul>
+            <li><b>Success Count:</b> If k weeks remain secure, then the score is <b>S = k - (n-k) = 2k - n</b>. Thus <b>k = (S+n)/2</b>.</li>
+            <li><b>Binomial Framework:</b> The number of secure weeks k follows a Binomial(n, 1-p) distribution, representing n independent trials each with success probability (1-p).</li>
+            <li><b>Probability Formula:</b> The probability of achieving exactly score S is: <b>P(S) = C(n,k) × (1-p)^k × p^(n-k)</b>, where k = (S+n)/2 and C(n,k) is the binomial coefficient.</li>
+            <li><b>Convergence:</b> As we simulate more trajectories (m increases), the empirical frequency of each final score converges to its theoretical binomial probability. This demonstrates the Law of Large Numbers applied to the binomial distribution.</li>
+        </ul>
+    </div>
+
+    <div class="theory-block">
+        <h3>3. Visualization and Interpretation</h3>
+        <p>The simulation provides both temporal and distributional insights into the random walk behavior.</p>
+        <ul>
+            <li><b>Trajectory Plot:</b> Shows the evolution of cumulative scores over n weeks. Each colored path represents one server's security history. The trajectories spread out from the origin, creating a characteristic "fan" pattern.</li>
+            <li><b>Histogram:</b> Displays the distribution of final scores across all m trajectories. The height of each bar shows how many trajectories ended at that particular score.</li>
+            <li><b>Theoretical Overlay:</b> A red curve shows the theoretical binomial distribution, allowing visual comparison between empirical results and mathematical expectations.</li>
+            <li><b>Convergence Observation:</b> With larger m, the histogram bars align more closely with the theoretical curve, demonstrating convergence. The distribution becomes more symmetric when p = 0.5 and skews when p ≠ 0.5.</li>
+        </ul>
+    </div>
+</section>
+
+<section class="content-section">
+    <h2>Simulation Parameters</h2>
+    <p>The interactive simulation allows you to explore how different parameters affect the random walk and its convergence to the binomial distribution:</p>
+    <ul>
+        <li><b>Number of Trajectories (m):</b> More trajectories provide better approximation of the theoretical distribution. Try values from 50 to 500.</li>
+        <li><b>Number of Weeks (n):</b> Longer time periods create wider score distributions. The range of possible scores is from -n to +n.</li>
+        <li><b>Breach Probability (p):</b> When p = 0.5, the walk is symmetric. When p < 0.5, scores tend positive (more secure). When p > 0.5, scores tend negative (more breaches).</li>
+        <li><b>Number of Bins:</b> Controls the granularity of the histogram. More bins show finer detail but may appear noisier with fewer trajectories.</li>
+    </ul>
+</section>
+
+<section class="content-section">
+
+<div class="controls">
+  <label>Number of trajectories (m): <input type="number" id="trajs" value="100" min="10" max="500"></label>
+  <label>Weeks (n): <input type="number" id="weeks" value="50" min="10" max="200"></label>
+  <label>Breach probability (p): <input type="number" id="prob" value="0.3" step="0.01" min="0" max="1"></label>
+  <label>Bins: <input type="number" id="bins" value="25" min="5" max="100"></label>
+  <button id="start">Start Simulation</button>
+</div>
+
+<canvas id="simCanvas" width="1000" height="500"></canvas>
+
+</section>
+
+        </article>
+    </main>
+
+<script>
+const canvas = document.getElementById("simCanvas");
+const ctx = canvas.getContext("2d");
+
+let animId = null;
+
+document.getElementById("start").addEventListener("click", startSimulation);
+
+function startSimulation() {
+  if (animId) cancelAnimationFrame(animId);
+
+  const numTraj = +document.getElementById("trajs").value;
+  const numWeeks = +document.getElementById("weeks").value;
+  const p = +document.getElementById("prob").value;
+  const numBins = +document.getElementById("bins").value;
+
+  const mainWidth = canvas.width * 0.75;
+  const histWidth = canvas.width * 0.25;
+
+  const trajectories = Array.from({ length: numTraj }, () => ({
+    week: 0,
+    score: 0,
+    data: [0]
+  }));
+
+  let step = 0;
+  const maxSteps = numWeeks;
+
+  function drawFrame() {
+    ctx.fillStyle = "#222";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Zero line
+    ctx.strokeStyle = "#666";
+    ctx.lineWidth = 1;
+    const yZero = canvas.height / 2;
+    ctx.beginPath();
+    ctx.moveTo(0, yZero);
+    ctx.lineTo(mainWidth, yZero);
+    ctx.stroke();
+
+    // Update trajectories
+    const finalScores = [];
+    trajectories.forEach(t => {
+      if (t.week < maxSteps) {
+        const breach = Math.random() < p;
+        t.score += breach ? -1 : 1;
+        t.week++;
+        t.data.push(t.score);
+      }
+      if (t.data.length > 0) finalScores.push(t.data[t.data.length - 1]);
+    });
+
+    // Find score range for scaling
+    const minScore = Math.min(...trajectories.flatMap(t => t.data));
+    const maxScore = Math.max(...trajectories.flatMap(t => t.data));
+    const scoreRange = maxScore - minScore || 1;
+
+    // Draw trajectories
+    trajectories.forEach(t => {
+      ctx.beginPath();
+      for (let i = 0; i < t.data.length; i++) {
+        const x = (i / maxSteps) * mainWidth;
+        const normalizedScore = (t.data[i] - minScore) / scoreRange;
+        const y = canvas.height * (1 - normalizedScore);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = `hsla(${Math.random() * 360}, 80%, 60%, 0.3)`;
+      ctx.lineWidth = 0.8;
+      ctx.stroke();
+    });
+
+    // Draw histogram
+    if (step === maxSteps) {
+      drawHistogram(finalScores, mainWidth, histWidth, numWeeks, p, numBins, minScore, maxScore);
+    }
+
+    step++;
+    if (step <= maxSteps) {
+      animId = requestAnimationFrame(drawFrame);
+    } else {
+      animId = null;
+    }
+  }
+
+  drawFrame();
+}
+
+function drawHistogram(scores, offsetX, width, n, p, bins, minScore, maxScore) {
+  const scoreRange = maxScore - minScore;
+  const binWidth = scoreRange / bins;
+  const counts = Array(bins).fill(0);
+  
+  scores.forEach(score => {
+    const idx = Math.min(bins - 1, Math.floor((score - minScore) / binWidth));
+    counts[idx]++;
+  });
+
+  const maxCount = Math.max(...counts, 1);
+
+  // Draw bars
+  const barHeight = canvas.height / bins;
+  ctx.fillStyle = "#4a9eff";
+  for (let i = 0; i < bins; i++) {
+    const barWidth = (counts[i] / maxCount) * width * 0.9;
+    const x = offsetX + width * 0.05;
+    const y = canvas.height - (i + 1) * barHeight;
+    ctx.fillRect(x, y, barWidth, barHeight - 1);
+  }
+
+  // Draw theoretical binomial distribution
+  ctx.strokeStyle = "#ff4444";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  let firstPoint = true;
+  
+  for (let score = minScore; score <= maxScore; score++) {
+    if ((score + n) % 2 !== 0) continue; // Skip impossible scores
+    
+    const k = (score + n) / 2;
+    if (k < 0 || k > n) continue;
+    
+    const prob = binomialProbability(n, k, 1 - p);
+    const theoretical = prob * scores.length;
+    
+    const normalizedScore = (score - minScore) / scoreRange;
+    const y = canvas.height * (1 - normalizedScore);
+    const x = offsetX + width * 0.05 + (theoretical / maxCount) * width * 0.9;
+    
+    if (firstPoint) {
+      ctx.moveTo(x, y);
+      firstPoint = false;
+    } else {
+      ctx.lineTo(x, y);
+    }
+  }
+  ctx.stroke();
+}
+
+function binomialCoefficient(n, k) {
+  if (k < 0 || k > n) return 0;
+  if (k === 0 || k === n) return 1;
+  
+  let result = 1;
+  for (let i = 1; i <= k; i++) {
+    result *= (n - i + 1) / i;
+  }
+  return result;
+}
+
+function binomialProbability(n, k, p) {
+  return binomialCoefficient(n, k) * Math.pow(p, k) * Math.pow(1 - p, n - k);
+}
+</script>
+
+</body>
+</html>
