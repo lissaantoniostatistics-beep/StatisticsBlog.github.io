@@ -2,6 +2,44 @@
 
 // Lista degli homework - aggiorna qui i nuovi compiti
 const homeworkList = [
+    
+    {
+        id: 'homework-10',
+        week: 'Week 6',
+        title: 'Counting Process Simulation',
+        description:' Simulation of a Counting Process using Poisson distribution',
+        date: '2025-11-18',
+        tags: ['Counting Process', 'Poisson Distribution', 'Simulations'],
+        filename: 'homework_10.html'
+    },
+    {
+        id: 'homework-9',
+        week: 'Week 6',
+        title: 'Interpretations of Probability & Axiomatic Foundations',
+        description: 'Exploration of different interpretations of probability and their axiomatic foundations',
+        date: '2025-11-18',
+        tags: ['Probability Interpretations', 'Axioms of Probability'],
+        filename: 'homework_9.html'
+    },
+    {
+        id: 'homework-8',
+        week: 'Week 5',
+        title: 'Comparing LLN and Random Walk: Mathematical Connections',
+        description: 'Exploration of the mathematical connections between the Law of Large Numbers and Random Walks',
+        date: '2025-11-13',
+        tags: ['LLN', 'Random Walk', 'Mathematical Connections'],
+        filename: 'homework_8.html'
+    },
+     {
+        id: 'homework-7',
+        week: 'Week 5',
+        title: 'Random Walk and Binomial Distribution',
+        description: 'Implementation of Random Walk and Binomial Distribution',
+        date: '2025-11-13',
+        tags: ['Random Walk', 'Binomial Distribution', 'Simulations'],
+        filename: 'homework_7.html'
+    },
+
     {
         id: 'homework-6',
         week: 'Week 4',
