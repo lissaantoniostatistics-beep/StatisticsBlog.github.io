@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 9 - Interpretations of Probability & Axiomatic Foundations</title>
+    <meta name="description" content="Interpretations of probability, Kolmogorov axioms, measure-theoretic foundations, subadditivity and inclusion-exclusion derivations.">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/homework.css">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="../index.html" class="logo">Statistica Blog</a>
+            <nav class="nav">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="../index.html#homework" class="nav-link">Homework</a>
+                <a href="#" class="nav-link">Info</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <nav class="breadcrumb">
+            <a href="../index.html">Home</a>
+            <span class="breadcrumb-separator">›</span>
+            <a href="../index.html#homework">Homework</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">Week 6</span>
+        </nav>
+
+        <header class="article-header">
+            <div class="article-meta">
+                <span class="homework-week">Week 6</span>
+                <span class="article-date">18 Nov 2025</span>
+            </div>
+            <h1 class="article-title">Interpretations of Probability and the Axiomatic/Measure-Theoretic Foundation</h1>
+            <div class="article-tags">
+                <span class="tag">Foundations</span>
+                <span class="tag">Measure Theory</span>
+                <span class="tag">Kolmogorov</span>
+            </div>
+        </header>
+
+        <article class="article-content">
+
+<section class="content-section">
+    <h2>Homework Objectives</h2>
+    <p>This assignment wants to:</p>
+    <ol>
+        <li>Review the main interpretations of probability (classical, frequentist, Bayesian, geometric, propensity, etc.).</li>
+        <li>Explain how Kolmogorov's axiomatic approach resolves conceptual inconsistencies among those interpretations.</li>
+        <li>Explain the relationship between probability theory and measure theory: sigma-algebras, probability measures, measurable functions and random variables.</li>
+        <li>Using the axioms, derive the subadditivity property and the inclusion–exclusion principle.</li>
+    </ol>
+</section>
+
+<section class="content-section">
+    <h2>Main Interpretations of Probability (concise review)</h2>
+
+    <h3>1. Classical (Laplace)</h3>
+    <p>Probability is the ratio of favorable equally likely outcomes to the total number of equally likely outcomes. Works well for symmetric finite problems (dice, cards), but fails or becomes ambiguous when symmetry is unclear or the sample space is infinite.</p>
+
+    <h3>2. Frequentist</h3>
+    <p>Probability is the long-run relative frequency of an event under repeated identical trials. It is operational and links directly to empirical experiments, but it is problematic for single-case events and for defining probability prior to experimentation.</p>
+
+    <h3>3. Bayesian (Subjective)</h3>
+    <p>Probability quantifies rational degree of belief given an agent's information; it is updated via Bayes' theorem. It handles single events naturally but requires explicit priors and a principle for choosing them.</p>
+
+    <h3>4. Geometric (Measure-based Intuition)</h3>
+    <p>Probability is a normalized geometric measure: lengths, areas, volumes. This is intuitive for continuous models but needs a precise choice of measure ("uniform" is not canonical) — otherwise paradoxes like Bertrand's paradox appear.</p>
+
+    <h3>5. Propensity, Operational and Other Views</h3>
+    <p>Propensity interprets probability as a physical tendency of an experimental setup. Operational views tie probabilities to betting odds or decision-theoretic utilities. These emphasize different practical roles of probability without supplying a single mathematical definition.</p>
+</section>
+
+<section class="content-section">
+    <h2>The Axiomatic Resolution: Kolmogorov (1933)</h2>
+    <p>Kolmogorov separated the mathematical structure of probability from philosophical interpretation. He postulated that any probability model must be a probability measure on a measurable space and satisfy three axioms. Those axioms impose constraints that every interpretation must satisfy to be mathematically coherent.</p>
+
+    <h3>Kolmogorov axioms</h3>
+    <p>Let \(\Omega\) be a sample space and let \(\mathcal{F}\) be a collection of subsets of \(\Omega\) (events). A function \(P:\mathcal{F}\to[0,1]\) is a probability measure if:</p>
+    <ol>
+        <li>Non-negativity: \(P(A)\ge 0\) for every \(A\in\mathcal{F}\).</li>
+        <li>Normalization: \(P(\Omega)=1\).</li>
+        <li>Countable additivity: If \(A_1,A_2,\dots\in\mathcal{F}\) are pairwise disjoint then
+            \[P\Big(\bigcup_{i=1}^{\infty}A_i\Big)=\sum_{i=1}^{\infty}P(A_i).\]
+        </li>
+    </ol>
+
+    <p>Any concrete interpretation (classical, frequentist, Bayesian, geometric, propensity) must specify a model \((\Omega,\mathcal{F},P)\). Inconsistencies that historically arose usually stem from ambiguous modeling choices (what is \(\Omega\)? which sets are events? which measure is "uniform"?) rather than from contradictions inside the axioms themselves. The axioms provide a neutral framework: different interpretations become different ways to choose \(\Omega,\mathcal{F},P\) while preserving the same formal properties.</p>
+</section>
+
+<section class="content-section">
+    <h2>Probability Theory as Measure Theory</h2>
+
+    <h3>Measurable space and sigma-algebra</h3>
+    <p>A <b>sigma-algebra</b> (\(\sigma\)-algebra) \(\mathcal{F}\) on \(\Omega\) is a collection of subsets of \(\Omega\) such that:</p>
+    <ul>
+        <li>\(\varnothing\in\mathcal{F}\) and \(\Omega\in\mathcal{F}\).</li>
+        <li>If \(A\in\mathcal{F}\) then \(A^c\in\mathcal{F}\) (closed under complementation).</li>
+        <li>If \(A_1,A_2,\dots\in\mathcal{F}\) then \(\bigcup_{i=1}^\infty A_i\in\mathcal{F}\) (closed under countable unions).</li>
+    </ul>
+    <p>The triple \((\Omega,\mathcal{F},P)\) is called a <b>probability space</b>. Requiring events to lie in a \(\sigma\)-algebra prevents pathological sets for which a probability cannot be consistently assigned.</p>
+
+    <h3>Probability measure</h3>
+    <p>A <b>probability measure</b> is a measure with total mass 1. Standard examples:
+    <ul>
+        <li>Counting measure normalized to 1 on finite \(\Omega\): recovers the classical case.</li>
+        <li>Lebesgue measure on a subset of \(\mathbb{R}^n\) normalized by the total volume: recovers geometric probability.</li>
+        <li>Empirical/frequency measures assigning mass \(1/N\) to observations in a dataset.</li>
+    </ul>
+    </p>
+
+    <h3>Measurable functions and random variables</h3>
+    <p>A function \(X:(\Omega,\mathcal{F})\to(\mathbb{R},\mathcal{B})\) is <b>measurable</b> if for every Borel set \(B\subseteq\mathbb{R}\) we have \(X^{-1}(B)\in\mathcal{F}\). A measurable function \(X\) is what we call a <b>random variable</b>. This ensures that events of the type \{\(X\in B\)\} are legitimate events with well-defined probabilities.</p>
+
+    <h3>Expectation as an integral</h3>
+    <p>Given a random variable \(X\), its expectation (when defined) is the Lebesgue integral with respect to \(P\):
+    \[\mathbb{E}[X]=\int_{\Omega} X(\omega)\,P(d\omega).\]
+    This unifies discrete sums (counting measure) and continuous integrals (Lebesgue measure) under a single operation.</p>
+</section>
+
+<section class="content-section">
+    <h2>Derivations from the Axioms</h2>
+
+    <h3>Monotonicity (useful lemma)</h3>
+    <p>If \(A\subseteq B\) and both are events in \(\mathcal{F}\), then using additivity on the disjoint decomposition \(B=A\cup(B\setminus A)\) we get
+    \[P(B)=P(A)+P(B\setminus A)\ge P(A),\]
+    because \(P(B\setminus A)\ge0\) by non-negativity. Thus probability is monotone with respect to set inclusion.</p>
+
+    <h3>Subadditivity (finite and countable)</h3>
+    <p><b>Statement.</b> For any countable collection of events \((A_i)_{i\ge1}\) we have
+    \[P\Big(\bigcup_{i=1}^\infty A_i\Big)\le\sum_{i=1}^\infty P(A_i).\]</p>
+
+    <p><b>Proof (constructive).</b> Define a sequence of disjoint sets by
+    \[B_1:=A_1,\qquad B_2:=A_2\setminus A_1,\qquad B_3:=A_3\setminus(A_1\cup A_2),\ \ldots\]
+    Then the \(B_i\) are pairwise disjoint and \(\bigcup_{i=1}^\infty A_i=\bigcup_{i=1}^\infty B_i\). By countable additivity
+    \[P\Big(\bigcup_{i=1}^\infty A_i\Big)=\sum_{i=1}^\infty P(B_i).\]
+    Since each \(B_i\subseteq A_i\), monotonicity gives \(P(B_i)\le P(A_i)\). Summing yields
+    \[P\Big(\bigcup_{i=1}^\infty A_i\Big)=\sum_{i=1}^\infty P(B_i)\le\sum_{i=1}^\infty P(A_i),\]
+    which proves countable subadditivity. For finite families the argument is identical or follows by truncating the series.</p>
+
+    <h3>Inclusion--Exclusion Principle (finite)</h3>
+    <p><b>Two events.</b> For \(A,B\in\mathcal{F}\), decompose \(A\cup B\) and apply additivity to disjoint pieces:
+    \[P(A\cup B)=P(A)+P(B)-P(A\cap B).\]
+    This follows from writing the union as the disjoint union of \(A\setminus B, B\setminus A, A\cap B\) and comparing sums.</p>
+
+    <p><b>Three events.</b> For \(A,B,C\) one can apply the two-event formula twice to obtain
+    \[\begin{aligned}
+    P(A\cup B\cup C)&=P(A)+P(B)+P(C)\\
+    &\quad -P(A\cap B)-P(A\cap C)-P(B\cap C)+P(A\cap B\cap C).
+    \end{aligned}\]
+    This is obtained by first computing \(P(A\cup B)\) then adding \(C\) and expanding \((A\cup B)\cap C=(A\cap C)\cup(B\cap C)\) together with the two-event formula.
+    </p>
+
+    <p><b>General finite form (inclusion--exclusion).</b> For \(A_1,\dots,A_n\in\mathcal{F}\):
+    \[
+    P\Big(\bigcup_{i=1}^n A_i\Big)=\sum_{i}P(A_i)-\sum_{i<j}P(A_i\cap A_j)+\sum_{i<j<k}P(A_i\cap A_j\cap A_k)-\cdots+(-1)^{n+1}P\Big(\bigcap_{i=1}^n A_i\Big).
+    \]
+    The proof proceeds by induction on \(n\) or by combinatorial counting of how many times each outcome is included on the right-hand side. Each point \(\omega\in\Omega\) that belongs to exactly \(m\) of the sets contributes
+    \[\binom{m}{1}-\binom{m}{2}+\binom{m}{3}-\cdots+(-1)^{m+1}\binom{m}{m}=1\]
+    to the alternating sum, so the right-hand side equals the indicator of \(\bigcup_i A_i\) integrated against \(P\), giving the equality.</p>
+</section>
+
+<section class="content-section">
+    <h2>Remarks and Connections to Interpretations</h2>
+    <p>The axiomatic/measure-theoretic framework does not decide which interpretation is "true". Instead it provides a rigorous language that any interpretation must respect. In practice:</p>
+    <ul>
+        <li>Classical probability corresponds to choosing finite \(\Omega\) with uniform counting measure.</li>
+        <li>Frequentist ideas are modeled by empirical measures or by considering \(P\) as a limit of relative frequencies under laws of large numbers.</li>
+        <li>Bayesian probabilities are priors and posteriors: they are legitimate probability measures on the same measurable space and are updated via conditioning (which is well-defined under the axioms when the conditioning event has positive probability).</li>
+        <li>Geometric probabilities correspond to specifying Lebesgue-type measures and normalizing appropriately.</li>
+    </ul>
+
+    <p>Pathologies and paradoxes typically come from under-specifying the model: ambiguous notions of "random selection" or of which sets are measurable. Measure theory provides the toolkit to express those choices precisely and to check whether they obey the Kolmogorov axioms.</p>
+</section>
+
+
+
+        </article>
+    </main>
+</body>
+</html>

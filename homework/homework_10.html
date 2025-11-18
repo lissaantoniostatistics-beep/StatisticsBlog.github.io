@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 10 - Counting Process Simulation</title>
+    <meta name="description" content="Simulation of a counting process with rate lambda, approximation by Bernoulli trials, theoretical analysis.">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/homework.css">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<header class="header">
+    <div class="header-content">
+        <a href="../index.html" class="logo">Statistica Blog</a>
+        <nav class="nav">
+            <a href="../index.html" class="nav-link">Home</a>
+            <a href="../index.html#homework" class="nav-link">Homework</a>
+            <a href="#" class="nav-link">Info</a>
+        </nav>
+    </div>
+</header>
+
+<main class="main-content">
+    <nav class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="breadcrumb-separator">›</span>
+        <a href="../index.html#homework">Homework</a>
+        <span class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-current">Week 6</span>
+    </nav>
+
+    <header class="article-header">
+        <div class="article-meta">
+            <span class="homework-week">Week 6</span>
+            <span class="article-date">18 Nov 2025</span>
+        </div>
+        <h1 class="article-title">Simulation of a Counting Process with Constant Rate \(\lambda\)</h1>
+        <div class="article-tags">
+            <span class="tag">Stochastic Processes</span>
+            <span class="tag">Poisson</span>
+            <span class="tag">Simulation</span>
+        </div>
+    </header>
+
+    <article class="article-content">
+
+<section class="content-section">
+    <h2>Objective</h2>
+    <p>This assignment simulates a counting process on the interval \([0,T]\) with events occurring independently at a constant rate \(\lambda\). We approximate the process by partitioning the interval into \(n\) small subintervals and performing independent Bernoulli trials with success probability \(\lambda/n\).</p>
+</section>
+
+<section class="content-section">
+    <h2>Theoretical Background</h2>
+
+    <h3>1. Approximation Scheme</h3>
+    <p>Let the time interval be \(T=1\) for simplicity, and split it into \(n\) equal subintervals of length \(1/n\). In each subinterval an event occurs with probability</p>
+    <p style="text-align:center">\[p = \frac{\lambda}{n}.\]</p>
+    <p>The total number of events is the sum of \(n\) i.i.d. Bernoulli random variables. Thus the simulated count \(N(1)\) follows a Binomial distribution:</p>
+    <p style="text-align:center">\[N(1) \sim \mathrm{Binomial}(n, \lambda/n).\]</p>
+
+    <h3>2. Limit as \(n \to \infty\)</h3>
+    <p>The classical Poisson limit theorem states:</p>
+    <p style="text-align:center">\[\mathrm{Binomial}(n, \lambda/n) \xrightarrow[]{d} \mathrm{Poisson}(\lambda).\]</p>
+    <p>Thus the simulated counting process approximates a <strong>Poisson process</strong> with rate \(\lambda\). The increments over disjoint intervals are (approximately) independent and Poisson distributed.</p>
+
+    <h3>3. Interpretation of the Rate Parameter</h3>
+    <p>The parameter \(\lambda\) is the expected number of events per unit time:</p>
+    <p style="text-align:center">\[\mathbb{E}[N(t)] = \lambda t.\]</p>
+    <p>It governs both the mean and variance of increments:</p>
+    <p style="text-align:center">\[\mathrm{Var}(N(t)) = \lambda t.\]</p>
+</section>
+
+<section class="content-section">
+    <h2>JavaScript Simulation</h2>
+    <p>The simulation below uses vanilla JavaScript to generate a sample path of the counting process.</p>
+
+    <pre class="code-block"><code>// Counting process simulation
+function simulateCountingProcess(lambda = 5, n = 5000) {
+    const dt = 1 / n;
+    const p = lambda / n;
+    let count = 0;
+    const times = [0];
+    const values = [0];
+
+    for (let i = 1; i <= n; i++) {
+        if (Math.random() < p) count++;
+        times.push(i * dt);
+        values.push(count);
+    }
+
+    return { times, values, total: count };
+}
+
+// Display results
+function runSimulation() {
+    const lambda = parseFloat(document.getElementById('lambdaInput').value);
+    const n = parseInt(document.getElementById('nInput').value);
+
+    const result = simulateCountingProcess(lambda, n);
+    document.getElementById('output').textContent =
+        `Total events: ${result.total}`;
+}
+</code></pre>
+
+    <div class="simulation-panel">
+        <label>Rate λ: <input id="lambdaInput" type="number" value="5" step="0.1"></label>
+        <label>n (subintervals): <input id="nInput" type="number" value="5000"></label>
+        <button onclick="runSimulation()">Simulate</button>
+    </div>
+
+    <pre id="output" class="code-block"></pre>
+</section>
+
+<section class="content-section">
+    <h2>Theoretical Properties of the Approximated Process</h2>
+    <ul>
+        <li><strong>Independent Increments:</strong> Events in disjoint intervals arise from independent Bernoulli trials.</li>
+        <li><strong>Stationary Increments:</strong> Each subinterval has the same probability \(\lambda/n\) of containing an event.</li>
+        <li><strong>Counting Nature:</strong> The sample path is a step function increasing by jumps of size 1.</li>
+        <li><strong>Poisson Limit:</strong> As \(n\to\infty\), the increments converge to Poisson-distributed variables with parameter \(\lambda t\).</li>
+    </ul>
+</section>
+
+<section class="content-section">
+    <h2>Conclusion</h2>
+    <p>The simulation demonstrates how a Poisson process emerges from a limit of simple Bernoulli trials over very small intervals. The rate \(\lambda\) controls the expected number of events per unit time and fully characterizes the distribution of increments.</p>
+</section>
+
+    </article>
+</main>
+</body>
+</html>
