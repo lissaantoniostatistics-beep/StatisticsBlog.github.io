@@ -2,7 +2,15 @@
 
 // Lista degli homework - aggiorna qui i nuovi compiti
 const homeworkList = [
-    
+        {
+        id: 'homework-11',
+        week: 'Week 7',
+        title: 'Brownian Motion Simulation',
+        description:' Simulation of Brownian Motion with volatility parameter sigma',
+        date: '2025-12-2',
+        tags: ['Brownian Motion', 'Volatility', 'Simulations'],
+        filename: 'homework_11.html'
+    },
     {
         id: 'homework-10',
         week: 'Week 6',
