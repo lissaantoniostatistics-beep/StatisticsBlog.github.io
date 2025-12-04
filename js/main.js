@@ -6,7 +6,7 @@ const homeworkList = [
         id: 'homework-11',
         week: 'Week 7',
         title: 'Brownian Motion Simulation',
-        description:' Simulation of Brownian Motion with volatility parameter sigma',
+        description:' Simulation of Brownian Motion',
         date: '2025-12-2',
         tags: ['Brownian Motion', 'Volatility', 'Simulations'],
         filename: 'homework_11.html'
