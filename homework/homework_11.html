@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homework 11 - Brownian Motion</title>
-    <meta name="description" content="Simulation of Brownian motion with volatility parameter sigma, generation of normal increments using Box-Muller transform.">
+    <title>Homework 11 - SDE Simulation with Euler-Maruyama</title>
+    <meta name="description" content="Simulation of stochastic differential equations using Euler-Maruyama method, application to Wiener process and general SDEs.">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/homework.css">
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -46,11 +46,11 @@
             margin-right: 15px;
             margin-bottom: 10px;
         }
-        .simulation-panel input {
+        .simulation-panel input, .simulation-panel select {
             padding: 5px;
             border: 1px solid #ccc;
             border-radius: 3px;
-            width: 80px;
+            width: 120px;
         }
         .simulation-panel button {
             padding: 8px 16px;
@@ -64,6 +64,14 @@
         }
         .simulation-panel button:hover {
             background: #2980b9;
+        }
+        .sde-info {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            margin: 15px 0;
+            font-family: monospace;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -91,13 +99,13 @@
     <header class="article-header">
         <div class="article-meta">
             <span class="homework-week">Week 7</span>
-            <span class="article-date">2 Dec 2025</span>
+            <span class="article-date">25 Nov 2025</span>
         </div>
-        <h1 class="article-title">Simulation of Brownian Motion with Volatility \(\sigma\)</h1>
+        <h1 class="article-title">Stochastic Differential Equations: Euler-Maruyama Method</h1>
         <div class="article-tags">
             <span class="tag">Stochastic Processes</span>
-            <span class="tag">Brownian Motion</span>
-            <span class="tag">Simulation</span>
+            <span class="tag">Euler-Maruyama</span>
+            <span class="tag">SDE</span>
         </div>
     </header>
 
@@ -105,51 +113,70 @@
 
 <section class="content-section">
     <h2>Objective</h2>
-    <p>This assignment simulates a Brownian motion (Wiener process) on the interval \([0,T]\) with volatility parameter \(\sigma\). We discretize time into \(n\) subintervals and generate normal increments using the Box-Muller transform to convert uniform random variables into standard normals.</p>
+    <p>This assignment implements the <strong>Euler-Maruyama method</strong> to numerically solve stochastic differential equations (SDEs). We apply it to simulate the Wiener process (Brownian motion) and extend it to handle more general SDEs including Ornstein-Uhlenbeck and Geometric Brownian Motion processes.</p>
 </section>
 
 <section class="content-section">
     <h2>Theoretical Background</h2>
 
-    <h3>1. Discretization Scheme</h3>
-    <p>We partition the time interval \([0,T]\) into \(n\) equal subintervals of length \(\Delta t = T/n\). The Brownian motion is approximated by</p>
-    <p style="text-align:center">\[B(t_i) = B(t_{i-1}) + \Delta B_i\]</p>
-    <p>where the increment \(\Delta B_i \sim N(0, \sigma^2 \Delta t)\) is normally distributed with mean 0 and variance \(\sigma^2 \Delta t\).</p>
-
-    <h3>2. Box-Muller Transform</h3>
-    <p>To generate normal random variables from uniform \(U \sim \text{Uniform}(0,1)\), we use the Box-Muller transform. Given two independent uniform random variables \(U_1, U_2\), we obtain two independent standard normals:</p>
-    <p style="text-align:center">\[Z_1 = \sqrt{-2\ln U_1} \cos(2\pi U_2)\]</p>
-    <p style="text-align:center">\[Z_2 = \sqrt{-2\ln U_1} \sin(2\pi U_2)\]</p>
-    <p>where \(Z_1, Z_2 \sim N(0,1)\). To obtain \(N(0, \sigma^2 \Delta t)\), we scale by \(\sigma\sqrt{\Delta t}\):</p>
-    <p style="text-align:center">\[\Delta B = \sigma\sqrt{\Delta t} \cdot Z\]</p>
-
-    <h3>3. Properties of Brownian Motion</h3>
-    <p>The simulated process satisfies key properties:</p>
+    <h3>1. Stochastic Differential Equations</h3>
+    <p>A general SDE has the form:</p>
+    <p style="text-align:center">\[dX_t = \mu(X_t, t)\, dt + \sigma(X_t, t)\, dW_t\]</p>
+    <p>where:</p>
     <ul>
-        <li><strong>Starting point:</strong> \(B(0) = 0\)</li>
-        <li><strong>Normal increments:</strong> \(B(t) - B(s) \sim N(0, \sigma^2(t-s))\)</li>
-        <li><strong>Independent increments:</strong> Non-overlapping intervals are independent</li>
-        <li><strong>Continuous paths:</strong> The trajectory is continuous (no jumps)</li>
+        <li>\(\mu(X_t, t)\) is the <strong>drift coefficient</strong> (deterministic trend)</li>
+        <li>\(\sigma(X_t, t)\) is the <strong>diffusion coefficient</strong> (stochastic volatility)</li>
+        <li>\(W_t\) is a standard Wiener process</li>
     </ul>
 
-    <h3>4. The Volatility Parameter \(\sigma\)</h3>
-    <p>The parameter \(\sigma\) controls the spread of the process. At time \(t\):</p>
-    <p style="text-align:center">\[\text{Var}[B(t)] = \sigma^2 t, \quad \text{SD}[B(t)] = \sigma\sqrt{t}\]</p>
-    <p>Higher \(\sigma\) leads to more volatile paths with larger deviations from the starting point.</p>
+    <h3>2. Euler-Maruyama Discretization</h3>
+    <p>The Euler-Maruyama method discretizes the SDE over small time steps \(\Delta t = T/n\):</p>
+    <p style="text-align:center">\[X_{i+1} = X_i + \mu(X_i, t_i)\Delta t + \sigma(X_i, t_i)\sqrt{\Delta t}\, Z_i\]</p>
+    <p>where \(Z_i \sim N(0,1)\) are independent standard normal random variables generated via the Box-Muller transform.</p>
+
+    <h3>3. Wiener Process (Brownian Motion)</h3>
+    <p>For a standard Wiener process with volatility parameter \(\sigma\):</p>
+    <p style="text-align:center">\[dB_t = \sigma\, dW_t\]</p>
+    <p>This corresponds to \(\mu(X_t, t) = 0\) and \(\sigma(X_t, t) = \sigma\) (constant). The discretization becomes:</p>
+    <p style="text-align:center">\[B_{i+1} = B_i + \sigma\sqrt{\Delta t}\, Z_i\]</p>
+
+    <h3>4. Examples of General SDEs</h3>
+    <p><strong>Ornstein-Uhlenbeck Process</strong> (mean-reverting):</p>
+    <p style="text-align:center">\[dX_t = \theta(\mu - X_t)dt + \sigma dW_t\]</p>
+    <p>Models processes that tend to revert to a long-term mean \(\mu\) with speed \(\theta\).</p>
+
+    <p><strong>Geometric Brownian Motion</strong> (used in finance):</p>
+    <p style="text-align:center">\[dX_t = \mu X_t dt + \sigma X_t dW_t\]</p>
+    <p>Models stock prices and other quantities that cannot become negative.</p>
 </section>
 
 <section class="content-section">
     <h2>Interactive Simulation</h2>
-    <p>Use the controls below to simulate Brownian motion trajectories and analyze their distribution.</p>
+    <p>Select an SDE type and adjust parameters to simulate different stochastic processes.</p>
 
     <div class="simulation-panel">
-        <label>Volatility σ: <input id="sigmaInput" type="number" value="1" step="0.1" min="0.1"></label>
-        <label>T (time horizon): <input id="TInput" type="number" value="1" step="0.1" min="0.1"></label>
-        <label>n (subintervals): <input id="nInput" type="number" value="1000" min="100"></label>
-        <label>Number of trajectories: <input id="numTrajInput" type="number" value="10" min="1" max="100"></label>
+        <label>SDE Type: 
+            <select id="sdeType" onchange="updateSdeInfo()">
+                <option value="wiener">Wiener Process</option>
+                <option value="ou">Ornstein-Uhlenbeck</option>
+                <option value="gbm">Geometric Brownian Motion</option>
+            </select>
+        </label>
         <br>
-        <button onclick="runSimulation()">Simulate Trajectories</button>
+        <div id="parametersDiv">
+            <label>σ (volatility): <input id="sigmaInput" type="number" value="1" step="0.1" min="0.1"></label>
+        </div>
+        <label>X₀ (initial value): <input id="x0Input" type="number" value="0" step="0.1"></label>
+        <label>T (time horizon): <input id="TInput" type="number" value="1" step="0.1" min="0.1"></label>
+        <label>n (time steps): <input id="nInput" type="number" value="1000" min="100"></label>
+        <label>Number of paths: <input id="numTrajInput" type="number" value="10" min="1" max="100"></label>
+        <br>
+        <button onclick="runSimulation()">Simulate Paths</button>
         <button onclick="runDistributionAnalysis()">Analyze Distribution (1000 runs)</button>
+    </div>
+
+    <div class="sde-info" id="sdeInfo">
+        dB<sub>t</sub> = σ dW<sub>t</sub>
     </div>
 
     <div class="stats-panel">
@@ -157,469 +184,359 @@
     </div>
 
     <div class="visualization-container">
-        <div class="chart-title">Sample Trajectories</div>
+        <div class="chart-title">Sample Paths</div>
         <canvas id="trajectoriesCanvas" width="800" height="400"></canvas>
         
-        <div class="chart-title">Distribution of Final Values B(T)</div>
+        <div class="chart-title">Distribution of Final Values X(T)</div>
         <canvas id="distributionCanvas" width="800" height="400"></canvas>
     </div>
 </section>
 
 <section class="content-section">
-    <h2>JavaScript Simulation Code</h2>
-    <p>The simulation uses the Box-Muller transform to generate normal increments.</p>
+    <h2>JavaScript Implementation</h2>
+    <p>The Euler-Maruyama simulator is implemented as a general framework accepting drift and diffusion functions.</p>
 
-    <pre class="code-block"><code>// Box-Muller transform for normal random variables
+    <pre class="code-block"><code>// Box-Muller transform for standard normal variables
 function boxMuller() {
     const u1 = Math.random();
     const u2 = Math.random();
-    const z1 = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
-    return z1;
+    return Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
 }
 
-// Brownian motion simulation
-function simulateBrownianMotion(sigma = 1, T = 1, n = 1000) {
+// Euler-Maruyama method for general SDEs
+function eulerMaruyama(mu, sigma, X0, T, n) {
     const dt = T / n;
     const sqrtDt = Math.sqrt(dt);
-    let value = 0;
+    let X = X0;
     const times = [0];
-    const values = [0];
+    const values = [X0];
 
-    for (let i = 1; i <= n; i++) {
-        const dB = sigma * sqrtDt * boxMuller();
-        value += dB;
-        times.push(i * dt);
-        values.push(value);
+    for (let i = 0; i < n; i++) {
+        const t = i * dt;
+        const dW = sqrtDt * boxMuller();
+        X = X + mu(X, t) * dt + sigma(X, t) * dW;
+        times.push((i + 1) * dt);
+        values.push(X);
     }
 
-    return { times, values, final: value };
+    return { times, values, final: X };
 }</code></pre>
 </section>
 
 <section class="content-section">
-    <h2>Comparison with Random Walk</h2>
-    <p>Brownian motion emerges as the continuous limit of a random walk. In a discrete random walk, at each step we move up or down by a fixed amount. As we take smaller steps more frequently (letting \(\Delta t \to 0\) and \(n \to \infty\)), and scale the step size by \(\sqrt{\Delta t}\), the process converges to Brownian motion by the Functional Central Limit Theorem.</p>
+    <h2>Properties of the Method</h2>
+    <ul>
+        <li><strong>Convergence:</strong> The Euler-Maruyama method converges with strong order 0.5 and weak order 1.0 as \(\Delta t \to 0\)</li>
+        <li><strong>Generality:</strong> Works for any SDE by specifying appropriate \(\mu\) and \(\sigma\) functions</li>
+        <li><strong>Simplicity:</strong> Extension of deterministic Euler method to stochastic setting</li>
+        <li><strong>Limitation:</strong> Requires small time steps for accuracy; higher-order methods exist (Milstein, Runge-Kutta)</li>
+    </ul>
 </section>
 
 <section class="content-section">
     <h2>Conclusion</h2>
-    <p>The simulation demonstrates how Brownian motion can be approximated through discrete time steps with normal increments. The volatility parameter \(\sigma\) controls the variability of the paths, and the Box-Muller transform provides an efficient method to generate the required normal random variables from uniform distributions.</p>
+    <p>The Euler-Maruyama method provides a practical numerical approach to simulate stochastic differential equations. By discretizing time and approximating the Wiener process increments with normal random variables, we can generate sample paths for a wide variety of stochastic processes including the Wiener process, mean-reverting processes, and geometric Brownian motion used in financial modeling.</p>
 </section>
 
     </article>
 </main>
 
 <script>
-// Box-Muller transform for generating standard normal random variables
+    function plotTrajectories(trajectories, type, p, X0, T) {
+    const canvas = document.getElementById("trajectoriesCanvas");
+    const ctx = canvas.getContext("2d");
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const W = canvas.width;
+    const H = canvas.height;
+
+    // All values in all paths
+    const allValues = trajectories.flatMap(t => t.values);
+    const minY = Math.min(...allValues);
+    const maxY = Math.max(...allValues);
+
+    const scaleX = W / trajectories[0].times.length;
+    const scaleY = H / (maxY - minY || 1);
+
+    ctx.lineWidth = 1;
+
+    trajectories.forEach(traj => {
+        ctx.beginPath();
+        ctx.strokeStyle = "rgba(0, 80, 180, 0.7)";
+
+        traj.values.forEach((v, i) => {
+            const x = i * scaleX;
+            const y = H - (v - minY) * scaleY;
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        });
+
+        ctx.stroke();
+    });
+}
+function plotDistribution(finals, type, p, X0, T) {
+    const canvas = document.getElementById("distributionCanvas");
+    const ctx = canvas.getContext("2d");
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const W = canvas.width;
+    const H = canvas.height;
+
+    // Histogram bins
+    const bins = 40;
+    const minX = Math.min(...finals);
+    const maxX = Math.max(...finals);
+    const binWidth = (maxX - minX) / bins;
+
+    const counts = new Array(bins).fill(0);
+
+    finals.forEach(x => {
+        const idx = Math.min(Math.floor((x - minX) / binWidth), bins - 1);
+        counts[idx]++;
+    });
+
+    const maxCount = Math.max(...counts);
+    const barWidth = W / bins;
+
+    // Draw histogram
+    ctx.fillStyle = "rgba(180, 50, 50, 0.7)";
+    counts.forEach((c, i) => {
+        const x = i * barWidth;
+        const h = (c / maxCount) * H;
+        const y = H - h;
+        ctx.fillRect(x, y, barWidth - 1, h);
+    });
+
+    // ---- GAUSSIANA ----
+    const mean = finals.reduce((a, b) => a + b, 0) / finals.length;
+    const variance = finals.reduce((a, b) => a + (b - mean)**2, 0) / finals.length;
+    const sigma = Math.sqrt(variance);
+
+    function gaussian(x) {
+        return (1 / (sigma * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * ((x - mean) / sigma)**2);
+    }
+
+    // Find max gaussian density to scale to canvas height
+    const xs = [];
+    for (let i = 0; i < 400; i++) xs.push(minX + (i / 399) * (maxX - minX));
+    const gVals = xs.map(gaussian);
+    const maxG = Math.max(...gVals);
+
+    ctx.strokeStyle = "blue";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+
+    xs.forEach((xVal, i) => {
+        const nx = ((xVal - minX) / (maxX - minX)) * W;
+        const ny = H - (gaussian(xVal) / maxG) * H;
+
+        if (i === 0) ctx.moveTo(nx, ny);
+        else ctx.lineTo(nx, ny);
+    });
+
+    ctx.stroke();
+}
+
+// Box-Muller transform
 function boxMuller() {
     const u1 = Math.random();
     const u2 = Math.random();
-    const z1 = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
-    return z1;
+    return Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
 }
 
-// Brownian motion simulation
-function simulateBrownianMotion(sigma = 1, T = 1, n = 1000) {
+// Euler–Maruyama method
+function eulerMaruyama(mu, sigma, X0, T, n) {
     const dt = T / n;
     const sqrtDt = Math.sqrt(dt);
-    let value = 0;
+    let X = X0;
+
     const times = [0];
-    const values = [0];
+    const values = [X0];
 
-    for (let i = 1; i <= n; i++) {
-        const dB = sigma * sqrtDt * boxMuller();
-        value += dB;
-        times.push(i * dt);
-        values.push(value);
+    for (let i = 0; i < n; i++) {
+        const t = i * dt;
+        const dW = sqrtDt * boxMuller();
+        X = X + mu(X, t) * dt + sigma(X, t) * dW;
+        times.push((i + 1) * dt);
+        values.push(X);
     }
-
-    return { times, values, final: value };
+    return { times, values, final: X };
 }
 
-// Plot multiple trajectories
-function plotTrajectories(trajectories, sigma, T) {
-    const canvas = document.getElementById('trajectoriesCanvas');
-    const ctx = canvas.getContext('2d');
-    const width = canvas.width;
-    const height = canvas.height;
-    
-    // Clear canvas
-    ctx.clearRect(0, 0, width, height);
-    
-    // Find max/min values for scaling
-    let maxValue = -Infinity;
-    let minValue = Infinity;
-    trajectories.forEach(traj => {
-        maxValue = Math.max(maxValue, Math.max(...traj.values));
-        minValue = Math.min(minValue, Math.min(...traj.values));
-    });
-    
-    // Add padding for better visualization
-    const range = maxValue - minValue;
-    maxValue += range * 0.1;
-    minValue -= range * 0.1;
-    
-    // Ensure we show at least ±2σ√T
-    const expectedStd = sigma * Math.sqrt(T);
-    maxValue = Math.max(maxValue, 2 * expectedStd);
-    minValue = Math.min(minValue, -2 * expectedStd);
-    
-    const padding = 50;
-    const plotWidth = width - 2 * padding;
-    const plotHeight = height - 2 * padding;
-    
-    // Draw axes
-    ctx.strokeStyle = '#333';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(padding, padding);
-    ctx.lineTo(padding, height - padding);
-    ctx.lineTo(width - padding, height - padding);
-    ctx.stroke();
-    
-    // Draw axis labels
-    ctx.fillStyle = '#333';
-    ctx.font = '12px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText('Time t', width / 2, height - 15);
-    ctx.save();
-    ctx.translate(15, height / 2);
-    ctx.rotate(-Math.PI / 2);
-    ctx.fillText('B(t)', 0, 0);
-    ctx.restore();
-    
-    // Draw zero line
-    const zeroY = height - padding - ((0 - minValue) / (maxValue - minValue)) * plotHeight;
-    ctx.strokeStyle = '#999';
-    ctx.lineWidth = 1;
-    ctx.setLineDash([5, 5]);
-    ctx.beginPath();
-    ctx.moveTo(padding, zeroY);
-    ctx.lineTo(width - padding, zeroY);
-    ctx.stroke();
-    ctx.setLineDash([]);
-    
-    // Draw grid and y-axis labels
-    ctx.strokeStyle = '#e0e0e0';
-    ctx.lineWidth = 1;
-    ctx.fillStyle = '#666';
-    ctx.textAlign = 'right';
-    const numYTicks = 6;
-    for (let i = 0; i <= numYTicks; i++) {
-        const value = minValue + (maxValue - minValue) * (i / numYTicks);
-        const y = height - padding - (plotHeight * i / numYTicks);
-        ctx.beginPath();
-        ctx.moveTo(padding, y);
-        ctx.lineTo(width - padding, y);
-        ctx.stroke();
-        ctx.fillText(value.toFixed(2), padding - 10, y + 4);
+// SDE definitions
+const sdeDefinitions = {
+    wiener: {
+        name: "Wiener Process",
+        equation: "dB<sub>t</sub> = σ dW<sub>t</sub>",
+        mu: () => 0,
+        sigma: (X, t, p) => p.sigma,
+        params: ["sigma"],
+        theoreticalMean: (X0) => X0,
+        theoreticalVar: (X0, T, p) => p.sigma * p.sigma * T
+    },
+    ou: {
+        name: "Ornstein-Uhlenbeck",
+        equation: "dX<sub>t</sub> = θ(μ - X<sub>t</sub>)dt + σ dW<sub>t</sub>",
+        mu: (X, t, p) => p.theta * (p.mean - X),
+        sigma: (X, t, p) => p.sigma,
+        params: ["theta", "mean", "sigma"],
+        theoreticalMean: (X0, T, p) =>
+            p.mean + (X0 - p.mean) * Math.exp(-p.theta * T),
+        theoreticalVar: (X0, T, p) =>
+            (p.sigma * p.sigma / (2 * p.theta)) *
+            (1 - Math.exp(-2 * p.theta * T))
+    },
+    gbm: {
+        name: "Geometric Brownian Motion",
+        equation: "dX<sub>t</sub> = μ X<sub>t</sub> dt + σ X<sub>t</sub> dW<sub>t</sub>",
+        mu: (X, t, p) => p.mu * X,
+        sigma: (X, t, p) => p.sigma * X,
+        params: ["mu", "sigma"],
+        theoreticalMean: (X0, T, p) => X0 * Math.exp(p.mu * T),
+        theoreticalVar: (X0, T, p) =>
+            X0 * X0 * Math.exp(2 * p.mu * T) *
+            (Math.exp(p.sigma * p.sigma * T) - 1)
     }
-    
-    // Draw x-axis labels
-    ctx.textAlign = 'center';
-    const numXTicks = 5;
-    for (let i = 0; i <= numXTicks; i++) {
-        const value = (T / numXTicks) * i;
-        const x = padding + (plotWidth / numXTicks) * i;
-        ctx.fillText(value.toFixed(2), x, height - padding + 20);
-    }
-    
-    // Draw ±σ√T bands
-    const stdDev = sigma * Math.sqrt(T);
-    ctx.fillStyle = 'rgba(231, 76, 60, 0.1)';
-    const upperY = height - padding - ((stdDev - minValue) / (maxValue - minValue)) * plotHeight;
-    const lowerY = height - padding - ((-stdDev - minValue) / (maxValue - minValue)) * plotHeight;
-    ctx.fillRect(width - padding - 5, upperY, 5, zeroY - upperY);
-    ctx.fillRect(width - padding - 5, zeroY, 5, lowerY - zeroY);
-    
-    // Labels for std dev bands
-    ctx.fillStyle = '#e74c3c';
-    ctx.textAlign = 'left';
-    ctx.font = '11px Arial';
-    ctx.fillText(`+σ√T = ${stdDev.toFixed(2)}`, width - padding - 120, upperY - 5);
-    ctx.fillText(`-σ√T = ${(-stdDev).toFixed(2)}`, width - padding - 120, lowerY + 12);
-    
-    // Draw trajectories
-    const colors = ['#3498db', '#2ecc71', '#9b59b6', '#f39c12', '#1abc9c', 
-                    '#34495e', '#e67e22', '#95a5a6', '#d35400', '#16a085'];
-    
-    trajectories.forEach((traj, idx) => {
-        ctx.strokeStyle = colors[idx % colors.length];
-        ctx.lineWidth = 1.5;
-        ctx.globalAlpha = 0.7;
-        ctx.beginPath();
-        
-        for (let i = 0; i < traj.times.length; i++) {
-            const x = padding + (traj.times[i] / T) * plotWidth;
-            const y = height - padding - ((traj.values[i] - minValue) / (maxValue - minValue)) * plotHeight;
-            
-            if (i === 0) {
-                ctx.moveTo(x, y);
-            } else {
-                ctx.lineTo(x, y);
-            }
-        }
-        ctx.stroke();
-    });
-    
-    ctx.globalAlpha = 1.0;
-}
+};
 
-// Plot distribution histogram
-function plotDistribution(finals, sigma, T) {
-    const canvas = document.getElementById('distributionCanvas');
-    const ctx = canvas.getContext('2d');
-    const width = canvas.width;
-    const height = canvas.height;
-    
-    // Clear canvas
-    ctx.clearRect(0, 0, width, height);
-    
-    // Create histogram
-    const numBins = 30;
-    const minVal = Math.min(...finals);
-    const maxVal = Math.max(...finals);
-    const binWidth = (maxVal - minVal) / numBins;
-    
-    const histogram = new Array(numBins).fill(0);
-    finals.forEach(val => {
-        const bin = Math.min(Math.floor((val - minVal) / binWidth), numBins - 1);
-        histogram[bin]++;
-    });
-    
-    const maxFreq = Math.max(...histogram);
-    
-    const padding = 50;
-    const plotWidth = width - 2 * padding;
-    const plotHeight = height - 2 * padding;
-    
-    // Draw axes
-    ctx.strokeStyle = '#333';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(padding, padding);
-    ctx.lineTo(padding, height - padding);
-    ctx.lineTo(width - padding, height - padding);
-    ctx.stroke();
-    
-    // Draw axis labels
-    ctx.fillStyle = '#333';
-    ctx.font = '12px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText('Final Value B(T)', width / 2, height - 15);
-    ctx.save();
-    ctx.translate(15, height / 2);
-    ctx.rotate(-Math.PI / 2);
-    ctx.fillText('Frequency', 0, 0);
-    ctx.restore();
-    
-    // Draw bars
-    const barWidth = plotWidth / numBins;
-    ctx.fillStyle = '#3498db';
-    
-    for (let i = 0; i < numBins; i++) {
-        const freq = histogram[i];
-        const barHeight = (freq / maxFreq) * plotHeight;
-        const x = padding + i * barWidth;
-        const y = height - padding - barHeight;
-        
-        ctx.fillRect(x + 1, y, barWidth - 2, barHeight);
-    }
-    
-    // Draw theoretical normal PDF overlay
-    ctx.strokeStyle = '#e74c3c';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    
-    const normalPDF = (x, mean, variance) => {
-        return Math.exp(-0.5 * Math.pow((x - mean) / Math.sqrt(variance), 2)) / Math.sqrt(2 * Math.PI * variance);
-    };
-    
-    const theoreticalMean = 0;
-    const theoreticalVar = sigma * sigma * T;
-    
-    const numPoints = 100;
-    for (let i = 0; i <= numPoints; i++) {
-        const value = minVal + (maxVal - minVal) * (i / numPoints);
-        const density = normalPDF(value, theoreticalMean, theoreticalVar);
-        const theoreticalFreq = density * finals.length * binWidth;
-        const barHeight = (theoreticalFreq / maxFreq) * plotHeight;
-        const x = padding + (value - minVal) / (maxVal - minVal) * plotWidth;
-        const y = height - padding - barHeight;
-        
-        if (i === 0) {
-            ctx.moveTo(x, y);
-        } else {
-            ctx.lineTo(x, y);
-        }
-    }
-    ctx.stroke();
-    
-    // Legend
-    ctx.fillStyle = '#3498db';
-    ctx.fillRect(width - padding - 150, padding + 10, 20, 15);
-    ctx.fillStyle = '#333';
-    ctx.textAlign = 'left';
-    ctx.fillText('Simulated', width - padding - 125, padding + 22);
-    
-    ctx.strokeStyle = '#e74c3c';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(width - padding - 150, padding + 40);
-    ctx.lineTo(width - padding - 130, padding + 40);
-    ctx.stroke();
-    ctx.fillText(`N(0, σ²T)`, width - padding - 125, padding + 44);
-    
-    // Y-axis labels
-    ctx.fillStyle = '#666';
-    ctx.textAlign = 'right';
-    const numYTicks = 5;
-    for (let i = 0; i <= numYTicks; i++) {
-        const freq = (maxFreq / numYTicks) * i;
-        const y = height - padding - (plotHeight / numYTicks) * i;
-        ctx.fillText(Math.round(freq), padding - 10, y + 4);
-    }
-    
-    // X-axis labels
-    ctx.textAlign = 'center';
-    const numXTicks = 6;
-    for (let i = 0; i <= numXTicks; i++) {
-        const value = minVal + (maxVal - minVal) * (i / numXTicks);
-        const x = padding + (plotWidth / numXTicks) * i;
-        ctx.fillText(value.toFixed(2), x, height - padding + 20);
+function updateSdeInfo() {
+    const sdeType = document.getElementById("sdeType").value;
+    const sde = sdeDefinitions[sdeType];
+
+    document.getElementById("sdeInfo").innerHTML = sde.equation;
+
+    const div = document.getElementById("parametersDiv");
+    if (sdeType === "wiener") {
+        div.innerHTML =
+            '<label>σ: <input id="sigmaInput" type="number" value="1" step="0.1"></label>';
+    } else if (sdeType === "ou") {
+        div.innerHTML = `
+            <label>θ: <input id="thetaInput" type="number" value="1" step="0.1"></label>
+            <label>μ: <input id="meanInput" type="number" value="0" step="0.1"></label>
+            <label>σ: <input id="sigmaInput" type="number" value="0.5" step="0.1"></label>`;
+    } else {
+        div.innerHTML = `
+            <label>μ: <input id="muInput" type="number" value="0.1" step="0.1"></label>
+            <label>σ: <input id="sigmaInput" type="number" value="0.2" step="0.1"></label>`;
     }
 }
 
-// Run simulation with trajectory visualization
+function getParameters() {
+    const type = document.getElementById("sdeType").value;
+    const p = {};
+
+    if (type === "wiener") {
+        p.sigma = parseFloat(document.getElementById("sigmaInput").value);
+    } else if (type === "ou") {
+        p.theta = parseFloat(document.getElementById("thetaInput").value);
+        p.mean = parseFloat(document.getElementById("meanInput").value);
+        p.sigma = parseFloat(document.getElementById("sigmaInput").value);
+    } else {
+        p.mu = parseFloat(document.getElementById("muInput").value);
+        p.sigma = parseFloat(document.getElementById("sigmaInput").value);
+    }
+    return p;
+}
+
+// ----------------------------------------------------
+// PLOTTING FUNCTIONS
+// ----------------------------------------------------
+// (unchanged from your version; avoided editing for brevity)
+// ----------------------------------------------------
+
+/* ... QUI RESTANO plotTrajectories(...) e plotDistribution(...) identici ... */
+
+// ----------------------------------------------------
+// SIMULATION
+// ----------------------------------------------------
+
 function runSimulation() {
-    const sigma = parseFloat(document.getElementById('sigmaInput').value);
-    const T = parseFloat(document.getElementById('TInput').value);
-    const n = parseInt(document.getElementById('nInput').value);
-    const numTraj = parseInt(document.getElementById('numTrajInput').value);
-    
-    if (isNaN(sigma) || sigma <= 0) {
-        document.getElementById('output').textContent = 'Error: σ must be a positive number';
+    const type = document.getElementById("sdeType").value;
+    const p = getParameters();
+    const X0 = parseFloat(document.getElementById("x0Input").value);
+    const T = parseFloat(document.getElementById("TInput").value);
+    const n = parseInt(document.getElementById("nInput").value);
+    const N = parseInt(document.getElementById("numTrajInput").value);
+
+    if (!T || !n || !N || N < 1) {
+        document.getElementById("output").textContent = "Invalid parameters.";
         return;
     }
-    if (isNaN(T) || T <= 0) {
-        document.getElementById('output').textContent = 'Error: T must be a positive number';
-        return;
-    }
-    if (isNaN(n) || n <= 0) {
-        document.getElementById('output').textContent = 'Error: n must be a positive integer';
-        return;
-    }
-    if (isNaN(numTraj) || numTraj <= 0 || numTraj > 100) {
-        document.getElementById('output').textContent = 'Error: Number of trajectories must be between 1 and 100';
-        return;
-    }
-    
-    // Generate trajectories
-    const trajectories = [];
+
+    const sde = sdeDefinitions[type];
+    const mu = (X, t) => sde.mu(X, t, p);
+    const sigma = (X, t) => sde.sigma(X, t, p);
+
     const finals = [];
-    
-    for (let i = 0; i < numTraj; i++) {
-        const result = simulateBrownianMotion(sigma, T, n);
-        trajectories.push(result);
-        finals.push(result.final);
+    const trajectories = [];
+
+    for (let i = 0; i < N; i++) {
+        const r = eulerMaruyama(mu, sigma, X0, T, n);
+        trajectories.push(r);
+        finals.push(r.final);
     }
-    
-    // Calculate statistics
-    const mean = finals.reduce((a, b) => a + b, 0) / numTraj;
-    const variance = finals.reduce((sum, x) => sum + Math.pow(x - mean, 2), 0) / numTraj;
-    const stdDev = Math.sqrt(variance);
-    const min = Math.min(...finals);
-    const max = Math.max(...finals);
-    
-    const expectedMean = 0;
-    const theoreticalVar = sigma * sigma * T;
-    const theoreticalStdDev = Math.sqrt(theoreticalVar);
-    
-    document.getElementById('output').textContent = 
-        `Simulation Results (${numTraj} trajectories):\n` +
-        `═════════════════════════════════════════\n` +
-        `Sample mean:          ${mean.toFixed(3)}\n` +
-        `Expected mean:        ${expectedMean.toFixed(3)}\n` +
-        `Sample variance:      ${variance.toFixed(3)}\n` +
-        `Theoretical var(σ²T): ${theoreticalVar.toFixed(3)}\n` +
-        `Sample std dev:       ${stdDev.toFixed(3)}\n` +
-        `Theoretical std dev:  ${theoreticalStdDev.toFixed(3)}\n` +
-        `Range:                [${min.toFixed(3)}, ${max.toFixed(3)}]`;
-    
-    // Plot trajectories
-    plotTrajectories(trajectories, sigma, T);
-    
-    // Plot distribution
-    plotDistribution(finals, sigma, T);
+
+    const mean = finals.reduce((a, b) => a + b, 0) / N;
+    const variance = finals.reduce((s, x) => s + (x - mean) ** 2, 0) / N;
+
+    let txt = `Simulation (${N} paths)\n`;
+    txt += `Mean: ${mean.toFixed(4)}\n`;
+    txt += `Variance: ${variance.toFixed(4)}\n`;
+
+    if (sde.theoreticalMean) {
+        txt += `Theo mean: ${sde.theoreticalMean(X0, T, p).toFixed(4)}\n`;
+        txt += `Theo var: ${sde.theoreticalVar(X0, T, p).toFixed(4)}\n`;
+    }
+
+    document.getElementById("output").textContent = txt;
+
+    plotTrajectories(trajectories, type, p, X0, T);
+    plotDistribution(finals, type, p, X0, T);
 }
 
-// Run distribution analysis with many simulations
+
+// ----------------------------------------------------
+// DISTRIBUTION ANALYSIS
+// ----------------------------------------------------
+
 function runDistributionAnalysis() {
-    const sigma = parseFloat(document.getElementById('sigmaInput').value);
-    const T = parseFloat(document.getElementById('TInput').value);
-    const n = parseInt(document.getElementById('nInput').value);
-    const numSims = 1000;
-    
-    if (isNaN(sigma) || sigma <= 0 || isNaN(T) || T <= 0 || isNaN(n) || n <= 0) {
-        document.getElementById('output').textContent = 'Error: Invalid parameters';
-        return;
+    const type = document.getElementById("sdeType").value;
+    const p = getParameters();
+    const X0 = parseFloat(document.getElementById("x0Input").value);
+    const T = parseFloat(document.getElementById("TInput").value);
+    const n = parseInt(document.getElementById("nInput").value);
+
+    const sde = sdeDefinitions[type];
+    const mu = (X, t) => sde.mu(X, t, p);
+    const sigma = (X, t) => sde.sigma(X, t, p);
+
+    const N = 1000;
+    const finals = [];
+
+    for (let i = 0; i < N; i++) {
+        finals.push(eulerMaruyama(mu, sigma, X0, T, n).final);
     }
-    
-    document.getElementById('output').textContent = 'Running 1000 simulations...';
-    
-    // Use setTimeout to avoid blocking UI
-    setTimeout(() => {
-        const finals = [];
-        for (let i = 0; i < numSims; i++) {
-            const result = simulateBrownianMotion(sigma, T, n);
-            finals.push(result.final);
-        }
-        
-        // Calculate statistics
-        const mean = finals.reduce((a, b) => a + b, 0) / numSims;
-        const variance = finals.reduce((sum, x) => sum + Math.pow(x - mean, 2), 0) / numSims;
-        const stdDev = Math.sqrt(variance);
-        const min = Math.min(...finals);
-        const max = Math.max(...finals);
-        
-        const expectedMean = 0;
-        const theoreticalVar = sigma * sigma * T;
-        const theoreticalStdDev = Math.sqrt(theoreticalVar);
-        
-        document.getElementById('output').textContent = 
-            `Distribution Analysis (${numSims} simulations):\n` +
-            `═════════════════════════════════════════\n` +
-            `Sample mean:          ${mean.toFixed(3)}\n` +
-            `Expected mean:        ${expectedMean.toFixed(3)}\n` +
-            `Difference:           ${Math.abs(mean - expectedMean).toFixed(3)}\n\n` +
-            `Sample variance:      ${variance.toFixed(3)}\n` +
-            `Theoretical var(σ²T): ${theoreticalVar.toFixed(3)}\n` +
-            `Difference:           ${Math.abs(variance - theoreticalVar).toFixed(3)}\n\n` +
-            `Sample std dev:       ${stdDev.toFixed(3)}\n` +
-            `Theoretical std dev:  ${theoreticalStdDev.toFixed(3)}\n` +
-            `Range:                [${min.toFixed(3)}, ${max.toFixed(3)}]`;
-        
-        // Plot distribution
-        plotDistribution(finals, sigma, T);
-        
-        // Clear trajectories canvas
-        const canvas = document.getElementById('trajectoriesCanvas');
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#666';
-        ctx.font = '16px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText('Run "Simulate Trajectories" to see sample paths', canvas.width / 2, canvas.height / 2);
-    }, 100);
+
+    plotDistribution(finals, type, p, X0, T);
+
+    const mean = finals.reduce((a, b) => a + b, 0) / N;
+    const variance = finals.reduce((s, x) => s + (x - mean) ** 2, 0) / N;
+
+    let txt = `Distribution Analysis (1000 runs)\n`;
+    txt += `Mean: ${mean.toFixed(4)}\nVariance: ${variance.toFixed(4)}\n`;
+
+    if (sde.theoreticalMean) {
+        txt += `Theo mean: ${sde.theoreticalMean(X0, T, p).toFixed(4)}\n`;
+        txt += `Theo var: ${sde.theoreticalVar(X0, T, p).toFixed(4)}\n`;
+    }
+
+    document.getElementById("output").textContent = txt;
 }
 
 // Initialize
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('output').textContent = 
-        'Click "Simulate Trajectories" to see sample paths\n' +
-        'or "Analyze Distribution" to run 1000 simulations';
-});
+updateSdeInfo();
 </script>
-
 </body>
 </html>
